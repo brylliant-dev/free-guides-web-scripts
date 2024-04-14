@@ -41,18 +41,16 @@ const runFn = async () => {
 
     const compendium = document.querySelector('code#json-compendium')
     const compendiumText = compendium.textContent
+    const generalsTab = document.querySelector('#new-design [data-w-tab="Tab 3"]')
+    const recommendationsTab = document.querySelector('#new-design [data-w-tab="Tab 2"]')
 
     const truncateString = (str, maxLength) => {
         return str.length <= maxLength ? str : str.slice(0, maxLength - 3) + '...';
     }
 
     if (compendiumText === '') {
-        if (!copendiumJson.generalEnabled) {
-            document.querySelector('#new-design [data-w-tab="Tab 3"]').remove()
-        }
-        if (!copendiumJson.recommendEnabled) {
-            document.querySelector('#new-design [data-w-tab="Tab 2"]').remove()
-        }
+        generalsTab.remove()
+        recommendationsTab.remove()
     }
 
     if (idParam && idParam.includes('true') && compendiumText !== '') {
@@ -66,10 +64,10 @@ const runFn = async () => {
         const copendiumJson = JSON.parse(compendiumText)
 
         if (!copendiumJson.generalEnabled) {
-            document.querySelector('#new-design [data-w-tab="Tab 3"]').remove()
+            generalsTab.remove()
         }
         if (!copendiumJson.recommendEnabled) {
-            document.querySelector('#new-design [data-w-tab="Tab 2"]').remove()
+            recommendationsTab.remove()
         }
 
         const generalArray = copendiumJson.general.map(gen => gen)
