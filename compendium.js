@@ -43,6 +43,7 @@ const runFn = async () => {
     const compendiumText = compendium.textContent
     const generalsTab = document.querySelector('#new-design [data-w-tab="Tab 3"]')
     const recommendationsTab = document.querySelector('#new-design [data-w-tab="Tab 2"]')
+    const toursTab = document.querySelector('#new-design [data-w-tab="Tab 1"]')
 
     const truncateString = (str, maxLength) => {
         return str.length <= maxLength ? str : str.slice(0, maxLength - 3) + '...';
@@ -51,6 +52,7 @@ const runFn = async () => {
     if (compendiumText === '') {
         generalsTab.remove()
         recommendationsTab.remove()
+        toursTab.click()
     }
 
     if (idParam && idParam.includes('true') && compendiumText !== '') {
@@ -62,13 +64,43 @@ const runFn = async () => {
         const recDeets = []
 
         const copendiumJson = JSON.parse(compendiumText)
+        const { generalEnabled, recommendEnabled } = copendiumJson
 
-        if (!copendiumJson.generalEnabled) {
-            generalsTab.remove()
+        const tabsInitConditions = {
+            'general-disabled-recom-enabled': {
+                condition: !generalEnabled && !recommendEnabled,
+                fn: () => {
+                    generalsTab.remove()
+                    recommendationsTab.click()
+                }
+            },
+            'general-enabled-recom-disabled': {
+                condition: generalEnabled && !recommendEnabled,
+                fn: () => {
+                    recommendationsTab.remove()
+                    generalsTab.click()
+                }
+            },
+            'general-disabled-recom-disabled': {
+                condition: !generalEnabled && !recommendEnabled,
+                fn: () => {
+                    recommendationsTab.remove()
+                    generalsTab.remove()
+                    toursTab.click()
+                }
+            },
+            'general-enabled-recom-enabled': {
+                condition: generalEnabled && recommendEnabled,
+                fn: () => {
+                    recommendationsTab.click()
+                }
+            },
         }
-        if (!copendiumJson.recommendEnabled) {
-            recommendationsTab.remove()
-        }
+
+        Object.values(tabsInitConditions)
+            .filter(tic => tic.condition) // Will check which of the conditions in `tabsInitConditions` is true
+            .find(t => t) // Extract them
+            .fn() // Then run the function
 
         const generalArray = copendiumJson.general.map(gen => gen)
         const recomDataArray = copendiumJson.recommendations.map((rec) => {
