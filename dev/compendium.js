@@ -142,8 +142,6 @@ const runFn = async () => {
 
             // Update content with data from the array
             recomDropdownTemplate.setAttribute('data-w-id', generateUUID())
-
-            console.log('--this is data.iconDetails', data.iconDetails)
             recomDropdownClone.querySelector('[recom-data="accordion-title"]').textContent = data.accordionTitle;
             recomDropdownClone.querySelector(`[recom-data="media-icon"]`).setAttribute('src', data.iconDetails.url)
 
