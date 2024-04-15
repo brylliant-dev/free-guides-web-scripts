@@ -143,7 +143,7 @@ const runFn = async () => {
             // Update content with data from the array
             recomDropdownTemplate.setAttribute('data-w-id', generateUUID())
             recomDropdownClone.querySelector('[recom-data="accordion-title"]').textContent = data.accordionTitle;
-            recomDropdownClone.querySelector(`[recom-data="media-icon"]`).src = data.iconDetails.url
+            recomDropdownClone.querySelector(`[recom-data="media-icon"]`).setAttribute('src', data.iconDetails.url)
 
             data.media.filter(med => med.active).forEach((medData, medIdx) => {
                 const mediaClone = recomCardWrapperTemplate.cloneNode(true);
