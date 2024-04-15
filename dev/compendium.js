@@ -68,7 +68,7 @@ const runFn = async () => {
         const generalArray = copendiumJson.general.map(gen => gen)
         const recomDataArray = copendiumJson.recommendations.map((rec) => {
             return {
-                icon: rec.icon,
+                iconDetails: rec.iconDetails,
                 active: rec.active,
                 accordionTitle: rec.title,
                 media: rec.media.map(({ active, overview, content, name, phoneNumber, website, mapsUrl, cardImg }) =>
