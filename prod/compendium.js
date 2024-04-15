@@ -267,8 +267,11 @@ const runFn = async () => {
                 }
 
                 data.media.forEach((medData, medIdx) => {
-                    const mediaClone = elementWithType[medData.type].cloneNode(true);
+                    if (!['text', 'link', 'img'].includes(medData.type)) {
+                        return // Let's skip first if there are more types than the 3
+                    }
 
+                    const mediaClone = elementWithType[medData.type].cloneNode(true);
 
                     if (medData.type === 'text') {
                         mediaClone.textContent = medData.content
