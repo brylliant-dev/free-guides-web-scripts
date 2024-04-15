@@ -57,16 +57,20 @@ const runFn = async () => {
 
     if (idParam && idParam.includes('true') && compendiumText !== '') {
         const tabSection = document.querySelector('.tabs-content.w-tab-content');
-        const recomTab = tabSection.querySelector('div#w-tabs-0-data-w-pane-1');
-        const recomDropdownWrapper = recomTab.querySelector('.guide-dropdown-list-wrapper.recommendation');
-        const recomDropdownTemplate = recomDropdownWrapper.querySelector('.guide-accordion-item.w-dropdown');
-        const recomCardWrapperTemplate = recomDropdownTemplate.querySelector('.recommendation-card-wrapper')
-        const recDeets = []
 
-        const copendiumJson = JSON.parse(compendiumText)
+        const compendium = JSON.parse(compendiumText)
 
-        const generalArray = copendiumJson.general.map(gen => gen)
-        const recomDataArray = copendiumJson.recommendations.map((rec) => {
+        const generalDataArray = compendium.general.map(gen => {
+            return {
+                iconDetails: gen.iconDetails,
+                active: gen.active,
+                accordionTitle: gen.title,
+                media: gen.media
+            }
+        })
+
+
+        const recomDataArray = compendium.recommendations.map((rec) => {
             return {
                 iconDetails: rec.iconDetails,
                 active: rec.active,
@@ -77,93 +81,219 @@ const runFn = async () => {
             }
         })
 
-        const closeToggle = ({ toggleBody, accordionBody, accordionBtn, clone }) => {
-            toggleBody.classList.remove('w--open')
-            accordionBody.classList.remove('w--open')
-            toggleBody.setAttribute('aria-expanded', 'false')
-            accordionBtn.style.transform = 'translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg)'
-            clone.style.zIndex = ''
-            clone.style.height = '30px'
+        // Let's scope this in a block so it wouldn't interfere with other tabs
+        const runRecommendations = () => {
+            const recomTab = tabSection.querySelector('div#w-tabs-0-data-w-pane-1');
+            const recomDropdownWrapper = recomTab.querySelector('.guide-dropdown-list-wrapper.recommendation');
+            const recomDropdownTemplate = recomDropdownWrapper.querySelector('.guide-accordion-item.w-dropdown');
+            const recomCardWrapperTemplate = recomDropdownTemplate.querySelector('.recommendation-card-wrapper');
+
+            const closeToggle = ({ toggleBody, accordionBody, accordionBtn, clone }) => {
+                toggleBody.classList.remove('w--open')
+                accordionBody.classList.remove('w--open')
+                toggleBody.setAttribute('aria-expanded', 'false')
+                accordionBtn.style.transform = 'translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg)'
+                clone.style.zIndex = ''
+                clone.style.height = '30px'
+            }
+
+            const switchAccordionBody = (toggle) => {
+                // This function helps avoid multiple opened accordion body
+                const accorBodiesNode = recomDropdownWrapper.querySelectorAll('.accordion-toggle.w-dropdown-toggle')
+                const accorBodies = Array.from(accorBodiesNode)
+
+                accorBodies.filter(ab => ab.id !== toggle.id).forEach((toggleBody) => {
+                    const accorClone = toggleBody.parentNode
+                    const accordionBody = accorClone.querySelector('nav.accordion-body.w-dropdown-list')
+                    const accordionBtn = accorClone.querySelector('.accordion-btn')
+
+                    closeToggle({ toggleBody, accordionBody, accordionBtn, clone: accorClone })
+                })
+            }
+
+
+            recomDropdownTemplate.remove()
+            recomCardWrapperTemplate.remove()
+            // Iterate over the data array and clone the template for each item
+            recomDataArray.filter(rda => rda.active).forEach((data, idx) => {
+                // Clone the template
+                const recomDropdownClone = recomDropdownTemplate.cloneNode(true);
+
+                const toggle = recomDropdownClone.querySelector('.accordion-toggle.w-dropdown-toggle')
+                const accordionBody = recomDropdownClone.querySelector('nav.accordion-body.w-dropdown-list')
+                const accordionBtn = recomDropdownClone.querySelector('.accordion-btn')
+                // const recomCardWrapperTemplate = recomDropdownClone.querySelector('.recommendation-card-wrapper')
+                const cardLayout = recomDropdownClone.querySelector('.recommendation-card-layout')
+
+                const toggleId = `w-dropdown-toggle-${idx + 1}`
+                const dropdownId = `w-dropdown-list-${idx + 1}`
+
+                toggle.setAttribute('id', toggleId)
+                toggle.setAttribute('aria-controls', dropdownId)
+                accordionBody.setAttribute('id', dropdownId)
+                accordionBody.setAttribute('aria-labelledby', toggleId)
+                accordionBtn.style.transition = '0.5s'
+
+                toggle.addEventListener('click', () => {
+                    if (!toggle.classList.contains('w--open')) {
+                        toggle.classList.add('w--open')
+                        accordionBody.classList.add('w--open')
+                        toggle.setAttribute('aria-expanded', 'true')
+                        accordionBtn.style.transform = 'translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(180deg) skew(0deg, 0deg)'
+                        recomDropdownClone.style.zIndex = '901'
+                        recomDropdownClone.style.height = ''
+
+                        switchAccordionBody(toggle)
+                    } else {
+                        closeToggle({ toggleBody: toggle, accordionBody, accordionBtn, clone: recomDropdownClone })
+                    }
+
+
+                })
+
+                // Update content with data from the array
+                recomDropdownTemplate.setAttribute('data-w-id', generateUUID())
+                recomDropdownClone.querySelector('[recom-data="accordion-title"]').textContent = data.accordionTitle;
+                recomDropdownClone.querySelector(`[recom-data="media-icon"]`).setAttribute('src', data.iconDetails.url)
+
+                data.media.filter(med => med.active).forEach((medData, medIdx) => {
+                    const mediaClone = recomCardWrapperTemplate.cloneNode(true);
+                    const writeMedia = (dataAttr, text, attr = 'textContent') => {
+                        mediaClone.querySelector(`[recom-data="${dataAttr}"]`)[attr] = text
+                    }
+
+                    writeMedia('media-name', medData.name)
+                    writeMedia('media-overview', truncateString(medData.overview, 25))
+                    writeMedia('media-website', truncateString(medData.website, 25))
+                    writeMedia('media-phone-number', medData.phoneNumber)
+                    writeMedia('media-maps-url', medData.mapsUrl || '#', 'href')
+                    writeMedia('media-maps-url', '_blank', 'target')
+                    writeMedia('media-card-img', medData.cardImg || '', 'src')
+
+                    cardLayout.append(mediaClone)
+                })
+
+                // // Append the cloned element to the wrapper
+                recomDropdownWrapper.append(recomDropdownClone);
+            });
         }
 
-        const switchAccordionBody = (toggle) => {
-            // This function helps avoid multiple opened accordion body
-            const accorBodiesNode = recomDropdownWrapper.querySelectorAll('.accordion-toggle.w-dropdown-toggle')
-            const accorBodies = Array.from(accorBodiesNode)
+        // Let's scope this in a block so it wouldn't interfere with other tabs
+        const runGeneral = () => {
+            const genTab = tabSection.querySelector('div#w-tabs-0-data-w-pane-2');
+            const genDropdownWrapper = genTab.querySelector('.guide-dropdown-list-wrapper.general');
+            const genDropdownTemplate = genDropdownWrapper.querySelector('.guide-accordion-item.w-dropdown');
 
-            accorBodies.filter(ab => ab.id !== toggle.id).forEach((toggleBody) => {
-                const accorClone = toggleBody.parentNode
-                const accordionBody = accorClone.querySelector('nav.accordion-body.w-dropdown-list')
-                const accordionBtn = accorClone.querySelector('.accordion-btn')
+            const closeToggle = ({ toggleBody, accordionBody, accordionBtn, clone }) => {
+                toggleBody.classList.remove('w--open')
+                accordionBody.classList.remove('w--open')
+                toggleBody.setAttribute('aria-expanded', 'false')
+                accordionBtn.style.transform = 'translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg)'
+                clone.style.zIndex = ''
+                clone.style.height = '30px'
+            }
 
-                closeToggle({ toggleBody, accordionBody, accordionBtn, clone: accorClone })
-            })
+            const switchAccordionBody = (toggle) => {
+                // This function helps avoid multiple opened accordion body
+                const accorBodiesNode = genDropdownWrapper.querySelectorAll('.accordion-toggle.w-dropdown-toggle')
+                const accorBodies = Array.from(accorBodiesNode)
+
+                accorBodies.filter(ab => ab.id !== toggle.id).forEach((toggleBody) => {
+                    const accorClone = toggleBody.parentNode
+                    const accordionBody = accorClone.querySelector('nav.accordion-body.w-dropdown-list')
+                    const accordionBtn = accorClone.querySelector('.accordion-btn')
+
+                    closeToggle({ toggleBody, accordionBody, accordionBtn, clone: accorClone })
+                })
+            }
+
+            genDropdownTemplate.remove()
+
+            // Iterate over the data array and clone the template for each item
+            generalDataArray.filter(rda => rda.active).forEach((data, idx) => {
+                // Clone the template
+                const genDropdownClone = genDropdownTemplate.cloneNode(true);
+
+                const toggle = genDropdownClone.querySelector('.accordion-toggle.w-dropdown-toggle')
+                const accordionBody = genDropdownClone.querySelector('nav.accordion-body.w-dropdown-list')
+                const accordionBtn = genDropdownClone.querySelector('.accordion-btn')
+
+                const toggleId = `w-dropdown-toggle-${idx + 1}`
+                const dropdownId = `w-dropdown-list-${idx + 1}`
+
+                toggle.setAttribute('id', toggleId)
+                toggle.setAttribute('aria-controls', dropdownId)
+                accordionBody.setAttribute('id', dropdownId)
+                accordionBody.setAttribute('aria-labelledby', toggleId)
+                accordionBtn.style.transition = '0.5s'
+
+                toggle.addEventListener('click', () => {
+                    if (!toggle.classList.contains('w--open')) {
+                        toggle.classList.add('w--open')
+                        accordionBody.classList.add('w--open')
+                        toggle.setAttribute('aria-expanded', 'true')
+                        accordionBtn.style.transform = 'translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(180deg) skew(0deg, 0deg)'
+                        genDropdownClone.style.zIndex = '901'
+                        genDropdownClone.style.height = ''
+
+                        switchAccordionBody(toggle)
+                    } else {
+                        closeToggle({ toggleBody: toggle, accordionBody, accordionBtn, clone: genDropdownClone })
+                    }
+
+
+                })
+
+                // Update content with data from the array
+                genDropdownTemplate.setAttribute('data-w-id', generateUUID())
+                genDropdownClone.querySelector('[gen-data="accordion-title"]').textContent = data.accordionTitle;
+                genDropdownClone.querySelector(`[gen-data="media-icon"]`).setAttribute('src', data.iconDetails.url)
+
+                const genMediaTextTemplate = genDropdownClone.querySelector('[gen-data="media-text"]')
+                const genMediaLinkTemplate = genDropdownClone.querySelector('[gen-data="media-link"]').parentElement
+                const genMediaImageTemplate = genDropdownClone.querySelector('[gen-data="media-img"]').parentElement
+                const genMediaVideoTemplate = genDropdownClone.querySelector('[gen-data="media-vid"]').parentElement
+
+                genMediaTextTemplate.remove()
+                genMediaLinkTemplate.remove()
+                genMediaImageTemplate.remove()
+                genMediaVideoTemplate.remove()
+
+                const elementWithType = {
+                    text: genMediaTextTemplate,
+                    link: genMediaLinkTemplate,
+                    img: genMediaImageTemplate,
+                    video: genMediaVideoTemplate
+                }
+
+                data.media.forEach((medData, medIdx) => {
+                    const mediaClone = elementWithType[medData.type].cloneNode(true);
+
+
+                    if (medData.type === 'text') {
+                        mediaClone.textContent = medData.content
+                    }
+                    else if (medData.type === 'link') {
+                        const link = mediaClone.querySelector('[gen-data="media-link"]')
+                        link.setAttribute('href', medData.content)
+                        link.setAttribute('target', '_blank')
+                    }
+                    else if (medData.type === 'img') {
+                        const img = mediaClone.querySelector('[gen-data="media-img"]')
+                        img.setAttribute('src', medData.content)
+                        img.setAttribute('srcset', '')
+                    }
+
+                    genDropdownClone.querySelector('.accordion-body-content').append(mediaClone)
+                })
+
+                // // Append the cloned element to the wrapper
+                genDropdownWrapper.append(genDropdownClone);
+            });
         }
 
-
-        recomDropdownTemplate.remove()
-        recomCardWrapperTemplate.remove()
-        // Iterate over the data array and clone the template for each item
-        recomDataArray.filter(rda => rda.active).forEach((data, idx) => {
-            // Clone the template
-            const recomDropdownClone = recomDropdownTemplate.cloneNode(true);
-
-            const toggle = recomDropdownClone.querySelector('.accordion-toggle.w-dropdown-toggle')
-            const accordionBody = recomDropdownClone.querySelector('nav.accordion-body.w-dropdown-list')
-            const accordionBtn = recomDropdownClone.querySelector('.accordion-btn')
-            // const recomCardWrapperTemplate = recomDropdownClone.querySelector('.recommendation-card-wrapper')
-            const cardLayout = recomDropdownClone.querySelector('.recommendation-card-layout')
-
-            const toggleId = `w-dropdown-toggle-${idx + 1}`
-            const dropdownId = `w-dropdown-list-${idx + 1}`
-
-            toggle.setAttribute('id', toggleId)
-            toggle.setAttribute('aria-controls', dropdownId)
-            accordionBody.setAttribute('id', dropdownId)
-            accordionBody.setAttribute('aria-labelledby', toggleId)
-            accordionBtn.style.transition = '0.5s'
-
-            toggle.addEventListener('click', () => {
-                if (!toggle.classList.contains('w--open')) {
-                    toggle.classList.add('w--open')
-                    accordionBody.classList.add('w--open')
-                    toggle.setAttribute('aria-expanded', 'true')
-                    accordionBtn.style.transform = 'translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(180deg) skew(0deg, 0deg)'
-                    recomDropdownClone.style.zIndex = '901'
-                    recomDropdownClone.style.height = ''
-
-                    switchAccordionBody(toggle)
-                } else {
-                    closeToggle({ toggleBody: toggle, accordionBody, accordionBtn, clone: recomDropdownClone })
-                }
-
-
-            })
-
-            // Update content with data from the array
-            recomDropdownTemplate.setAttribute('data-w-id', generateUUID())
-            recomDropdownClone.querySelector('[recom-data="accordion-title"]').textContent = data.accordionTitle;
-            recomDropdownClone.querySelector(`[recom-data="media-icon"]`).setAttribute('src', data.iconDetails.url)
-
-            data.media.filter(med => med.active).forEach((medData, medIdx) => {
-                const mediaClone = recomCardWrapperTemplate.cloneNode(true);
-                const writeMedia = (dataAttr, text, attr = 'textContent') => {
-                    mediaClone.querySelector(`[recom-data="${dataAttr}"]`)[attr] = text
-                }
-
-                writeMedia('media-name', medData.name)
-                writeMedia('media-overview', truncateString(medData.overview, 25))
-                writeMedia('media-website', truncateString(medData.website, 25))
-                writeMedia('media-phone-number', medData.phoneNumber)
-                writeMedia('media-maps-url', medData.mapsUrl || '#', 'href')
-                writeMedia('media-card-img', medData.cardImg || '', 'src')
-
-                cardLayout.append(mediaClone)
-            })
-
-            // // Append the cloned element to the wrapper
-            recomDropdownWrapper.append(recomDropdownClone);
-        });
+        runRecommendations() // Now we run recommendations script
+        runGeneral()
     }
 }
 
