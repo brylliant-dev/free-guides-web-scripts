@@ -161,13 +161,11 @@ const runFn = async () => {
                     const writeMedia = (dataAttr, text, attr = 'textContent') => {
                         mediaClone.querySelector(`[recom-data="${dataAttr}"]`)[attr] = text
                     }
-
+                    console.log('--this is medIdx', medIdx)
                     writeMedia('media-name', medData.name)
-                    writeMedia('media-overview', truncateString(medData.overview, 25))
                     writeMedia('media-website', truncateString(medData.website, 25))
-                    // writeMedia('media-phone-number', medData.phoneNumber)
+                    writeMedia('media-website', medData.website, 'href')
                     writeMedia('media-maps-url', medData.mapsUrl || '#', 'href')
-                    // writeMedia('media-maps-url', '_blank', 'target')
                     writeMedia('media-card-img', medData.cardImg || '', 'src')
 
                     cardLayout.append(mediaClone)
