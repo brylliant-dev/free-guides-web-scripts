@@ -165,9 +165,9 @@ const runFn = async () => {
                     writeMedia('media-name', medData.name)
                     writeMedia('media-overview', truncateString(medData.overview, 25))
                     writeMedia('media-website', truncateString(medData.website, 25))
-                    writeMedia('media-phone-number', medData.phoneNumber)
+                    // writeMedia('media-phone-number', medData.phoneNumber)
                     writeMedia('media-maps-url', medData.mapsUrl || '#', 'href')
-                    writeMedia('media-maps-url', '_blank', 'target')
+                    // writeMedia('media-maps-url', '_blank', 'target')
                     writeMedia('media-card-img', medData.cardImg || '', 'src')
 
                     cardLayout.append(mediaClone)
