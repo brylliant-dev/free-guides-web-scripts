@@ -161,9 +161,8 @@ const runFn = async () => {
                 // Update content with data from the array
                 recomDropdownTemplate.setAttribute('data-w-id', generateUUID())
                 recomDropdownClone.querySelector('[recom-data="accordion-title"]').textContent = data.accordionTitle;
-                // recomDropdownClone.querySelector(`[recom-data="media-icon"]`).setAttribute('src', data.iconDetails.url)
 
-                const mediaIcon = genDropdownClone.querySelector(`[gen-data="media-icon"]`)
+                const mediaIcon = genDropdownClone.querySelector(`[recom-data="media-icon"]`)
 
                 if (data.iconDetails.url.split('.svg').length > 1) {
                     const svgElem = `<object type="image/svg+xml" data="${data.iconDetails.url}"></object>`
@@ -306,7 +305,15 @@ const runFn = async () => {
                 genDropdownTemplate.setAttribute('data-w-id', generateUUID())
                 genDropdownClone.querySelector('[gen-data="accordion-title"]').textContent = data.accordionTitle;
 
-                genDropdownClone.querySelector(`[gen-data="media-icon"]`).setAttribute('src', data.iconDetails.url)
+                const mediaIcon = genDropdownClone.querySelector(`[gen-data="media-icon"]`)
+
+                if (data.iconDetails.url.split('.svg').length > 1) {
+                    const svgElem = `<object type="image/svg+xml" data="${data.iconDetails.url}"></object>`
+                    mediaIcon.innerHTML = svgElem
+                } else {
+                    const pngElem = `<img src="${data.iconDetails.url}" />`
+                    mediaIcon.innerHTML = pngElem
+                }
 
                 const genMediaTextTemplate = genDropdownClone.querySelector('[gen-data="media-text"]')
                 const genMediaLinkTemplate = genDropdownClone.querySelector('[gen-data="media-link"]').parentElement
