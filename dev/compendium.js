@@ -174,7 +174,7 @@ const runFn = async () => {
                     writeMedia('media-website', `https://www.${medData.website}`, 'href')
                     writeMedia('media-maps-url', medData.mapsUrl || '#', 'href')
 
-                    if (!isJsonParseable(medData.cardImg)) {
+                    if (typeof medData.cardImg === 'string') {
                         writeMedia('media-card-img-1', medData.cardImg || '', 'src')
                         mediaClone.querySelector(`[recom-data="media-card-img-2"]`).style.opacity = '0'
                         mediaClone.querySelector(`[recom-data="media-card-img-3"]`).style.opacity = '0'
