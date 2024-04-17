@@ -162,7 +162,7 @@ const runFn = async () => {
                 recomDropdownTemplate.setAttribute('data-w-id', generateUUID())
                 recomDropdownClone.querySelector('[recom-data="accordion-title"]').textContent = data.accordionTitle;
 
-                const mediaIcon = genDropdownClone.querySelector(`[recom-data="media-icon"]`)
+                const mediaIcon = recomDropdownClone.querySelector(`[recom-data="media-icon"]`)
 
                 if (data.iconDetails.url.split('.svg').length > 1) {
                     const svgElem = `<object type="image/svg+xml" data="${data.iconDetails.url}"></object>`
