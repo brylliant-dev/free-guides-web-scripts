@@ -156,8 +156,6 @@ const runFn = async () => {
                     } else {
                         closeToggle({ toggleBody: toggle, accordionBody, accordionBtn, clone: recomDropdownClone })
                     }
-
-
                 })
 
                 // Update content with data from the array
@@ -186,6 +184,14 @@ const runFn = async () => {
                         imgs.forEach((i, idx) => {
                             writeMedia(`media-card-img-${idx + 1}`, i || '', 'src')
                         })
+
+                        if (imgs.length < 3) {
+                            const newLength = 3 - imgs.length
+
+                            newLength.forEach((_nl, idx) => {
+                                mediaClone.querySelector(`[recom-data="media-card-img-${3 - idx}"]`).style.opacity = '0'
+                            })
+                        }
                     }
 
                     cardLayout.append(mediaClone)
