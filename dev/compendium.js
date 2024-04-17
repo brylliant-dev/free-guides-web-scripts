@@ -304,7 +304,7 @@ const runFn = async () => {
                     const pngElem = `<img src="${data.iconDetails.url}" />`
                     mediaIcon.innerHTML = pngElem
                 }
-                genDropdownClone.querySelector(`[gen-data="media-icon"]`).setAttribute('src', data.iconDetails.url)
+                // genDropdownClone.querySelector(`[gen-data="media-icon"]`).setAttribute('src', data.iconDetails.url)
 
                 const genMediaTextTemplate = genDropdownClone.querySelector('[gen-data="media-text"]')
                 const genMediaLinkTemplate = genDropdownClone.querySelector('[gen-data="media-link"]').parentElement
