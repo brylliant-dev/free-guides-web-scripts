@@ -50,6 +50,15 @@ const runFn = async () => {
         return str.length <= maxLength ? str : str.slice(0, maxLength - 3) + '...';
     }
 
+    const isJsonParseable = (str) => {
+        try {
+            JSON.parse(str);
+            return true;
+        } catch (error) {
+            return false;
+        }
+    }
+
     if (compendiumText === '') {
         generalsTab.remove()
         recommendationsTab.remove()
@@ -161,12 +170,23 @@ const runFn = async () => {
                     const writeMedia = (dataAttr, text, attr = 'textContent') => {
                         mediaClone.querySelector(`[recom-data="${dataAttr}"]`)[attr] = text
                     }
-                    console.log('--this is medIdx', medIdx)
+
                     writeMedia('media-name', medData.name)
                     writeMedia('media-website', truncateString(medData.website, 25))
-                    writeMedia('media-website', medData.website, 'href')
+                    writeMedia('media-website', `https://www.${medData.website}`, 'href')
                     writeMedia('media-maps-url', medData.mapsUrl || '#', 'href')
-                    writeMedia('media-card-img', medData.cardImg || '', 'src')
+
+                    if (!isJsonParseable(medData.cardImg)) {
+                        writeMedia('media-card-img-1', medData.cardImg || '', 'src')
+                        mediaClone.querySelector(`[recom-data="media-card-img-2"]`).style.opacity = '0'
+                        mediaClone.querySelector(`[recom-data="media-card-img-3"]`).style.opacity = '0'
+                    } else {
+                        const imgs = JSON.parse(medData.cardImg)
+
+                        imgs.forEach((i, idx) => {
+                            writeMedia(`media-card-img-${idx + 1}`, i || '', 'src')
+                        })
+                    }
 
                     cardLayout.append(mediaClone)
                 })
