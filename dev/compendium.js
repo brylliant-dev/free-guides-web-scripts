@@ -295,6 +295,15 @@ const runFn = async () => {
                 // Update content with data from the array
                 genDropdownTemplate.setAttribute('data-w-id', generateUUID())
                 genDropdownClone.querySelector('[gen-data="accordion-title"]').textContent = data.accordionTitle;
+                const mediaIcon = genDropdownClone.querySelector(`[gen-data="media-icon"]`)
+
+                if (data.iconDetails.url.split('.svg').length > 1) {
+                    const svgElem = `<object type="image/svg+xml" data="${data.iconDetails.url}"></object>`
+                    mediaIcon.innerHTML = svgElem
+                } else {
+                    const pngElem = `<img src="${data.iconDetails.url}" />`
+                    mediaIcon.innerHTML = pngElem
+                }
                 genDropdownClone.querySelector(`[gen-data="media-icon"]`).setAttribute('src', data.iconDetails.url)
 
                 const genMediaTextTemplate = genDropdownClone.querySelector('[gen-data="media-text"]')
