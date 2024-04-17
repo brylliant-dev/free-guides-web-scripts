@@ -50,6 +50,15 @@ const runFn = async () => {
         return str.length <= maxLength ? str : str.slice(0, maxLength - 3) + '...';
     }
 
+    const isJsonParseable = (str) => {
+        try {
+            JSON.parse(str);
+            return true;
+        } catch (error) {
+            return false;
+        }
+    }
+
     if (compendiumText === '') {
         generalsTab.remove()
         recommendationsTab.remove()
@@ -147,8 +156,6 @@ const runFn = async () => {
                     } else {
                         closeToggle({ toggleBody: toggle, accordionBody, accordionBtn, clone: recomDropdownClone })
                     }
-
-
                 })
 
                 // Update content with data from the array
@@ -163,12 +170,29 @@ const runFn = async () => {
                     }
 
                     writeMedia('media-name', medData.name)
-                    writeMedia('media-overview', truncateString(medData.overview, 25))
                     writeMedia('media-website', truncateString(medData.website, 25))
-                    writeMedia('media-phone-number', medData.phoneNumber)
+                    writeMedia('media-website', `https://www.${medData.website}`, 'href')
                     writeMedia('media-maps-url', medData.mapsUrl || '#', 'href')
-                    writeMedia('media-maps-url', '_blank', 'target')
-                    writeMedia('media-card-img', medData.cardImg || '', 'src')
+
+                    if (!isJsonParseable(medData.cardImg)) {
+                        writeMedia('media-card-img-1', medData.cardImg || '', 'src')
+                        mediaClone.querySelector(`[recom-data="media-card-img-2"]`).style.opacity = '0'
+                        mediaClone.querySelector(`[recom-data="media-card-img-3"]`).style.opacity = '0'
+                    } else {
+                        const imgs = JSON.parse(medData.cardImg)
+
+                        imgs.forEach((i, idx) => {
+                            writeMedia(`media-card-img-${idx + 1}`, i || '', 'src')
+                        })
+
+                        if (imgs.length < 3) {
+                            const newLength = 3 - imgs.length
+
+                            newLength.forEach((_nl, idx) => {
+                                mediaClone.querySelector(`[recom-data="media-card-img-${3 - idx}"]`).style.opacity = '0'
+                            })
+                        }
+                    }
 
                     cardLayout.append(mediaClone)
                 })
