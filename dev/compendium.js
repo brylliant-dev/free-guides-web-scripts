@@ -84,8 +84,8 @@ const runFn = async () => {
                 iconDetails: rec.iconDetails,
                 active: rec.active,
                 accordionTitle: rec.title,
-                media: rec.media.map(({ active, overview, content, name, phoneNumber, website, mapsUrl, cardImg }) =>
-                    ({ active, overview, placeId: content, name, phoneNumber, website, mapsUrl, cardImg })
+                media: rec.media.map(({ current_opening_hours, active, overview, content, name, phoneNumber, website, mapsUrl, cardImg }) =>
+                    ({ opening_hours: current_opening_hours, active, overview, placeId: content, name, phoneNumber, website, mapsUrl, cardImg })
                 )
             }
         })
@@ -169,10 +169,34 @@ const runFn = async () => {
                         mediaClone.querySelector(`[recom-data="${dataAttr}"]`)[attr] = text
                     }
 
+                    const { opening_hours } = medData
+                    const isOpen = opening_hours?.open_now
+
+                    const day = opening_hours?.periods?.length > 1 ? new Date().getDay() : 0
+                    const period = opening_hours?.periods?.filter(x => x?.open?.day === day).find(x => x) || {
+                        open: null,
+                        close: null
+                    }
+
+                    const openingTime = period.open?.time || "0000"
+                    const closingTime = period.close?.time || false
+
+                    const detailValue = isOpen && closingTime && openingTime ? `Closed at ${closingTime === "0000"
+                        ? "12:00 AM"
+                        : closingTime?.slice(0, 2) + ":" + closingTime?.slice(2)
+                        }` : `Opens at ${openingTime === "0000"
+                            ? "12:00 AM"
+                            : openingTime?.slice(0, 2) + ":" + openingTime?.slice(2)
+                        }` || ""
+
                     writeMedia('media-name', medData.name)
                     writeMedia('media-website', truncateString(medData.website, 25))
                     writeMedia('media-website', `https://www.${medData.website}`, 'href')
                     writeMedia('media-maps-url', medData.mapsUrl || '#', 'href')
+
+                    writeMedia('media-open-status', isOpen ? 'Open' : 'Closed')
+                    writeMedia('media-close-detail', detailValue)
+                    mediaClone.querySelector(`[recom-data="media-open-status"]`).classList.add(`text-color-span-${isOpen ? 'green' : 'red'}`)
 
                     if (typeof medData.cardImg === 'string') {
                         writeMedia('media-card-img-1', medData.cardImg || '', 'src')
