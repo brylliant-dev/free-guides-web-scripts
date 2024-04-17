@@ -212,9 +212,9 @@ const runFn = async () => {
                         if (imgs.length < 3) {
                             const newLength = 3 - imgs.length
 
-                            newLength.forEach((_nl, idx) => {
-                                mediaClone.querySelector(`[recom-data="media-card-img-${3 - idx}"]`).style.opacity = '0'
-                            })
+                            for (let i = 0; i < newLength; i++) {
+                                mediaClone.querySelector(`[recom-data="media-card-img-${3 - i}"]`).style.opacity = '0'
+                            }
                         }
                     }
 
