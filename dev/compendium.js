@@ -328,6 +328,7 @@ const runFn = async () => {
                         const link = mediaClone.querySelector('[gen-data="media-link"]')
                         link.setAttribute('href', medData.content)
                         link.setAttribute('target', '_blank')
+                        link.textContent = medData?.title || link.textContent
                     }
                     else if (medData.type === 'img') {
                         const img = mediaClone.querySelector('[gen-data="media-img"]')
