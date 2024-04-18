@@ -39,34 +39,31 @@ const runFn = async () => {
     const urlParams = new URLSearchParams(window.location.search);
     const idParam = urlParams.get('new');
 
+    const isNew = idParam && idParam.includes('true')
+
     const compendium = document.querySelector('code#json-compendium')
     const compendiumText = compendium.textContent
-    const generalsTab = document.querySelector('#new-design [data-w-tab="Tab 3"]')
-    const recommendationsTab = document.querySelector('#new-design [data-w-tab="Tab 2"]')
-    const toursTab = document.querySelector('#new-design [data-w-tab="Tab 1"]')
+
+    const ctaDetails = document.querySelector('code#json-cta')
+    const ctaDetailsText = ctaDetails.textContent
+
+    const newDesign = document.querySelector('#new-design')
+    const generalsTab = newDesign.querySelector('[data-w-tab="Tab 3"]')
+    const recommendationsTab = newDesign.querySelector('[data-w-tab="Tab 2"]')
+    const toursTab = newDesign.querySelector('[data-w-tab="Tab 1"]')
+
     toursTab.click()
 
     const truncateString = (str, maxLength) => {
         return str.length <= maxLength ? str : str.slice(0, maxLength - 3) + '...';
     }
 
-    const isJsonParseable = (str) => {
-        try {
-            JSON.parse(str);
-            return true;
-        } catch (error) {
-            return false;
-        }
+    const removeCtaWrapper = () => {
+        newDesign.querySelector('.guide-cta-wrapper').remove()
     }
 
-    if (compendiumText === '') {
-        generalsTab.remove()
-        recommendationsTab.remove()
-    }
-
-    if (idParam && idParam.includes('true') && compendiumText !== '') {
+    const runTabFunctions = () => {
         const tabSection = document.querySelector('.tabs-content.w-tab-content');
-
         const compendium = JSON.parse(compendiumText)
 
         const generalDataArray = compendium.general.map(gen => {
@@ -346,6 +343,39 @@ const runFn = async () => {
 
         runRecommendations() // Now we run recommendations script
         runGeneral()
+    }
+
+    const runProfileFunctions = () => {
+        const ctaLink = newDesign.querySelector('[profile-data="cta-link"]')
+        const ctaMobile = newDesign.querySelector('[profile-data="cta-mobile"]')
+
+        const { enabled, link, phoneNum } = JSON.parse(ctaDetailsText)
+
+        if (enabled) {
+            ctaLink.textContent = link.title
+            ctaLink.href = link.value
+
+            ctaMobile.textContent = phoneNum.title
+            ctaMobile.href = `tel:${phoneNum.value}`
+        } else {
+            removeCtaWrapper()
+        }
+    }
+
+    if (isNew) {
+        const compendiumFn = compendiumText === ''
+            ? () => {
+                generalsTab.remove()
+                recommendationsTab.remove()
+            }
+            : () => runTabFunctions()
+
+        const ctaFn = ctaDetailsText === ''
+            ? removeCtaWrapper
+            : () => runProfileFunctions()
+
+        compendiumFn()
+        ctaFn()
     }
 }
 
