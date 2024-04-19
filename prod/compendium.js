@@ -88,7 +88,7 @@ const runFn = async () => {
         })
 
         const validateRecomData = recomDataArray.filter(rda => rda.active && rda.media.filter(rd => rd.active).length > 1).length > 1
-        const validateGeneralData = generalDataArray.filter(gda => gda.active && gda.media.filter(gd => gd.active).length > 1).length > 1
+        const validateGeneralData = generalDataArray.filter(gda => gda.active).length > 1
 
         if (!validateRecomData) {
             recommendationsTab.remove()
