@@ -87,6 +87,16 @@ const runFn = async () => {
             }
         })
 
+        const validateRecomData = recomDataArray.filter(rda => rda.active && rda.media > 1).length > 1
+        const validateGeneralData = generalDataArray.filter(gda => gda.active && gda.media > 1).length > 1
+
+        if (!validateRecomData) {
+            recommendationsTab.remove()
+        }
+        if (!validateGeneralData) {
+            generalsTab.remove()
+        }
+
         // Let's scope this in a block so it wouldn't interfere with other tabs
         const runRecommendations = () => {
             const recomTab = tabSection.querySelector('div#w-tabs-0-data-w-pane-1');
