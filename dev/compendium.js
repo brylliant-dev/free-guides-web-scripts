@@ -121,7 +121,7 @@ const runFn = async () => {
             recomDropdownTemplate.remove()
             recomCardWrapperTemplate.remove()
             // Iterate over the data array and clone the template for each item
-            recomDataArray.filter(rda => rda.active).forEach((data, idx) => {
+            recomDataArray.filter(rda => rda.active && rda.media.length > 1).forEach((data, idx) => {
                 // Clone the template
                 const recomDropdownClone = recomDropdownTemplate.cloneNode(true);
 
@@ -255,7 +255,7 @@ const runFn = async () => {
             genDropdownTemplate.remove()
 
             // Iterate over the data array and clone the template for each item
-            generalDataArray.filter(rda => rda.active).forEach((data, idx) => {
+            generalDataArray.filter(rda => rda.active && rda.media.length > 1).forEach((data, idx) => {
                 // Clone the template
                 const genDropdownClone = genDropdownTemplate.cloneNode(true);
 
