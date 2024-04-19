@@ -98,7 +98,7 @@ const runFn = async () => {
         }
 
         const runGeneralVidData = ({ link, clone }) => {
-            const mediaVid = clone.querySelector('[gen-data="media-vid"]')
+            const mediaVid = clone
             const thumbnail = mediaVid.querySelector('img')
             const jsScript = mediaVid.querySelector('script.w-json')
 
@@ -455,9 +455,10 @@ const runFn = async () => {
                         img.setAttribute('src', medData.content)
                         img.setAttribute('srcset', '')
                     } else if (medData.type === 'video') {
+                        const video = mediaClone.querySelector('[gen-data="media-vid"]')
                         runGeneralVidData({
                             link: medData.content,
-                            clone: mediaClone
+                            clone: video
                         })
                     }
 
