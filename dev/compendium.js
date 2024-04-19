@@ -111,8 +111,8 @@ const runFn = async () => {
                     selectors: ['.w-lightbox-view', 'iframe.embedly-embed.w-lightbox-embed'],
                     callback: () => {
                         const iframeEmbed = document.querySelector('iframe.embedly-embed.w-lightbox-embed')
-                        const accordionLightBox = document.querySelector('accordion-lightbox.w-inline-block.w-lightbox')
-                        const closeBtn = document.querySelector('w-lightbox-control.w-lightbox-close')
+                        const accordionLightBox = document.querySelector('.accordion-lightbox.w-inline-block.w-lightbox')
+                        const closeBtn = document.querySelector('.w-lightbox-control.w-lightbox-close')
 
                         iframeEmbed.setAttribute('src', iframeSrc)
                         accordionLightBox.classList.add('active-lightbox')
