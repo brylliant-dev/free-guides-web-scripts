@@ -132,7 +132,7 @@ const runFn = async () => {
                 const vidId = extractYouTubeVideoId({ link })
                 const iframeSrc = `//cdn.embedly.com/widgets/media.html?src=https%3A%2F%2Fwww.youtube.com%2Fembed%2F${vidId}%3Ffeature%3Doembed&display_name=YouTube&url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3D${vidId}&image=https%3A%2F%2Fi.ytimg.com%2Fvi%2F${vidId}%2Fhqdefault.jpg&key=96f1f04c5f4143bcb0f2e68c87d65feb&type=text%2Fhtml&schema=youtube`
 
-                mediaVid.setAttribute('onclick', changeIframeSource({ iframeSrc }))
+                mediaVid.addEventListener('click', () => changeIframeSource({ iframeSrc }))
                 thumbnail.setAttribute('srcset', `https://i.ytimg.com/vi/${vidId}/maxresdefault.jpg 1280w, https://i.ytimg.com/vi/${vidId}/hqdefault.jpg 480w`)
                 const scriptConfig = {
                     items: [
