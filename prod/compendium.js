@@ -97,8 +97,8 @@ const runFn = async () => {
             generalsTab.remove()
         }
 
-        const runGeneralVidData = ({ link }) => {
-            const mediaVid = document.querySelector('[gen-data="media-vid"]')
+        const runGeneralVidData = ({ link, clone }) => {
+            const mediaVid = clone.querySelector('[gen-data="media-vid"]')
             const thumbnail = mediaVid.querySelector('img')
             const jsScript = mediaVid.querySelector('script.w-json')
 
@@ -455,7 +455,10 @@ const runFn = async () => {
                         img.setAttribute('src', medData.content)
                         img.setAttribute('srcset', '')
                     } else if (medData.type === 'video') {
-                        runGeneralVidData({ link: medData.content })
+                        runGeneralVidData({
+                            link: medData.content,
+                            clone: mediaClone
+                        })
                     }
 
                     genDropdownClone.querySelector('.accordion-body-content').append(mediaClone)
