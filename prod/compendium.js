@@ -103,7 +103,7 @@ const runFn = async () => {
             const jsScript = mediaVid.querySelector('script.w-json')
 
             const writeJsScript = ({ data }) => {
-                jsScript.innerHTML = data
+                jsScript.textContent = data
             }
 
             const changeIframeSource = ({ iframeSrc }) => {
