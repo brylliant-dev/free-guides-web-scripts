@@ -97,125 +97,6 @@ const runFn = async () => {
             generalsTab.remove()
         }
 
-        const runGeneralVidData = ({ link, clone }) => {
-            const mediaVid = clone
-            const thumbnail = mediaVid.querySelector('img')
-            const jsScript = mediaVid.querySelector('script.w-json')
-
-            const writeJsScript = ({ data }) => {
-                jsScript.textContent = data
-            }
-
-            const changeIframeSource = ({ iframeSrc }) => {
-                startObservingElements({
-                    selectors: ['.w-lightbox-view', 'iframe.embedly-embed.w-lightbox-embed'],
-                    callback: () => {
-                        const iframeEmbed = document.querySelector('iframe.embedly-embed.w-lightbox-embed')
-                        const accordionLightBox = document.querySelector('.accordion-lightbox.w-inline-block.w-lightbox')
-                        const closeBtn = document.querySelector('.w-lightbox-control.w-lightbox-close')
-
-                        iframeEmbed.setAttribute('src', iframeSrc)
-                        accordionLightBox.classList.add('active-lightbox')
-
-                        closeBtn.addEventListener('click', () => accordionLightBox.classList.remove('active-lightbox'))
-                    }
-                })
-            }
-
-            const identifyVideoPlatform = ({ link }) => {
-                return (link.includes('youtube.com') || link.includes('youtu.be')) ? 'youtube' : link.includes('vimeo.com') ? 'vimeo' : null
-            }
-
-            const runYoutubeIframe = ({ link }) => {
-                const extractYouTubeVideoId = ({ link }) => {
-                    const regex = /[?&]v=([^&]+)/;
-                    const match = link.match(regex);
-                    const shortUrlMatch = link.match(/youtu.be\/([^&]+)/);
-
-                    return match ? match[1] : shortUrlMatch ? shortUrlMatch[1] : null
-                }
-
-                const vidId = extractYouTubeVideoId({ link })
-                const iframeSrc = `//cdn.embedly.com/widgets/media.html?src=https%3A%2F%2Fwww.youtube.com%2Fembed%2F${vidId}%3Ffeature%3Doembed&display_name=YouTube&url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3D${vidId}&image=https%3A%2F%2Fi.ytimg.com%2Fvi%2F${vidId}%2Fhqdefault.jpg&key=96f1f04c5f4143bcb0f2e68c87d65feb&type=text%2Fhtml&schema=youtube`
-
-                mediaVid.addEventListener('click', () => changeIframeSource({ iframeSrc }))
-                thumbnail.setAttribute('srcset', `https://i.ytimg.com/vi/${vidId}/maxresdefault.jpg 1280w, https://i.ytimg.com/vi/${vidId}/hqdefault.jpg 480w`)
-                const scriptConfig = {
-                    items: [
-                        {
-                            url: `https://www.youtube.com/watch?v=${vidId}`,
-                            originalUrl: `https://www.youtube.com/watch?v=${vidId}`,
-                            width: 940,
-                            height: 528,
-                            thumbnailUrl: `https://i.ytimg.com/vi/${vidId}/hqdefault.jpg`,
-                            html: `<iframe class="embedly-embed" src="//cdn.embedly.com/widgets/media.html?src=https%3A%2F%2Fwww.youtube.com%2Fembed%2F${vidId}%3Ffeature%3Doembed&display_name=YouTube&url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3D${vidId}&image=https%3A%2F%2Fi.ytimg.com%2Fvi%2F${vidId}%2Fhqdefault.jpg&key=96f1f04c5f4143bcb0f2e68c87d65feb&type=text%2Fhtml&schema=youtube" width="940" height="528" scrolling="no" title="YouTube embed" frameborder="0" allow="autoplay; fullscreen; encrypted-media; picture-in-picture;" allowfullscreen="true"></iframe>`,
-                            type: 'video'
-                        }
-                    ],
-                    group: ''
-                }
-
-                writeJsScript({ data: JSON.stringify(scriptConfig) })
-            }
-
-            const runVimeoIframe = async ({ link }) => {
-                const extractVimeoVideoId = ({ link }) => {
-                    const match = link.match(/vimeo.com\/(\d+)/);
-
-                    return match ? match[1] : null
-                }
-
-                const vidId = extractVimeoVideoId({ link })
-                const fetchVimeoData = async () => await fetch(`https://vimeo.com/api/v2/video/${vidId}.json`).then(r => r.json())
-                const vimeoData = (await fetchVimeoData()).find(d => d)
-                const { thumbnail_large } = vimeoData
-                const thumbnailImg = thumbnail_large.split('_').find(f => f)
-
-                const thumbnailId = ({ thumbnailImg }) => {
-                    const startIndex = thumbnailUrl.indexOf('/video/') + 7; // Length of "/video/"
-                    const endIndex = thumbnailUrl.indexOf('-', startIndex);
-                    return thumbnailUrl.substring(startIndex, endIndex);
-                }
-
-                const iframeSrc = `//cdn.embedly.com/widgets/media.html?src=https%3A%2F%2Fplayer.vimeo.com%2Fvideo%2F${vidId}%3Fapp_id%3D122963&amp;dntp=1&amp;display_name=Vimeo&amp;url=https%3A%2F%2Fvimeo.com%2F${vidId}&amp;image=https%3A%2F%2Fi.vimeocdn.com%2Fvideo%2F${thumbnailId({ thumbnailImg })}%3Ff%3Dwebp&amp;key=96f1f04c5f4143bcb0f2e68c87d65feb&amp;type=text%2Fhtml&amp;schema=vimeo`
-
-                mediaVid.setAttribute('onclick', changeIframeSource({ iframeSrc }))
-
-                thumbnail.setAttribute('srcset', `${thumbnailImg}_1280.jpg 1280w, ${thumbnailImg}_480.jpg 480w`)
-                const scriptConfig = {
-                    items: [
-                        {
-                            url: `https://www.youtube.com/watch?v=${vidId}`,
-                            originalUrl: `https://www.youtube.com/watch?v=${vidId}`,
-                            width: 940,
-                            height: 528,
-                            thumbnailUrl: `${thumbnailImg}_480.jpg`,
-                            html: `<iframe class="embedly-embed" src="//cdn.embedly.com/widgets/media.html?src=https%3A%2F%2Fplayer.vimeo.com%2Fvideo%2F${vidId}%3Fapp_id%3D122963&amp;dntp=1&amp;display_name=Vimeo&amp;url=https%3A%2F%2Fvimeo.com%2F${vidId}&amp;image=https%3A%2F%2Fi.vimeocdn.com%2Fvideo%2F${thumbnailId({ thumbnailImg })}%3Ff%3Dwebp&amp;key=96f1f04c5f4143bcb0f2e68c87d65feb&amp;type=text%2Fhtml&amp;schema=vimeo" width="940" height="528" scrolling="no" title="YouTube embed" frameborder="0" allow="autoplay; fullscreen; encrypted-media; picture-in-picture;" allowfullscreen="true"></iframe>`,
-                            type: 'video'
-                        }
-                    ],
-                    group: ''
-                }
-                writeJsScript({ data: JSON.stringify(scriptConfig) })
-            }
-
-            const runModalIframe = ({ videoProvider, link }) => {
-                const provider = {
-                    youtube: runYoutubeIframe,
-                    vimeo: runVimeoIframe
-                }
-
-                if (['youtube', 'vimeo'].includes(videoProvider)) {
-                    provider[videoProvider]({ link })
-                }
-            }
-
-            if (identifyVideoPlatform({ link })) {
-                const videoProvider = identifyVideoPlatform({ link })
-                runModalIframe({ videoProvider, link })
-            }
-        }
-
         // Let's scope this in a block so it wouldn't interfere with other tabs
         const runRecommendations = () => {
             const recomTab = tabSection.querySelector('div#w-tabs-0-data-w-pane-1');
@@ -462,10 +343,8 @@ const runFn = async () => {
                         img.setAttribute('srcset', '')
                     } else if (medData.type === 'video') {
                         const video = mediaClone.querySelector('[gen-data="media-vid"]')
-                        runGeneralVidData({
-                            link: medData.content,
-                            clone: video
-                        })
+
+                        video.querySelector('iframe.embedly-embed').setAttribute('src', medData.content)
                     }
 
                     genDropdownClone.querySelector('.accordion-body-content').append(mediaClone)
