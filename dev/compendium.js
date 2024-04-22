@@ -462,10 +462,10 @@ const runFn = async () => {
                         img.setAttribute('srcset', '')
                     } else if (medData.type === 'video') {
                         const video = mediaClone.querySelector('[gen-data="media-vid"]')
-                        runGeneralVidData({
-                            link: medData.content,
-                            clone: video
-                        })
+                        // runGeneralVidData({
+                        //     link: medData.content,
+                        //     clone: video
+                        // })
                     }
 
                     genDropdownClone.querySelector('.accordion-body-content').append(mediaClone)
