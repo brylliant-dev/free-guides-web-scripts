@@ -63,8 +63,9 @@ const runFn = async () => {
     // Add hover effect and set tab to active
     allTabs.map(at =>
         Object.entries({ add: 'mouseenter', remove: 'mouseleave' }).forEach(([action, event]) => {
-            at.getAttribute('aria-selected') !== 'true' && at.addEventListener(event, () => {
-                at.classList[action]('w--current')
+            at.addEventListener(event, () => {
+                at.getAttribute('aria-selected') !== 'true' &&
+                    at.classList[action]('w--current')
             })
         })
     )
