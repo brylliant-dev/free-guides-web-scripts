@@ -35,7 +35,7 @@ const startObservingElements = ({ selectors, callback }) => {
         childList: true,
         subtree: true,
     });
-};
+}
 
 const truncateString = (str, maxLength) => {
     return str.length <= maxLength ? str : str.slice(0, maxLength - 3) + '...';
@@ -54,9 +54,20 @@ const runFn = async () => {
     const ctaDetailsText = ctaDetails.textContent
 
     const newDesign = document.querySelector('#new-design')
-    const [toursTab, recommendationsTab, generalsTab] = [1, 2, 3]
+    const allTabs = [1, 2, 3]
         .map(dwt => newDesign
             .querySelector(`[data-w-tab="Tab ${dwt}"]`))
+
+    const [toursTab, recommendationsTab, generalsTab] = allTabs
+
+    // Add hover effect and set tab to active
+    allTabs.map(at =>
+        Object.entries({ add: 'mouseenter', remove: 'mouseleave' }).forEach(([action, event]) => {
+            at.getAttribute('aria-selected') !== 'true' && at.addEventListener(event, () => {
+                at.classList[action]('w--current')
+            })
+        })
+    )
 
     const removeCtaWrapper = () => {
         newDesign.querySelector('.guide-cta-wrapper').remove()
@@ -202,7 +213,15 @@ const runFn = async () => {
 
                     writeMedia('media-open-status', isOpen ? 'Open' : 'Closed')
                     writeMedia('media-close-detail', detailValue)
-                    mediaClone.querySelector(`[recom-data="media-open-status"]`).classList.add(`text-color-span-${isOpen ? 'green' : 'red'}`)
+                    mediaClone.querySelector(`[recom-data="media-open-status"]`).style.color = `#${isOpen ? '60BE83' : 'FF5757'}`
+
+                    Object.entries({ add: 'mouseenter', remove: 'mouseleave' }).forEach(([action, event]) => {
+                        const websiteLink = mediaClone.querySelector(`[recom-data="media-website"]`)
+
+                        websiteLink.addEventListener(event, () => {
+                            websiteLink.classList[action]('w--current')
+                        })
+                    })
 
                     if (typeof medData.cardImg === 'string') {
                         writeMedia('media-card-img-1', medData.cardImg || '', 'src')
