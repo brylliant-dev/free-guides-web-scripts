@@ -215,13 +215,13 @@ const runFn = async () => {
                     writeMedia('media-close-detail', detailValue)
                     mediaClone.querySelector(`[recom-data="media-open-status"]`).style.color = `#${isOpen ? '60BE83' : 'FF5757'}`
 
-                    Object.entries({ add: 'mouseenter', remove: 'mouseleave' }).forEach(([action, event]) => {
-                        const websiteLink = mediaClone.querySelector(`[recom-data="media-website"]`)
+                    // Object.entries({ add: 'mouseenter', remove: 'mouseleave' }).forEach(([action, event]) => {
+                    //     const websiteLink = mediaClone.querySelector(`[recom-data="media-website"]`)
 
-                        websiteLink.addEventListener(event, () => {
-                            websiteLink.classList[action]('w--current')
-                        })
-                    })
+                    //     websiteLink.addEventListener(event, () => {
+                    //         websiteLink.classList[action]('w--current')
+                    //     })
+                    // })
 
                     if (typeof medData.cardImg === 'string') {
                         writeMedia('media-card-img-1', medData.cardImg || '', 'src')
