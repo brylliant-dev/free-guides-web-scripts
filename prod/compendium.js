@@ -205,7 +205,6 @@ const runFn = async () => {
                     const chevronToggle = mediaClone.querySelector(`[recom-data="open-hours-chevron"]`)
 
                     const cardimageWrapper = mediaClone.querySelector('.recom-card-image-wrapper')
-                    console.log('--this is cardimageWrapper', cardimageWrapper)
 
                     const detailValue = isOpen && closingTime && openingTime ? `Closed at ${closingTime === "0000"
                         ? "12:00 AM"
@@ -251,10 +250,10 @@ const runFn = async () => {
                         })
 
                         if (imgs.length < 3) {
-                            // if (imgs.length === 0) {
-                            //     mediaClone.querySelector('.recom-card-image-wrapper').remove()
-                            //     return
-                            // }
+                            if (imgs.length === 0) {
+                                cardimageWrapper.remove()
+                                return
+                            }
 
                             const newLength = 3 - imgs.length
 
