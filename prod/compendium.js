@@ -233,7 +233,7 @@ const runFn = async () => {
 
                         chevronToggle.classList[isToggled ? 'remove' : 'add']('toggled')
                         chevronToggle.style.transform = `translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(${isToggled ? 0 : 180}deg) skew(0deg, 0deg)`
-                        openHourElem.style.display = isToggled ? 'none' : ''
+                        openHourElem.style.display = isToggled ? 'none' : 'flex'
                     })
 
                     if (typeof medData.cardImg === 'string') {
