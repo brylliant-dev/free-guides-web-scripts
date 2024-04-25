@@ -186,10 +186,15 @@ const runFn = async () => {
                     const writeMedia = (dataAttr, text, attr = 'textContent') => {
                         mediaClone.querySelector(`[recom-data="${dataAttr}"]`)[attr] = text
                     }
+                    const openHourList = medData.current_opening_hours?.weekday_text || []
+                    const openHourElem = mediaClone.querySelector('.recom-card-text-link ul.recom-opening-sched')
+                    const listItem = document.createElement('li')
 
-                    const detailToggle = () => {
-
-                    }
+                    openHourList.forEach(ohl => {
+                        const listItemClone = listItem.cloneNode(true)
+                        listItemClone.textContent = ohl
+                        openHourElem.appendChild(listItemClone)
+                    })
 
                     const { opening_hours } = medData
                     const isOpen = opening_hours?.open_now
@@ -228,15 +233,8 @@ const runFn = async () => {
 
                         chevronToggle.classList[isToggled ? 'remove' : 'add']('toggled')
                         chevronToggle.style.transform = `translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(${isToggled ? 0 : 180}deg) skew(0deg, 0deg)`
+                        openHourElem.style.display = isToggled ? 'none' : ''
                     })
-
-                    // Object.entries({ add: 'mouseenter', remove: 'mouseleave' }).forEach(([action, event]) => {
-                    //     const websiteLink = mediaClone.querySelector(`[recom-data="media-website"]`)
-
-                    //     websiteLink.addEventListener(event, () => {
-                    //         websiteLink.classList[action]('w--current')
-                    //     })
-                    // })
 
                     if (typeof medData.cardImg === 'string') {
                         writeMedia('media-card-img-1', medData.cardImg || '', 'src')
@@ -253,9 +251,6 @@ const runFn = async () => {
                             const newLength = 3 - imgs.length
 
                             if (imgs.length === 0) {
-                                // for (let i = 0; i < newLength; i++) {
-                                //     mediaClone.querySelector(`[recom-data="media-card-img-${3 - i}"]`).style.display = 'none'
-                                // }
                                 cardimageWrapper.remove()
                             } else {
                                 for (let i = 0; i < newLength; i++) {
