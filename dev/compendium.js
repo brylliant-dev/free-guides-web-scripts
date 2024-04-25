@@ -186,14 +186,12 @@ const runFn = async () => {
                     const writeMedia = (dataAttr, text, attr = 'textContent') => {
                         mediaClone.querySelector(`[recom-data="${dataAttr}"]`)[attr] = text
                     }
-                    const openHourList = medData.current_opening_hours?.weekday_text || []
+                    const openHourList = medData.opening_hours?.weekday_text || []
                     const openHourElem = mediaClone.querySelector('.recom-card-text-link ul.recom-opening-sched')
                     const listItem = document.createElement('li')
 
-                    console.log('--this is openHourList', openHourList)
                     openHourList.forEach(ohl => {
                         const listItemClone = listItem.cloneNode(true)
-                        console.log('--this is ohl', ohl)
                         listItemClone.textContent = ohl
                         openHourElem.appendChild(listItemClone)
                     })
