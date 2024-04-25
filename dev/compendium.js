@@ -253,9 +253,10 @@ const runFn = async () => {
                             const newLength = 3 - imgs.length
 
                             if (imgs.length === 0) {
-                                for (let i = 0; i < newLength; i++) {
-                                    mediaClone.querySelector(`[recom-data="media-card-img-${3 - i}"]`).style.display = 'none'
-                                }
+                                // for (let i = 0; i < newLength; i++) {
+                                //     mediaClone.querySelector(`[recom-data="media-card-img-${3 - i}"]`).style.display = 'none'
+                                // }
+                                cardimageWrapper.remove()
                             } else {
                                 for (let i = 0; i < newLength; i++) {
                                     mediaClone.querySelector(`[recom-data="media-card-img-${3 - i}"]`).style.opacity = '0'
