@@ -245,17 +245,17 @@ const runFn = async () => {
                     } else {
                         const imgs = medData.cardImg
 
-                        if (imgs.length === 0) {
-                            cardimageWrapper.remove()
-                            return
-                        }
-
                         imgs.forEach((i, idx) => {
                             writeMedia(`media-card-img-${idx + 1}`, i || '', 'src')
                         })
 
                         if (imgs.length < 3) {
-
+                            if (imgs.length === 0) {
+                                for (let i = 0; i < newLength; i++) {
+                                    mediaClone.querySelector(`[recom-data="media-card-img-${3 - i}"]`).style.display = 'none'
+                                }
+                                return
+                            }
                             const newLength = 3 - imgs.length
 
                             for (let i = 0; i < newLength; i++) {
