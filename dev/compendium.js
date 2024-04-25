@@ -187,6 +187,10 @@ const runFn = async () => {
                         mediaClone.querySelector(`[recom-data="${dataAttr}"]`)[attr] = text
                     }
 
+                    const detailToggle = () => {
+
+                    }
+
                     const { opening_hours } = medData
                     const isOpen = opening_hours?.open_now
 
@@ -198,6 +202,7 @@ const runFn = async () => {
 
                     const openingTime = period.open?.time || "0000"
                     const closingTime = period.close?.time || false
+                    const chevronToggle = mediaClone.querySelector(`[recom-data="open-hours-chevron"]`)
 
                     const detailValue = isOpen && closingTime && openingTime ? `Closed at ${closingTime === "0000"
                         ? "12:00 AM"
@@ -215,6 +220,13 @@ const runFn = async () => {
                     writeMedia('media-open-status', isOpen ? 'Open' : 'Closed')
                     writeMedia('media-close-detail', detailValue)
                     mediaClone.querySelector(`[recom-data="media-open-status"]`).style.color = `#${isOpen ? '60BE83' : 'FF5757'}`
+
+                    chevronToggle.addEventListener('click', () => {
+                        const isToggled = chevronToggle.classList.contains('toggled')
+
+                        chevronToggle.classList[isToggled ? 'remove' : 'add']('toggled')
+                        chevronToggle.style.transform = `translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(${isToggled ? 0 : 180}deg) skew(0deg, 0deg)`
+                    })
 
                     // Object.entries({ add: 'mouseenter', remove: 'mouseleave' }).forEach(([action, event]) => {
                     //     const websiteLink = mediaClone.querySelector(`[recom-data="media-website"]`)
