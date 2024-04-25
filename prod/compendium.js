@@ -249,7 +249,7 @@ const runFn = async () => {
 
                         if (imgs.length < 3) {
                             if (imgs.length === 0) {
-                                mediaClone.querySelector('recom-card-image-wrapper').remove()
+                                mediaClone.querySelector('.recom-card-image-wrapper').remove()
                                 return
                             }
 
