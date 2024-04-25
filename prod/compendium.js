@@ -250,13 +250,14 @@ const runFn = async () => {
                         })
 
                         if (imgs.length < 3) {
+                            const newLength = 3 - imgs.length
+
                             if (imgs.length === 0) {
                                 for (let i = 0; i < newLength; i++) {
                                     mediaClone.querySelector(`[recom-data="media-card-img-${3 - i}"]`).style.display = 'none'
                                 }
                                 return
                             }
-                            const newLength = 3 - imgs.length
 
                             for (let i = 0; i < newLength; i++) {
                                 mediaClone.querySelector(`[recom-data="media-card-img-${3 - i}"]`).style.opacity = '0'
