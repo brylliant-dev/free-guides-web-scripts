@@ -256,12 +256,13 @@ const runFn = async () => {
                                 for (let i = 0; i < newLength; i++) {
                                     mediaClone.querySelector(`[recom-data="media-card-img-${3 - i}"]`).style.display = 'none'
                                 }
-                                return
+                            } else {
+                                for (let i = 0; i < newLength; i++) {
+                                    mediaClone.querySelector(`[recom-data="media-card-img-${3 - i}"]`).style.opacity = '0'
+                                }
                             }
 
-                            for (let i = 0; i < newLength; i++) {
-                                mediaClone.querySelector(`[recom-data="media-card-img-${3 - i}"]`).style.opacity = '0'
-                            }
+
                         }
                     }
 
