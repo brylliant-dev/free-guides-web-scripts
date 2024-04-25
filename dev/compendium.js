@@ -248,6 +248,11 @@ const runFn = async () => {
                         })
 
                         if (imgs.length < 3) {
+                            if (imgs.length === 0) {
+                                mediaClone.querySelector('recom-card-image-wrapper').remove()
+                                return
+                            }
+
                             const newLength = 3 - imgs.length
 
                             for (let i = 0; i < newLength; i++) {
