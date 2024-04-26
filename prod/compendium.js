@@ -188,7 +188,8 @@ const runFn = async () => {
                     }
                     const openHourList = medData.opening_hours?.weekday_text || []
                     const openHourElem = mediaClone.querySelector('.recom-card-text-link ul.recom-opening-sched')
-                    const listItem = document.createElement('li')
+                    const listItem = openHourElem.querySelector('.recom-opening-sched-item li')
+                    listItem.remove()
 
                     openHourList.forEach(ohl => {
                         const listItemClone = listItem.cloneNode(true)
