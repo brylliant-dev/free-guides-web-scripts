@@ -41,40 +41,36 @@ const truncateString = (str, maxLength) => {
     return str.length <= maxLength ? str : str.slice(0, maxLength - 3) + '...';
 }
 
-const urlParams = new URLSearchParams(window.location.search);
-const idParam = urlParams.get('new');
-const isNew = idParam && idParam.includes('true')
-
 const runFn = async () => {
+    const compendium = document.querySelector('code#json-compendium')
+    const compendiumText = compendium.textContent
 
-    // Check if the URL has `new=true` parameter
+    const ctaDetails = document.querySelector('code#json-cta')
+    const ctaDetailsText = ctaDetails.textContent
+
+    const mainWrapper = document.querySelector('.main-wrapper')
+    const allTabs = [1, 2, 3]
+        .map(dwt => mainWrapper
+            .querySelector(`[data-w-tab="Tab ${dwt}"]`))
+
+    const [toursTab, recommendationsTab, generalsTab] = allTabs
+
+    // Add hover effect and set tab to active
+    allTabs.map(at =>
+        Object.entries({ add: 'mouseenter', remove: 'mouseleave' }).forEach(([action, event]) => {
+            at.addEventListener(event, () => {
+                at.getAttribute('aria-selected') !== 'true' &&
+                    at.classList[action]('w--current')
+            })
+        })
+    )
+
+    const removeCtaWrapper = () => {
+        mainWrapper.querySelector('.guide-cta-wrapper').remove()
+    }
+    toursTab.click()
 
     const runTabFunctions = () => {
-        const compendiumCode = document.querySelector('code#json-compendium')
-        const compendiumText = compendiumCode.textContent
-
-        const newDesign = document.querySelector('#new-design')
-        const allTabs = [1, 2, 3]
-            .map(dwt => newDesign
-                .querySelector(`[data-w-tab="Tab ${dwt}"]`))
-
-        const [toursTab, recommendationsTab, generalsTab] = allTabs
-
-        // Add hover effect and set tab to active
-        allTabs.map(at =>
-            Object.entries({ add: 'mouseenter', remove: 'mouseleave' }).forEach(([action, event]) => {
-                at.addEventListener(event, () => {
-                    at.getAttribute('aria-selected') !== 'true' &&
-                        at.classList[action]('w--current')
-                })
-            })
-        )
-
-        const removeCtaWrapper = () => {
-            newDesign.querySelector('.guide-cta-wrapper').remove()
-        }
-        toursTab.click()
-
         const tabSection = document.querySelector('.tabs-content.w-tab-content');
         const compendium = JSON.parse(compendiumText)
 
@@ -363,11 +359,8 @@ const runFn = async () => {
 
     // Update Profile Section using details from CTA field in Guide Collections
     const runProfileFunctions = () => {
-        const ctaDetails = document.querySelector('code#json-cta')
-        const ctaDetailsText = ctaDetails.textContent
-
-        const ctaLink = newDesign.querySelector('[profile-data="cta-link"]')
-        const ctaMobile = newDesign.querySelector('[profile-data="cta-mobile"]')
+        const ctaLink = mainWrapper.querySelector('[profile-data="cta-link"]')
+        const ctaMobile = mainWrapper.querySelector('[profile-data="cta-mobile"]')
 
         const { enabled, link, phoneNum } = JSON.parse(ctaDetailsText)
 
@@ -382,7 +375,6 @@ const runFn = async () => {
         }
     }
 
-    // if (isNew) {
     const compendiumFn = compendiumText === ''
         ? () => {
             generalsTab.remove()
@@ -396,19 +388,13 @@ const runFn = async () => {
 
     compendiumFn()
     ctaFn()
-    // }
 }
 
-if (isNew) {
-    startObservingElements({
-        selectors: [
-            'div#w-tabs-0-data-w-pane-1',
-            'code#json-compendium',
-            'code#json-cta'
-        ],
-        callback: runFn
-    });
-}
-
-
-
+startObservingElements({
+    selectors: [
+        'div#w-tabs-0-data-w-pane-1',
+        'code#json-compendium',
+        'code#json-cta'
+    ],
+    callback: runFn
+});
