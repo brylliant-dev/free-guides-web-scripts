@@ -205,6 +205,11 @@ const runFn = async () => {
                     const closingTime = period.close?.time || false
                     const chevronToggle = mediaClone.querySelector(`[recom-data="open-hours-chevron"]`)
 
+
+                    if (openHourList.length === 0) {
+                        chevronToggle.remove()
+                    }
+
                     const cardimageWrapper = mediaClone.querySelector('.recom-card-image-wrapper')
 
                     const detailValue = isOpen && closingTime && openingTime ? `Closed at ${closingTime === "0000"
