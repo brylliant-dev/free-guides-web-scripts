@@ -41,10 +41,12 @@ const truncateString = (str, maxLength) => {
     return str.length <= maxLength ? str : str.slice(0, maxLength - 3) + '...';
 }
 
+const urlParams = new URLSearchParams(window.location.search);
+const idParam = urlParams.get('new');
+const isNew = idParam && idParam.includes('true')
+
 const runFn = async () => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const idParam = urlParams.get('new');
-    const isNew = idParam && idParam.includes('true')
+
     // Check if the URL has `new=true` parameter
 
     const runTabFunctions = () => {
@@ -380,28 +382,33 @@ const runFn = async () => {
         }
     }
 
-    if (isNew) {
-        const compendiumFn = compendiumText === ''
-            ? () => {
-                generalsTab.remove()
-                recommendationsTab.remove()
-            }
-            : () => runTabFunctions()
+    // if (isNew) {
+    const compendiumFn = compendiumText === ''
+        ? () => {
+            generalsTab.remove()
+            recommendationsTab.remove()
+        }
+        : () => runTabFunctions()
 
-        const ctaFn = ctaDetailsText === ''
-            ? removeCtaWrapper
-            : () => runProfileFunctions()
+    const ctaFn = ctaDetailsText === ''
+        ? removeCtaWrapper
+        : () => runProfileFunctions()
 
-        compendiumFn()
-        ctaFn()
-    }
+    compendiumFn()
+    ctaFn()
+    // }
 }
 
-startObservingElements({
-    selectors: [
-        'div#w-tabs-0-data-w-pane-1',
-        'code#json-compendium',
-        'code#json-cta'
-    ],
-    callback: runFn
-});
+if (isNew) {
+    startObservingElements({
+        selectors: [
+            'div#w-tabs-0-data-w-pane-1',
+            'code#json-compendium',
+            'code#json-cta'
+        ],
+        callback: runFn
+    });
+}
+
+
+
