@@ -47,35 +47,32 @@ const runFn = async () => {
     const isNew = idParam && idParam.includes('true')
     // Check if the URL has `new=true` parameter
 
-    const compendium = document.querySelector('code#json-compendium')
-    const compendiumText = compendium.textContent
-
-    const ctaDetails = document.querySelector('code#json-cta')
-    const ctaDetailsText = ctaDetails.textContent
-
-    const newDesign = document.querySelector('#new-design')
-    const allTabs = [1, 2, 3]
-        .map(dwt => newDesign
-            .querySelector(`[data-w-tab="Tab ${dwt}"]`))
-
-    const [toursTab, recommendationsTab, generalsTab] = allTabs
-
-    // Add hover effect and set tab to active
-    allTabs.map(at =>
-        Object.entries({ add: 'mouseenter', remove: 'mouseleave' }).forEach(([action, event]) => {
-            at.addEventListener(event, () => {
-                at.getAttribute('aria-selected') !== 'true' &&
-                    at.classList[action]('w--current')
-            })
-        })
-    )
-
-    const removeCtaWrapper = () => {
-        newDesign.querySelector('.guide-cta-wrapper').remove()
-    }
-    toursTab.click()
-
     const runTabFunctions = () => {
+        const compendiumCode = document.querySelector('code#json-compendium')
+        const compendiumText = compendiumCode.textContent
+
+        const newDesign = document.querySelector('#new-design')
+        const allTabs = [1, 2, 3]
+            .map(dwt => newDesign
+                .querySelector(`[data-w-tab="Tab ${dwt}"]`))
+
+        const [toursTab, recommendationsTab, generalsTab] = allTabs
+
+        // Add hover effect and set tab to active
+        allTabs.map(at =>
+            Object.entries({ add: 'mouseenter', remove: 'mouseleave' }).forEach(([action, event]) => {
+                at.addEventListener(event, () => {
+                    at.getAttribute('aria-selected') !== 'true' &&
+                        at.classList[action]('w--current')
+                })
+            })
+        )
+
+        const removeCtaWrapper = () => {
+            newDesign.querySelector('.guide-cta-wrapper').remove()
+        }
+        toursTab.click()
+
         const tabSection = document.querySelector('.tabs-content.w-tab-content');
         const compendium = JSON.parse(compendiumText)
 
@@ -364,6 +361,9 @@ const runFn = async () => {
 
     // Update Profile Section using details from CTA field in Guide Collections
     const runProfileFunctions = () => {
+        const ctaDetails = document.querySelector('code#json-cta')
+        const ctaDetailsText = ctaDetails.textContent
+
         const ctaLink = newDesign.querySelector('[profile-data="cta-link"]')
         const ctaMobile = newDesign.querySelector('[profile-data="cta-mobile"]')
 
