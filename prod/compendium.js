@@ -252,7 +252,7 @@ const runFn = async () => {
                             const newLength = 3 - imgs.length
 
                             if (imgs.length === 0) {
-                                cardimageWrapper.remove()
+                                cardimageWrapper.style.display = 'none'
                             } else {
                                 for (let i = 0; i < newLength; i++) {
                                     mediaClone.querySelector(`[recom-data="media-card-img-${3 - i}"]`).style.opacity = '0'
