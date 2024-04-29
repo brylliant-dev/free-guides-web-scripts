@@ -179,7 +179,9 @@ const runFn = async () => {
                 data.media.filter(med => med.active).forEach((medData) => {
                     const mediaClone = recomCardWrapperTemplate.cloneNode(true);
                     const writeMedia = (dataAttr, text, attr = 'textContent') => {
-                        mediaClone.querySelector(`[recom-data="${dataAttr}"]`)[attr] = text
+                        if (mediaClone.querySelector(`[recom-data="${dataAttr}"]`)) {
+                            mediaClone.querySelector(`[recom-data="${dataAttr}"]`)[attr] = text
+                        }
                     }
                     const openHourList = medData.opening_hours?.weekday_text || []
                     const openHourElem = mediaClone.querySelector('.recom-card-text-link ul.recom-opening-sched')
