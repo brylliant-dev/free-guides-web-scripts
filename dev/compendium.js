@@ -41,6 +41,13 @@ const truncateString = (str, maxLength) => {
     return str.length <= maxLength ? str : str.slice(0, maxLength - 3) + '...';
 }
 
+const runFooterYear = () => {
+    const currentYearInfo = document.querySelector('#current-year-text-info')
+    if (currentYearInfo) {
+        currentYearInfo.textContent = new Date().getFullYear()
+    }
+}
+
 const runFn = async () => {
     const compendium = document.querySelector('code#json-compendium')
     const compendiumText = compendium.textContent
