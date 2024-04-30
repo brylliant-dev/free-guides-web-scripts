@@ -52,6 +52,13 @@ const runFn = async () => {
     const compendium = document.querySelector('code#json-compendium')
     const compendiumText = compendium.textContent
 
+    const jQCompendium = $('code#json-compendium')
+    const jQCompendiumText = jQCompendium.find('code#json-compendium')
+
+    const JQCompendiumJson = JSON.parse(jQCompendiumText)
+    console.log('--JQCompendiumJson', JQCompendiumJson)
+
+
     const ctaDetails = document.querySelector('code#json-cta')
     const ctaDetailsText = ctaDetails.textContent
 
