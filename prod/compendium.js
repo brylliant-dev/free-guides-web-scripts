@@ -76,6 +76,7 @@ const runFn = async () => {
         mainWrapper.querySelector('.guide-cta-wrapper').remove()
     }
     toursTab.click()
+    runFooterYear()
 
     const runTabFunctions = () => {
         const tabSection = document.querySelector('.tabs-content.w-tab-content');
