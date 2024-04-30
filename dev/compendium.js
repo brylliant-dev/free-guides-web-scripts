@@ -379,11 +379,19 @@ const runFn = async () => {
         const { enabled, link, phoneNum } = JSON.parse(ctaDetailsText)
 
         if (enabled) {
-            ctaLink.textContent = link.title
-            ctaLink.href = link.value
+            if (link && link !== '') {
+                ctaLink.textContent = link.title
+                ctaLink.href = link.value
+            } else {
+                ctaLink.remove()
+            }
 
-            ctaMobile.textContent = phoneNum.title
-            ctaMobile.href = `tel:${phoneNum.value}`
+            if (phoneNum && phoneNum !== '') {
+                ctaMobile.textContent = phoneNum.title
+                ctaMobile.href = `tel:${phoneNum.value}`
+            } else {
+                phoneNum.remove()
+            }
         } else {
             removeCtaWrapper()
         }
