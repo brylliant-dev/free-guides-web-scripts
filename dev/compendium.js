@@ -384,7 +384,7 @@ const runFn = async () => {
                 ctaLink.textContent = link.title
                 ctaLink.href = link.value
             } else {
-                ctaLink.remove()
+                ctaLink.parentNode.remove()
             }
 
             if (phoneNum && phoneNum !== '') {

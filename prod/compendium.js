@@ -52,14 +52,6 @@ const runFn = async () => {
     const compendium = document.querySelector('code#json-compendium')
     const compendiumText = compendium.textContent
 
-    const jQCompendium = $('code#json-compendium')
-    const jQCompendiumText = jQCompendium.text()
-
-    if (jQCompendiumText !== '') {
-        const JQCompendiumJson = JSON.parse(jQCompendiumText)
-        console.log('--JQCompendiumJson', JQCompendiumJson)
-    }
-
     const ctaDetails = document.querySelector('code#json-cta')
     const ctaDetailsText = ctaDetails.textContent
 
@@ -392,7 +384,7 @@ const runFn = async () => {
                 ctaLink.textContent = link.title
                 ctaLink.href = link.value
             } else {
-                ctaLink.remove()
+                ctaLink.parentNode.remove()
             }
 
             if (phoneNum && phoneNum !== '') {
