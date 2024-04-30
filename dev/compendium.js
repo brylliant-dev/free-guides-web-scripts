@@ -283,7 +283,7 @@ const runFn = async () => {
         // Let's scope this in a block so it wouldn't interfere with other tabs
         const runGeneral = () => {
             // Let's validate if there are any data to be rendered otherwise, let's just remove the tab and not run the function
-            const validateGeneralData = generalDataArray.filter(gda => gda.active).length > 0
+            const validateGeneralData = generalDataArray.filter(gda => gda.active && gda.media.length > 0).length > 0
             if (!validateGeneralData) {
                 generalsTab.remove()
                 return
