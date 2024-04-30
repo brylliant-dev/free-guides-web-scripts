@@ -297,7 +297,7 @@ const runFn = async () => {
             genDropdownTemplate.remove()
 
             // Iterate over the data array and clone the template for each item
-            generalDataArray.filter(rda => rda.active && gda.media.length > 0).forEach((data, idx) => {
+            generalDataArray.filter(rda => rda.active && rda.media.length > 0).forEach((data, idx) => {
                 // Clone the template
                 const genDropdownClone = genDropdownTemplate.cloneNode(true);
 
