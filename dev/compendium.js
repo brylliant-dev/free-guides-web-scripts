@@ -334,7 +334,7 @@ const runFn = async () => {
                     const { content, title } = data
                     return {
                         text: () => {
-                            clone.innerHTML = content
+                            clone.innerHTML = content.replace(/"/g, `'`);
                         },
                         link: () => {
                             const link = clone.querySelector('[gen-data="media-link"]')
