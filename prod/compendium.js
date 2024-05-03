@@ -220,6 +220,10 @@ const runFn = async () => {
                         chevronToggle.remove()
                     }
 
+                    if (!medData.website || medData.website === '') {
+                        mediaClone.querySelector(`[recom-data="media-website"]`).parentNode.style.display = 'none'
+                    }
+
                     const cardimageWrapper = mediaClone.querySelector('.recom-card-image-wrapper')
 
                     const detailValue = isOpen && closingTime && openingTime ? `Closed at ${closingTime === "0000"
