@@ -285,9 +285,8 @@ const runFn = async () => {
                 data.media.filter(med => med.active).forEach((medData) => {
                     const mediaClone = recomCardWrapperTemplate.cloneNode(true);
 
-                    console.log('--this is medData.placeId', medData.placeId)
                     mediaClone.innerHTML = `
-                        <iframe src="https://tour.freeguides.com/?placeId=${medData.placeId}" height="100%" width="100%"id="iFrame1">
+                        <iframe src="https://tour.freeguides.com/?placeId=${medData.placeId}" height="360px" width="100%"id="iFrame1">
                         </iframe>
                     `
 
