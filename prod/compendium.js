@@ -184,103 +184,115 @@ const runFn = async () => {
                 recomDropdownClone.querySelector('[recom-data="accordion-title"]').textContent = data.accordionTitle;
                 recomDropdownClone.querySelector(`[recom-data="media-icon"]`).setAttribute('src', data.iconDetails.url)
 
+                // data.media.filter(med => med.active).forEach((medData) => {
+                //     const mediaClone = recomCardWrapperTemplate.cloneNode(true);
+                //     const writeMedia = (dataAttr, text, attr = 'textContent') => {
+                //         if (mediaClone.querySelector(`[recom-data="${dataAttr}"]`)) {
+                //             mediaClone.querySelector(`[recom-data="${dataAttr}"]`)[attr] = text
+                //         }
+                //     }
+                //     const openHourList = medData.opening_hours?.weekday_text || []
+                //     const openHourElem = mediaClone.querySelector('.recom-card-text-link ul.recom-opening-sched')
+                //     const listItem = openHourElem.querySelector('.recom-opening-sched-item')
+                //     listItem.remove()
+
+                //     openHourList.forEach(ohl => {
+                //         const listItemClone = listItem.cloneNode(true)
+                //         listItemClone.textContent = ohl
+                //         openHourElem.appendChild(listItemClone)
+                //     })
+
+                //     const { opening_hours } = medData
+                //     const isOpen = opening_hours?.open_now
+
+                //     const day = opening_hours?.periods?.length > 1 ? new Date().getDay() : 0
+                //     const period = opening_hours?.periods?.filter(x => x?.open?.day === day).find(x => x) || {
+                //         open: null,
+                //         close: null
+                //     }
+
+                //     const openingTime = period.open?.time || "0000"
+                //     const closingTime = period.close?.time || false
+                //     const chevronToggle = mediaClone.querySelector(`[recom-data="open-hours-chevron"]`)
+
+
+                //     if (openHourList.length === 0) {
+                //         chevronToggle.remove()
+                //     }
+
+                //     if (!medData.website || medData.website === '') {
+                //         mediaClone.querySelector(`[recom-data="media-website"]`).parentNode.style.display = 'none'
+                //     }
+
+                //     const cardimageWrapper = mediaClone.querySelector('.recom-card-image-wrapper')
+
+                //     const detailValue = isOpen && closingTime && openingTime ? `Closed at ${closingTime === "0000"
+                //         ? "12:00 AM"
+                //         : closingTime?.slice(0, 2) + ":" + closingTime?.slice(2)
+                //         }` : `Opens at ${openingTime === "0000"
+                //             ? "12:00 AM"
+                //             : openingTime?.slice(0, 2) + ":" + openingTime?.slice(2)
+                //         }` || ""
+
+                //     writeMedia('media-name', medData.name)
+                //     writeMedia('media-website', truncateString(medData.website, 25))
+                //     writeMedia('media-website', `https://www.${medData.website}`, 'href')
+                //     writeMedia('media-maps-url', medData.mapsUrl || '#', 'href')
+
+                //     writeMedia('media-open-status', isOpen ? 'Open' : 'Closed')
+                //     writeMedia('media-close-detail', detailValue)
+                //     mediaClone.querySelector(`[recom-data="media-open-status"]`).style.color = `#${isOpen ? '60BE83' : 'FF5757'}`
+
+                //     chevronToggle.addEventListener('click', () => {
+                //         const isToggled = chevronToggle.classList.contains('toggled')
+
+                //         chevronToggle.classList[isToggled ? 'remove' : 'add']('toggled')
+                //         chevronToggle.style.transform = `translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(${isToggled ? 0 : 180}deg) skew(0deg, 0deg)`
+                //         openHourElem.style.display = isToggled ? 'none' : 'flex'
+                //     })
+
+                //     if (typeof medData.cardImg === 'string') {
+                //         writeMedia('media-card-img-1', medData.cardImg || '', 'src')
+                //         mediaClone.querySelector(`[recom-data="media-card-img-2"]`).style.opacity = '0'
+                //         mediaClone.querySelector(`[recom-data="media-card-img-3"]`).style.opacity = '0'
+                //     } else {
+                //         const imgs = medData.cardImg
+
+                //         imgs.forEach((i, idx) => {
+                //             writeMedia(`media-card-img-${idx + 1}`, i || '', 'src')
+                //         })
+
+                //         if (imgs.length < 3) {
+                //             const newLength = 3 - imgs.length
+
+                //             if (imgs.length === 0) {
+                //                 cardimageWrapper.style.display = 'none'
+                //             } else {
+                //                 for (let i = 0; i < newLength; i++) {
+                //                     mediaClone.querySelector(`[recom-data="media-card-img-${3 - i}"]`).style.opacity = '0'
+                //                 }
+                //             }
+
+
+                //         }
+                //     }
+
+                //     cardLayout.append(mediaClone)
+                // })
+
+                // // Append the cloned element to the wrapper
+
                 data.media.filter(med => med.active).forEach((medData) => {
                     const mediaClone = recomCardWrapperTemplate.cloneNode(true);
-                    const writeMedia = (dataAttr, text, attr = 'textContent') => {
-                        if (mediaClone.querySelector(`[recom-data="${dataAttr}"]`)) {
-                            mediaClone.querySelector(`[recom-data="${dataAttr}"]`)[attr] = text
-                        }
-                    }
-                    const openHourList = medData.opening_hours?.weekday_text || []
-                    const openHourElem = mediaClone.querySelector('.recom-card-text-link ul.recom-opening-sched')
-                    const listItem = openHourElem.querySelector('.recom-opening-sched-item')
-                    listItem.remove()
 
-                    openHourList.forEach(ohl => {
-                        const listItemClone = listItem.cloneNode(true)
-                        listItemClone.textContent = ohl
-                        openHourElem.appendChild(listItemClone)
-                    })
-
-                    const { opening_hours } = medData
-                    const isOpen = opening_hours?.open_now
-
-                    const day = opening_hours?.periods?.length > 1 ? new Date().getDay() : 0
-                    const period = opening_hours?.periods?.filter(x => x?.open?.day === day).find(x => x) || {
-                        open: null,
-                        close: null
-                    }
-
-                    const openingTime = period.open?.time || "0000"
-                    const closingTime = period.close?.time || false
-                    const chevronToggle = mediaClone.querySelector(`[recom-data="open-hours-chevron"]`)
-
-
-                    if (openHourList.length === 0) {
-                        chevronToggle.remove()
-                    }
-
-                    if (!medData.website || medData.website === '') {
-                        mediaClone.querySelector(`[recom-data="media-website"]`).parentNode.style.display = 'none'
-                    }
-
-                    const cardimageWrapper = mediaClone.querySelector('.recom-card-image-wrapper')
-
-                    const detailValue = isOpen && closingTime && openingTime ? `Closed at ${closingTime === "0000"
-                        ? "12:00 AM"
-                        : closingTime?.slice(0, 2) + ":" + closingTime?.slice(2)
-                        }` : `Opens at ${openingTime === "0000"
-                            ? "12:00 AM"
-                            : openingTime?.slice(0, 2) + ":" + openingTime?.slice(2)
-                        }` || ""
-
-                    writeMedia('media-name', medData.name)
-                    writeMedia('media-website', truncateString(medData.website, 25))
-                    writeMedia('media-website', `https://www.${medData.website}`, 'href')
-                    writeMedia('media-maps-url', medData.mapsUrl || '#', 'href')
-
-                    writeMedia('media-open-status', isOpen ? 'Open' : 'Closed')
-                    writeMedia('media-close-detail', detailValue)
-                    mediaClone.querySelector(`[recom-data="media-open-status"]`).style.color = `#${isOpen ? '60BE83' : 'FF5757'}`
-
-                    chevronToggle.addEventListener('click', () => {
-                        const isToggled = chevronToggle.classList.contains('toggled')
-
-                        chevronToggle.classList[isToggled ? 'remove' : 'add']('toggled')
-                        chevronToggle.style.transform = `translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(${isToggled ? 0 : 180}deg) skew(0deg, 0deg)`
-                        openHourElem.style.display = isToggled ? 'none' : 'flex'
-                    })
-
-                    if (typeof medData.cardImg === 'string') {
-                        writeMedia('media-card-img-1', medData.cardImg || '', 'src')
-                        mediaClone.querySelector(`[recom-data="media-card-img-2"]`).style.opacity = '0'
-                        mediaClone.querySelector(`[recom-data="media-card-img-3"]`).style.opacity = '0'
-                    } else {
-                        const imgs = medData.cardImg
-
-                        imgs.forEach((i, idx) => {
-                            writeMedia(`media-card-img-${idx + 1}`, i || '', 'src')
-                        })
-
-                        if (imgs.length < 3) {
-                            const newLength = 3 - imgs.length
-
-                            if (imgs.length === 0) {
-                                cardimageWrapper.style.display = 'none'
-                            } else {
-                                for (let i = 0; i < newLength; i++) {
-                                    mediaClone.querySelector(`[recom-data="media-card-img-${3 - i}"]`).style.opacity = '0'
-                                }
-                            }
-
-
-                        }
-                    }
+                    mediaClone.innerHTML = `
+                        <iframe src="https://tour.freeguides.com/?placeId=${medData.placeId}" height="360px" width="100%"id="iFrame1">
+                        </iframe>
+                    `
 
                     cardLayout.append(mediaClone)
                 })
 
-                // // Append the cloned element to the wrapper
                 recomDropdownWrapper.append(recomDropdownClone);
             });
         }
