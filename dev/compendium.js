@@ -91,9 +91,10 @@ const runFn = async () => {
             iconDetails,
             active,
             accordionTitle: title,
-            media: media.map(({ current_opening_hours, active, overview, content, name, phoneNumber, website, mapsUrl, cardImg }) =>
-                ({ opening_hours: current_opening_hours, active, overview, placeId: content, name, phoneNumber, website, mapsUrl, cardImg })
-            )
+            media
+            // media: media.map(({ current_opening_hours, active, overview, content, name, phoneNumber, website, mapsUrl, cardImg }) =>
+            //     ({ opening_hours: current_opening_hours, active, overview, placeId: content, name, phoneNumber, website, mapsUrl, cardImg })
+            // )
         })
         )
 
