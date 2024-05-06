@@ -290,6 +290,8 @@ const runFn = async () => {
                         <iframe src="https://tour.freeguides.com/?placeId=${medData.placeId}" height="100%" width="100%"id="iFrame1">
                         </iframe>
                     `
+
+                    cardLayout.append(mediaClone)
                 })
 
                 recomDropdownWrapper.append(recomDropdownClone);
