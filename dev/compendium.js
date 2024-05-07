@@ -155,7 +155,7 @@ const runFn = async () => {
         const runRecommendations = () => {
             // Let's validate if there are any data to be rendered otherwise, let's just remove the tab and not run the function
             const validateRecomData = recomDataArray.filter(rda => rda.active && rda.media.filter(rd => rd.active).length > 0).length > 0
-            if (!validateRecomData) {
+            if (!validateRecomData || !compendium.recommendEnabled) {
                 recommendationsTab.remove()
                 return
             }
@@ -302,7 +302,7 @@ const runFn = async () => {
         const runGeneral = () => {
             // Let's validate if there are any data to be rendered otherwise, let's just remove the tab and not run the function
             const validateGeneralData = generalDataArray.filter(gda => gda.active).length > 0
-            if (!validateGeneralData) {
+            if (!validateGeneralData || !compendium.generalEnabled) {
                 generalsTab.remove()
                 return
             }
