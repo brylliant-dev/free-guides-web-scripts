@@ -122,7 +122,7 @@ const runFn = async () => {
                 })
             }
 
-            const toggleFn = ({ toggle, accordionBody, accordionBtn, clone, wrapper, idx, callback = (_i) => { } }) => {
+            const toggleFn = ({ toggle, accordionBody, accordionBtn, clone, wrapper, idx, callback = () => { } }) => {
                 const toggleId = `w-dropdown-toggle-${idx + 1}`
                 const dropdownId = `w-dropdown-list-${idx + 1}`
 
@@ -146,7 +146,7 @@ const runFn = async () => {
                         closeToggle({ toggleBody: toggle, accordionBody, accordionBtn, clone })
                     }
 
-                    callback(idx)
+                    callback()
                 })
             }
 
@@ -182,12 +182,12 @@ const runFn = async () => {
 
                 const iframeClones = []
 
-                const feedIframeSrc = (index) => {
-                    const iframeClone = iframeClones[index]
-
-                    if (iframeClone.item.getAttribute('src') === '') {
-                        iframeClone.item.setAttribute('src', `https://tour.freeguides.com/?placeId=${iframeClone.placeId}`)
-                    }
+                const feedIframeSrc = () => {
+                    iframeClones.forEach(ifc => {
+                        if (ifc.item.getAttribute('src') === '') {
+                            ifc.item.setAttribute('src', `https://tour.freeguides.com/?placeId=${iframeClone.placeId}`)
+                        }
+                    })
                 }
 
                 toggleFn({ accordionBody, accordionBtn, clone: recomDropdownClone, toggle, wrapper: recomDropdownWrapper, idx, callback: feedIframeSrc })
