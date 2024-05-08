@@ -122,7 +122,7 @@ const runFn = async () => {
                 })
             }
 
-            const toggleFn = ({ toggle, accordionBody, accordionBtn, clone, wrapper, idx }) => {
+            const toggleFn = ({ toggle, accordionBody, accordionBtn, clone, wrapper, idx, callback = (_i) => { } }) => {
                 const toggleId = `w-dropdown-toggle-${idx + 1}`
                 const dropdownId = `w-dropdown-list-${idx + 1}`
 
@@ -145,6 +145,8 @@ const runFn = async () => {
                     } else {
                         closeToggle({ toggleBody: toggle, accordionBody, accordionBtn, clone })
                     }
+
+                    callback(idx)
                 })
             }
 
@@ -178,7 +180,18 @@ const runFn = async () => {
                 const accordionBtn = recomDropdownClone.querySelector('.accordion-btn')
                 const cardLayout = recomDropdownClone.querySelector('.recommendation-card-layout')
 
-                toggleFn({ accordionBody, accordionBtn, clone: recomDropdownClone, toggle, wrapper: recomDropdownWrapper, idx })
+                const iframeClones = []
+
+                const feedIframeSrc = (index) => {
+                    const iframeClone = iframeClones[index]
+
+                    if (iframeClone.item.getAttribute('data-src') === '') {
+                        iframeClone.item.setAttribute('data-src', `https://tour.freeguides.com/?placeId=${iframeClone.placeId}`)
+                    }
+
+                }
+
+                toggleFn({ accordionBody, accordionBtn, clone: recomDropdownClone, toggle, wrapper: recomDropdownWrapper, idx, callback: feedIframeSrc })
 
                 // Update content with data from the array
                 recomDropdownTemplate.setAttribute('data-w-id', generateUUID())
@@ -285,12 +298,16 @@ const runFn = async () => {
 
                 data.media.filter(med => med.active).forEach((medData) => {
                     const mediaClone = recomCardWrapperTemplate.cloneNode(true);
+                    const placeId = medData.placeId
 
                     mediaClone.innerHTML = `
-                        <iframe src="https://tour.freeguides.com/?placeId=${medData.placeId}" height="360px" width="100%"id="iFrame1">
-                        </iframe>
+                        <iframe src="about:black" data-src="" height="360px" width="100%" loading="lazy" class="iFrame1"></iframe>
                     `
 
+                    iframeClones.push({
+                        item: mediaClone.querySelector('iframe'),
+                        placeId
+                    })
                     cardLayout.append(mediaClone)
                 })
 
