@@ -298,7 +298,7 @@ const runFn = async () => {
                     const placeId = medData.placeId
 
                     mediaClone.innerHTML = `
-                        <iframe src="about:black" src="" height="360px" width="100%" loading="lazy" class="iFrame1"></iframe>
+                        <iframe src="" height="360px" width="100%" loading="lazy" class="iFrame1"></iframe>
                     `
 
                     iframeClones.push({
