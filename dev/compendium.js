@@ -185,8 +185,8 @@ const runFn = async () => {
                 const feedIframeSrc = (index) => {
                     const iframeClone = iframeClones[index]
 
-                    if (iframeClone.item.getAttribute('data-src') === '') {
-                        iframeClone.item.setAttribute('data-src', `https://tour.freeguides.com/?placeId=${iframeClone.placeId}`)
+                    if (iframeClone.item.getAttribute('src') === '') {
+                        iframeClone.item.setAttribute('src', `https://tour.freeguides.com/?placeId=${iframeClone.placeId}`)
                     }
 
                 }
@@ -301,7 +301,7 @@ const runFn = async () => {
                     const placeId = medData.placeId
 
                     mediaClone.innerHTML = `
-                        <iframe src="about:black" data-src="" height="360px" width="100%" loading="lazy" class="iFrame1"></iframe>
+                        <iframe src="about:black" src="" height="360px" width="100%" loading="lazy" class="iFrame1"></iframe>
                     `
 
                     iframeClones.push({
