@@ -185,7 +185,9 @@ const runFn = async () => {
                 const feedIframeSrc = (index) => {
                     const iframeClone = iframeClones[index]
 
-                    iframeClone.item.setAttribute('src', `https://tour.freeguides.com/?placeId=${iframeClone.placeId}`)
+                    if (iframeClone.item.getAttribute('src') === '') {
+                        iframeClone.item.setAttribute('src', `https://tour.freeguides.com/?placeId=${iframeClone.placeId}`)
+                    }
                 }
 
                 toggleFn({ accordionBody, accordionBtn, clone: recomDropdownClone, toggle, wrapper: recomDropdownWrapper, idx, callback: feedIframeSrc })
