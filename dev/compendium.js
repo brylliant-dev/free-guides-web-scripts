@@ -183,6 +183,7 @@ const runFn = async () => {
                 const iframeClones = []
 
                 const feedIframeSrc = () => {
+                    console.log('--this is iframeClones', iframeClones)
                     iframeClones.forEach(ifc => {
                         if (ifc.item.getAttribute('src') === '') {
                             ifc.item.setAttribute('src', `https://tour.freeguides.com/?placeId=${iframeClone.placeId}`)
