@@ -480,14 +480,17 @@ const runFn = async () => {
 
     const checkNullData = ({ details, elem, prefix = '', parent = false }) => {
       if (details && details !== '') {
-        elem.textContent = details.title
-        elem.href = `${prefix}${details.value}`
+        elem.textContent = details?.title || ''
+        elem.href = `${prefix}${details?.value || ''}`
       } else {
         (parent ? elem.parentElement : elem).remove()
       }
     }
 
     if (enabled) {
+      if (!primary) {
+        ctaLink.classList.add('profile-cta-order', 'margin-top-9')
+      }
       checkNullData({ details: link, elem: ctaLink })
       checkNullData({ details: phoneNum, elem: ctaMobile, prefix: 'tel:' })
       checkNullData({ details: primary, elem: ctaMain, parent: true })
