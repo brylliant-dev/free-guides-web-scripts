@@ -1000,12 +1000,14 @@ const runMainFn = () => {
     })
 }
 
-startObservingElements({
-    selectors: [
-        'div#w-tabs-0-data-w-pane-1',
-        'code#json-compendium',
-        'code#json-cta',
-    ],
-    callback: runMainFn,
-})
+// startObservingElements({
+//     selectors: [
+//         'div#w-tabs-0-data-w-pane-1',
+//         'code#json-compendium',
+//         'code#json-cta',
+//     ],
+//     callback: runMainFn,
+// })
+
+runOldFn()
 
