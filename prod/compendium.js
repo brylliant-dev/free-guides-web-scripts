@@ -55,7 +55,7 @@ const runOldFn = async () => {
   const ctaDetails = document.querySelector('code#json-cta')
   const ctaDetailsText = ctaDetails.textContent
 
-  const mainWrapper = document.querySelector('#old-design.main-wrapper')
+  const mainWrapper = document.querySelector('.main-wrapper')
   const allTabs = [1, 2, 3].map((dwt) =>
     mainWrapper.querySelector(`[data-w-tab='Tab ${dwt}']`)
   )
@@ -521,7 +521,7 @@ const runNewFn = async () => {
   const ctaDetails = document.querySelector('code#json-cta')
   const ctaDetailsText = ctaDetails.textContent
 
-  const mainWrapper = document.querySelector('#new-design.main-wrapper')
+  const mainWrapper = document.querySelector('.main-wrapper')
   const allTabs = [1, 2, 3].map((dwt) =>
     mainWrapper.querySelector(`[data-w-tab='Tab ${dwt}']`)
   )
