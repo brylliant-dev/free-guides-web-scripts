@@ -990,8 +990,8 @@ const runMainFn = () => {
   console.log('--new design', newDesign)
 
   const isNew = eval(urlParams)
-  // oldDesign.style.display = isNew ? 'none' : 'block'
-  // newDesign.style.display = isNew ? 'block' : 'none'
+  const toRemove = isNew ? oldDesign : newDesign
+  toRemove.remove()
 
   console.log('--isNew', isNew)
 }
