@@ -996,7 +996,15 @@ const runMainFn = () => {
   console.log('--isNew', isNew)
 }
 
-runMainFn()
+startObservingElements({
+  selectors: [
+    '#old-design',
+    '#new-design',
+  ],
+  callback: () => {
+    runMainFn()
+  },
+})
 
 startObservingElements({
   selectors: [
