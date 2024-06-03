@@ -1005,7 +1005,7 @@ const runMainFn = () => {
       '#old-design',
       '#new-design',
     ],
-    callback: runNewFn,
+    callback: runOldFn,
   })
 }
 
