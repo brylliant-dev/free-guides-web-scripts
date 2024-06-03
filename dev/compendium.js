@@ -1008,6 +1008,6 @@ startObservingElements({
         'code#json-compendium',
         'code#json-cta',
     ],
-    callback: runMainFn,
+    callback: runOldFn,
 })
 
