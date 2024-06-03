@@ -1016,7 +1016,7 @@ startObservingElements({
     '#new-design',
   ],
   callback: () => {
-    runNewFn()
+    runMainFn()
   },
 })
 
