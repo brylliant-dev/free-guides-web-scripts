@@ -49,13 +49,14 @@ const runFooterYear = () => {
 }
 
 const runOldFn = async () => {
+  runMainFn()
   const compendium = document.querySelector('code#json-compendium')
   const compendiumText = compendium.textContent
 
   const ctaDetails = document.querySelector('code#json-cta')
   const ctaDetailsText = ctaDetails.textContent
 
-  const mainWrapper = document.querySelector('.main-wrapper')
+  const mainWrapper = document.querySelector('#old-design.main-wrapper')
   const allTabs = [1, 2, 3].map((dwt) =>
     mainWrapper.querySelector(`[data-w-tab='Tab ${dwt}']`)
   )
@@ -521,7 +522,7 @@ const runNewFn = async () => {
   const ctaDetails = document.querySelector('code#json-cta')
   const ctaDetailsText = ctaDetails.textContent
 
-  const mainWrapper = document.querySelector('.main-wrapper')
+  const mainWrapper = document.querySelector('#new-design.main-wrapper')
   const allTabs = [1, 2, 3].map((dwt) =>
     mainWrapper.querySelector(`[data-w-tab='Tab ${dwt}']`)
   )
@@ -986,9 +987,14 @@ const runMainFn = () => {
   const oldDesign = document.querySelector('#old-design')
   const newDesign = document.querySelector('#new-design')
 
+  console.log('--old design', oldDesign)
+  console.log('--new design', newDesign)
+
   const isNew = eval(urlParams)
-  oldDesign.style.display = isNew ? 'none' : 'block'
-  newDesign.style.display = isNew ? 'block' : 'none'
+  // oldDesign.style.display = isNew ? 'none' : 'block'
+  // newDesign.style.display = isNew ? 'block' : 'none'
+
+  console.log('--isNew', isNew)
 }
 
 startObservingElements({
