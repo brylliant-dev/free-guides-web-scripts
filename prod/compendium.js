@@ -1009,11 +1009,14 @@ const runMainFn = () => {
 
 startObservingElements({
   selectors: [
+    'div#w-tabs-0-data-w-pane-1',
+    'code#json-compendium',
+    'code#json-cta',
     '#old-design',
     '#new-design',
   ],
   callback: () => {
-    runMainFn()
+    runNewFn()
   },
 })
 
