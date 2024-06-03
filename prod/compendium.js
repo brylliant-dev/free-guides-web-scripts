@@ -49,7 +49,6 @@ const runFooterYear = () => {
 }
 
 const runOldFn = async () => {
-  runMainFn()
   const compendium = document.querySelector('code#json-compendium')
   const compendiumText = compendium.textContent
 
@@ -996,6 +995,8 @@ const runMainFn = () => {
 
   console.log('--isNew', isNew)
 }
+
+runMainFn()
 
 startObservingElements({
   selectors: [
