@@ -987,17 +987,8 @@ const runMainFn = () => {
     const newDesign = document.querySelector('#new-design')
 
     const isNew = eval(urlParams)
-    const designToRemove = isNew ? oldDesign : newDesign
-    designToRemove.remove()
-
-    startObservingElements({
-        selectors: [
-            'div#w-tabs-0-data-w-pane-1',
-            'code#json-compendium',
-            'code#json-cta',
-        ],
-        callback: runOldFn,
-    })
+    oldDesign.style.display = isNew ? 'none' : 'block'
+    newDesign.style.display = isNew ? 'block' : 'none'
 }
 
 startObservingElements({
@@ -1006,6 +997,9 @@ startObservingElements({
         'code#json-compendium',
         'code#json-cta',
     ],
-    callback: runOldFn,
+    callback: () => {
+        runOldFn()
+        runMainFn()
+    },
 })
 
