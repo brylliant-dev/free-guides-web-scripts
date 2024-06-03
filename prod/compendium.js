@@ -996,24 +996,17 @@ const runMainFn = () => {
       'code#json-compendium',
       'code#json-cta',
     ],
-    callback: runOldFn,
+    callback: isNew ? runNewFn : runOldFn,
   })
 }
-
-const url = new URL(window.location.href)
-const urlParams = new URLSearchParams(url.search).get('new')
-const oldDesign = document.querySelector('#old-design')
-const newDesign = document.querySelector('#new-design')
-
-const isNew = eval(urlParams)
-const designToRemove = isNew ? oldDesign : newDesign
-designToRemove.remove()
 
 startObservingElements({
   selectors: [
     'div#w-tabs-0-data-w-pane-1',
     'code#json-compendium',
     'code#json-cta',
+    '#old-design',
+    '#new-design',
   ],
-  callback: isNew ? runNewFn : runOldFn,
+  callback: runMainFn,
 })
