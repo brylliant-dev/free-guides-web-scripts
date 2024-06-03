@@ -990,11 +990,11 @@ const runMainFn = () => {
   console.log('--new design', newDesign)
 
   const isNew = urlParams === 'true' || eval(urlParams)
-  const toRemove = isNew ? oldDesign : newDesign
-  // oldDesign.style.display = isNew ? 'none' : 'block'
-  // newDesign.style.display = isNew ? 'block' : 'none'
+  // const toRemove = isNew ? oldDesign : newDesign
+  oldDesign.style.display = isNew ? 'none' : 'block'
+  newDesign.style.display = isNew ? 'block' : 'none'
 
-  toRemove.remove()
+  // toRemove.remove()
 
   console.log('--isNew', isNew)
   startObservingElements({
