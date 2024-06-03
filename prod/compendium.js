@@ -994,6 +994,14 @@ const runMainFn = () => {
   toRemove.remove()
 
   console.log('--isNew', isNew)
+  startObservingElements({
+    selectors: [
+      'div#w-tabs-0-data-w-pane-1',
+      'code#json-compendium',
+      'code#json-cta',
+    ],
+    callback: isNew ? runOldFn : runNewFn,
+  })
 }
 
 startObservingElements({
@@ -1003,17 +1011,6 @@ startObservingElements({
   ],
   callback: () => {
     runMainFn()
-  },
-})
-
-startObservingElements({
-  selectors: [
-    'div#w-tabs-0-data-w-pane-1',
-    'code#json-compendium',
-    'code#json-cta',
-  ],
-  callback: () => {
-    runOldFn()
   },
 })
 
