@@ -1003,7 +1003,7 @@ const runMainFn = () => {
       'code#json-compendium',
       'code#json-cta',
     ],
-    callback: isNew ? runOldFn : runNewFn,
+    callback: isNew ? runNewFn : runOldFn,
   })
 }
 
