@@ -996,7 +996,7 @@ const runMainFn = () => {
       'code#json-compendium',
       'code#json-cta',
     ],
-    callback: isNew ? runNewFn : runOldFn,
+    callback: runOldFn,
   })
 }
 
@@ -1005,8 +1005,7 @@ startObservingElements({
     'div#w-tabs-0-data-w-pane-1',
     'code#json-compendium',
     'code#json-cta',
-    '#old-design',
-    '#new-design',
   ],
-  callback: runMainFn,
+  callback: runOldFn,
 })
+
