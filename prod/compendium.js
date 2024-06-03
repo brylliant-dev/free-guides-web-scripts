@@ -990,14 +990,16 @@ const runMainFn = () => {
   const designToRemove = isNew ? oldDesign : newDesign
   designToRemove.remove()
 
-  startObservingElements({
-    selectors: [
-      'div#w-tabs-0-data-w-pane-1',
-      'code#json-compendium',
-      'code#json-cta',
-    ],
-    callback: isNew ? runNewFn : runOldFn,
-  })
+  runNewFn()
+
+  // startObservingElements({
+  //   selectors: [
+  //     'div#w-tabs-0-data-w-pane-1',
+  //     'code#json-compendium',
+  //     'code#json-cta',
+  //   ],
+  //   callback: isNew ? runNewFn : runOldFn,
+  // })
 }
 
 startObservingElements({
