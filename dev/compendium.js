@@ -991,7 +991,8 @@ const runMainFn = () => {
     designToRemove.remove()
 
 
-        (isNew ? runNewFn : runOldFn)()
+    const runFn = isNew ? runNewFn : runOldFn
+    runFn()
 }
 
 startObservingElements({
