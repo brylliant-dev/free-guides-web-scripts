@@ -998,7 +998,6 @@ startObservingElements({
         'code#json-cta',
     ],
     callback: () => {
-        runMainFn()
         runOldFn()
     },
 })
