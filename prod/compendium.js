@@ -514,13 +514,26 @@ const runMainFn = async () => {
   ctaFn()
 }
 
+var Webflow = Webflow || [];
+Webflow.push(() => {
+  const urlParams = new URLSearchParams(window.location.search);
+  const idParam = urlParams.get('new')
+  const isNew = idParam && idParam.includes('true')
 
-startObservingElements({
-  selectors: [
-    'div#w-tabs-0-data-w-pane-1',
-    'code#json-compendium',
-    'code#json-cta',
-  ],
-  callback: runMainFn,
+  $('#new-design').css('display', isNew ? 'block' : 'none')
+  $('#old-design').css('display', isNew ? 'none' : 'block')
+
+
+  startObservingElements({
+    selectors: [
+      'div#w-tabs-0-data-w-pane-1',
+      'code#json-compendium',
+      'code#json-cta',
+    ],
+    callback: runMainFn,
+  })
 })
+
+
+
 
