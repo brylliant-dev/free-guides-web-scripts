@@ -48,14 +48,14 @@ const runFooterYear = () => {
   }
 }
 
-const runMainFn = async () => {
+const runMainFn = async ({ isNew = false }) => {
   const compendium = document.querySelector('code#json-compendium')
   const compendiumText = compendium.textContent
 
   const ctaDetails = document.querySelector('code#json-cta')
   const ctaDetailsText = ctaDetails.textContent
 
-  const mainWrapper = document.querySelector('.main-wrapper')
+  const mainWrapper = document.querySelector(`#${isNew ? 'new-design' : 'old-design'}.main-wrapper`)
   const allTabs = [1, 2, 3].map((dwt) =>
     mainWrapper.querySelector(`[data-w-tab='Tab ${dwt}']`)
   )
@@ -530,7 +530,9 @@ Webflow.push(() => {
       'code#json-compendium',
       'code#json-cta',
     ],
-    callback: runMainFn,
+    callback: () => {
+      runMainFn({ isNew })
+    },
   })
 })
 
