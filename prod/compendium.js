@@ -211,7 +211,7 @@ const runNewFn = async () => {
       console.log('--this is recomDataArray', recomDataArray)
       recomDataArray
         .filter(
-          (rda) => rda.active && rda.media.filter((rd) => rd.active).length > 1
+          (rda) => rda.active && rda.media.filter((rd) => rd.active).length > 0
         )
         .forEach((data, idx) => {
           // Clone the template
@@ -677,12 +677,12 @@ const runOldFn = async () => {
 
       console.log('--this is recomDataArray', recomDataArray)
       console.log('--this is recomDataArray.filter', recomDataArray.filter(
-        (rda) => rda.active && rda.media.filter((rd) => rd.active).length > 1
+        (rda) => rda.active && rda.media.filter((rd) => rd.active).length > 0
       ))
       // Iterate over the data array and clone the template for each item
       recomDataArray
         .filter(
-          (rda) => rda.active && rda.media.filter((rd) => rd.active).length > 1
+          (rda) => rda.active && rda.media.filter((rd) => rd.active).length > 0
         )
         .forEach((data, idx) => {
           // Clone the template
