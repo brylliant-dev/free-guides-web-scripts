@@ -890,9 +890,9 @@ const runOldFn = async () => {
           const genMediaVideoTemplate = genDropdownClone.querySelector('[gen-data="media-vid"]')?.parentElement
 
           genMediaTextTemplate.remove()
-          genMediaLinkTemplate.remove()
-          genMediaImageTemplate.remove()
-          genMediaVideoTemplate.remove()
+          genMediaLinkTemplate && genMediaLinkTemplate.remove()
+          genMediaImageTemplate && genMediaImageTemplate.remove()
+          genMediaVideoTemplate && genMediaVideoTemplate.remove()
 
           const elementWithType = {
             text: genMediaTextTemplate,
