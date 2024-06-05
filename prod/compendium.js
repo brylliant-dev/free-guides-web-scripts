@@ -676,6 +676,9 @@ const runOldFn = async () => {
       recomCardWrapperTemplate.remove()
 
       console.log('--this is recomDataArray', recomDataArray)
+      console.log('--this is recomDataArray.filter', recomDataArray.filter(
+        (rda) => rda.active && rda.media.filter((rd) => rd.active).length > 1
+      ))
       // Iterate over the data array and clone the template for each item
       recomDataArray
         .filter(
