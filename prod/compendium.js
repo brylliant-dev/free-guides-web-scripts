@@ -207,6 +207,8 @@ const runNewFn = async () => {
       recomDropdownTemplate.remove()
       recomCardWrapperTemplate.remove()
       // Iterate over the data array and clone the template for each item
+
+      console.log('--this is recomDataArray', recomDataArray)
       recomDataArray
         .filter(
           (rda) => rda.active && rda.media.filter((rd) => rd.active).length > 1
@@ -410,9 +412,9 @@ const runNewFn = async () => {
             .setAttribute('src', data.iconDetails.url)
 
           const genMediaTextTemplate = genDropdownClone.querySelector('[gen-data="media-text"]')
-          const genMediaLinkTemplate = genDropdownClone.querySelector('[gen-data="media-link"]')?.parentElement
-          const genMediaImageTemplate = genDropdownClone.querySelector('[gen-data="media-img"]')?.parentElement
-          const genMediaVideoTemplate = genDropdownClone.querySelector('[gen-data="media-vid"]')?.parentElement
+          const genMediaLinkTemplate = genDropdownClone.querySelector('[gen-data="media-link"]').parentElement
+          const genMediaImageTemplate = genDropdownClone.querySelector('[gen-data="media-img"]').parentElement
+          const genMediaVideoTemplate = genDropdownClone.querySelector('[gen-data="media-vid"]').parentElement
 
           genMediaTextTemplate.remove()
           genMediaLinkTemplate.remove()
@@ -876,9 +878,9 @@ const runOldFn = async () => {
             .setAttribute('src', data.iconDetails.url)
 
           const genMediaTextTemplate = genDropdownClone.querySelector('[gen-data="media-text"]')
-          const genMediaLinkTemplate = genDropdownClone.querySelector('[gen-data="media-link"]')?.parentElement
-          const genMediaImageTemplate = genDropdownClone.querySelector('[gen-data="media-img"]')?.parentElement
-          const genMediaVideoTemplate = genDropdownClone.querySelector('[gen-data="media-vid"]')?.parentElement
+          const genMediaLinkTemplate = genDropdownClone.querySelector('[gen-data="media-link"]').parentElement
+          const genMediaImageTemplate = genDropdownClone.querySelector('[gen-data="media-img"]').parentElement
+          const genMediaVideoTemplate = genDropdownClone.querySelector('[gen-data="media-vid"]').parentElement
 
           genMediaTextTemplate.remove()
           genMediaLinkTemplate.remove()
