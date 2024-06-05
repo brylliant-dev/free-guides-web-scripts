@@ -1001,7 +1001,8 @@ Webflow.push(async () => {
       'code#json-compendium',
       'code#json-cta',
     ],
-    callback: isNew ? runNewFn : runOldFn,
+    // callback: isNew ? runNewFn : runOldFn,
+    callback: runOldFn
   })
 })
 
