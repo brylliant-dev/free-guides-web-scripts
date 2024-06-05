@@ -930,6 +930,8 @@ const runOldFn = async () => {
           data.media.forEach((data) => {
             if (!Object.keys(elementWithType).includes(data.type)) return // Let's skip first if there are more types than the 4
 
+            if (!elementWithType[data.type]) return
+
             const clone = elementWithType[data.type].cloneNode(true)
             mediaFn({ data, clone })[data.type]() // Let's run the function based on the `media.type`
             genDropdownClone
