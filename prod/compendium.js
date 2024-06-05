@@ -686,6 +686,8 @@ const runOldFn = async () => {
         )
         .forEach((data, idx) => {
           // Clone the template
+          console.log('--this is data', data)
+          console.log('--this is idx', idx)
           const recomDropdownClone = recomDropdownTemplate.cloneNode(true)
 
           const toggle = recomDropdownClone.querySelector('.accordion-toggle.w-dropdown-toggle')
