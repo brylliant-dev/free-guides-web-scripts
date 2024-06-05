@@ -960,7 +960,7 @@ const runOldFn = async () => {
         elem.textContent = details?.title || ''
         elem.href = `${prefix}${details?.value || ''}`
       } else {
-        (parent ? elem.parentElement : elem).remove()
+        (parent ? elem?.parentElement || elem : elem).remove()
       }
     }
 
