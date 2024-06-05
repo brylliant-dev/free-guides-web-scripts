@@ -990,7 +990,7 @@ const runOldFn = async () => {
 }
 
 var Webflow = Webflow || [];
-Webflow.push(async () => {
+Webflow.push(() => {
   const urlParams = new URLSearchParams(window.location.search);
   const idParam = urlParams.get('new')
   const isNew = idParam && idParam.includes('true')
@@ -999,7 +999,7 @@ Webflow.push(async () => {
   $('#old-design').css('display', isNew ? 'none' : 'block')
   // document.querySelector(isNew ? '#old-design' : '#new-design').remove()
 
-  await startObservingElements({
+  startObservingElements({
     selectors: [
       'div#w-tabs-0-data-w-pane-1',
       'div#w-tabs-1-data-w-pane-1',
