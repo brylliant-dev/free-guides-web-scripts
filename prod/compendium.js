@@ -997,8 +997,8 @@ Webflow.push(() => {
   const idParam = urlParams.get('new')
   const isNew = idParam && idParam.includes('true')
 
-  // $('#new-design').css('display', isNew ? 'block' : 'none')
   $('#old-design').css('display', isNew ? 'none' : 'block')
+  $('#new-design').css('display', isNew ? 'block' : 'none')
   // document.querySelector(isNew ? '#old-design' : '#new-design').remove()
 
   startObservingElements({
