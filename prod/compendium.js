@@ -209,7 +209,7 @@ const runFn = async () => {
       // Iterate over the data array and clone the template for each item
       recomDataArray
         .filter(
-          (rda) => rda.active && rda.media.filter((rd) => rd.active).length > 1
+          (rda) => rda.active && rda.media.filter((rd) => rd.active).length > 0
         )
         .forEach((data, idx) => {
           // Clone the template
