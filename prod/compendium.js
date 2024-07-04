@@ -229,6 +229,10 @@ const runFn = async () => {
                   'src',
                   `https://tour.freeguides.com/?placeId=${ifc.placeId}`
                 )
+                ifc.item.setAttribute(
+                  'data-attr',
+                  ifc.details || ''
+                )
               }
             })
           }
