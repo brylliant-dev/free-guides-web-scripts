@@ -222,12 +222,15 @@ const runFn = async () => {
 
                     const iframeClones = []
 
+                    var testUrl = "https://fg-tours-preview--preview-bic7ekwv.web.app/?placeId="
+                    var prodUrl = 'https://tour.freeguides.com/?placeId='
+
                     const feedIframeSrc = () => {
                         iframeClones.forEach((ifc) => {
                             if (ifc.item.getAttribute('src') === '') {
                                 ifc.item.setAttribute(
                                     'src',
-                                    `https://tour.freeguides.com/?placeId=${ifc.placeId}`
+                                    `${testUrl + ifc.placeId}`
                                 )
                                 ifc.item.setAttribute(
                                     'data-attr',
