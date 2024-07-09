@@ -222,8 +222,8 @@ const runFn = async () => {
 
                     const iframeClones = []
 
-                    var testUrl = "https://fg-tours-preview--preview-bic7ekwv.web.app/?placeId="
-                    var prodUrl = 'https://tour.freeguides.com/?placeId='
+                    const testUrl = "https://fg-tours-preview--preview-bic7ekwv.web.app/?placeId="
+                    const prodUrl = 'https://tour.freeguides.com/?placeId='
 
                     const feedIframeSrc = () => {
                         iframeClones.forEach((ifc) => {

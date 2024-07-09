@@ -222,12 +222,15 @@ const runFn = async () => {
 
           const iframeClones = []
 
+          const testUrl = "https://fg-tours-preview--preview-bic7ekwv.web.app/?placeId="
+          const prodUrl = 'https://tour.freeguides.com/?placeId='
+
           const feedIframeSrc = () => {
             iframeClones.forEach((ifc) => {
               if (ifc.item.getAttribute('src') === '') {
                 ifc.item.setAttribute(
                   'src',
-                  `https://tour.freeguides.com/?placeId=${ifc.placeId}`
+                  `${testUrl + ifc.placeId}`
                 )
                 ifc.item.setAttribute(
                   'data-attr',
@@ -355,12 +358,14 @@ const runFn = async () => {
             .forEach((medData) => {
               const mediaClone = recomCardWrapperTemplate.cloneNode(true)
               const placeId = medData.placeId
+              const details = medData.details ?? ''
 
               mediaClone.innerHTML = `<iframe src='' height='360px' width='100%' loading='lazy' class='iFrame1'></iframe>`
 
               iframeClones.push({
                 item: mediaClone.querySelector('iframe'),
                 placeId,
+                details
               })
               cardLayout.append(mediaClone)
             })
