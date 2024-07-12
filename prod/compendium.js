@@ -234,7 +234,7 @@ const runFn = async () => {
                 )
                 ifc.item.setAttribute(
                   'data-attr',
-                  ifc.details || ''
+                  ifc.details && ifc.details !== '' ? JSON.stringify(ifc.details) : ''
                 )
               }
             })
