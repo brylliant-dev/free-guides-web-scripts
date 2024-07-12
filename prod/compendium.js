@@ -485,7 +485,7 @@ const runFn = async () => {
     const ctaMobile = mainWrapper.querySelector('[profile-data="cta-mobile"]')
     const ctaMain = mainWrapper.querySelector('[profile-data="cta-main"]')
 
-    const { enabled, link, phoneNum, main } = JSON.parse(ctaDetailsText)
+    const { enabled, link, phoneNum, main, primary } = JSON.parse(ctaDetailsText)
 
     const checkNullData = ({ details, elem, prefix = '', parent = false }) => {
       if (details && details !== '') {
@@ -497,12 +497,12 @@ const runFn = async () => {
     }
 
     if (enabled) {
-      if (!main) {
+      if (!main && !primary) {
         ctaLink.classList.add('profile-cta-order', 'margin-top-9', 'text-white')
       }
       checkNullData({ details: link, elem: ctaLink })
       checkNullData({ details: phoneNum, elem: ctaMobile, prefix: 'tel:' })
-      checkNullData({ details: main, elem: ctaMain, parent: true })
+      checkNullData({ details: main || primary, elem: ctaMain, parent: true })
     } else {
       removeCtaWrapper()
     }
