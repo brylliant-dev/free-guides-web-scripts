@@ -230,7 +230,7 @@ const runFn = async () => {
               if (ifc.item.getAttribute('src') === '') {
                 ifc.item.setAttribute(
                   'src',
-                  `${testUrl + ifc.placeId}`
+                  `${prodUrl + ifc.placeId}`
                 )
                 ifc.item.setAttribute(
                   'data-attr',
