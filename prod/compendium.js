@@ -222,8 +222,13 @@ const runFn = async () => {
 
           const iframeClones = []
 
-          const testUrl = "https://fg-tours-preview--preview-bic7ekwv.web.app/?placeId="
-          const prodUrl = 'https://tour.freeguides.com/?placeId='
+          const isBranded = document.querySelector('code#string-branded').textContent === 'true'
+          const stringBrandColor = document.querySelector('code#string-brand-color').textContent
+          const brandColor = isBranded && stringBrandColor !== '' && stringBrandColor || '#60be8c'
+
+          const testUrl = `https://fg-tours-preview--preview-bic7ekwv.web.app/?brandColor=${brandColor}&placeId=`
+          const prodUrl = 'https://tour.freeguides.com/?brandColor=${brandColor}&placeId='
+
 
           const feedIframeSrc = () => {
             iframeClones.forEach((ifc) => {
