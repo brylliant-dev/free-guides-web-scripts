@@ -227,7 +227,7 @@ const runFn = async () => {
           const brandColor = isBranded && stringBrandColor !== '' && stringBrandColor || '#60be8c'
 
           const testUrl = `https://fg-tours-preview--preview-bic7ekwv.web.app/?brandColor=${brandColor}&placeId=`
-          const prodUrl = 'https://tour.freeguides.com/?brandColor=${brandColor}&placeId='
+          const prodUrl = `https://tour.freeguides.com/?brandColor=${brandColor}&placeId=`
 
 
           const feedIframeSrc = () => {
