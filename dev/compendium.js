@@ -258,7 +258,7 @@ const runFn = async () => {
           // Update content with data from the array
           recomDropdownTemplate.setAttribute('data-w-id', generateUUID())
           recomDropdownClone.querySelector('[recom-data="accordion-title"]').textContent = data.accordionTitle
-          recomDropdownClone.querySelector(`[icon-data-name='icon-title']`).setAttribute('icon-data-name', data.iconDetails.name)
+          recomDropdownClone.querySelector(`[icon-recom-data-name='icon-title']`).setAttribute('icon-recom-data-name', data.iconDetails.name)
           recomDropdownClone
             .querySelector(`[recom-data='media-icon']`)
             .setAttribute('src', data.iconDetails.url)
@@ -420,6 +420,7 @@ const runFn = async () => {
           // Update content with data from the array
           genDropdownTemplate.setAttribute('data-w-id', generateUUID())
           genDropdownClone.querySelector('[gen-data="accordion-title"]').textContent = data.accordionTitle
+          genDropdownClone.querySelector(`[icon-gen-data-name='icon-title']`).setAttribute('icon-gen-data-name', data.iconDetails.name)
           genDropdownClone
             .querySelector(`[gen-data='media-icon']`)
             .setAttribute('src', data.iconDetails.url)
