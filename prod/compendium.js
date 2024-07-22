@@ -261,7 +261,8 @@ const runFn = async () => {
           recomDropdownClone
             .querySelector(`[recom-data='media-icon']`)
             .setAttribute('src', data.iconDetails.url)
-
+          console.log("title: " + data.title)
+          console.log("IconDetails: " + data.iconDetails)
           // data.media.filter(med => med.active).forEach((medData) => {
           //     const mediaClone = recomCardWrapperTemplate.cloneNode(true)
           //     const writeMedia = (dataAttr, text, attr = 'textContent') => {
@@ -536,3 +537,4 @@ startObservingElements({
   ],
   callback: runFn,
 })
+
