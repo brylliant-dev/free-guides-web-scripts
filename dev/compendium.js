@@ -258,10 +258,10 @@ const runFn = async () => {
           // Update content with data from the array
           recomDropdownTemplate.setAttribute('data-w-id', generateUUID())
           recomDropdownClone.querySelector('[recom-data="accordion-title"]').textContent = data.accordionTitle
-          recomDropdownClone.querySelector(`[icon-recom-data-name='icon-title']`).setAttribute('icon-recom-data-name', data.iconDetails.name)
-          recomDropdownClone
-            .querySelector(`[recom-data='media-icon']`)
-            .setAttribute('src', data.iconDetails.url)
+          recomDropdownClone.querySelector(`[icon-recom-data-name='icon-title']`).setAttribute('icon-recom-data-name', data.iconDetails?.name || 'welcome')
+          //recomDropdownClone
+            //.querySelector(`[recom-data='media-icon']`)
+           // .setAttribute('src', data.iconDetails.url)
           
           // data.media.filter(med => med.active).forEach((medData) => {
           //     const mediaClone = recomCardWrapperTemplate.cloneNode(true)
@@ -422,9 +422,9 @@ const runFn = async () => {
           genDropdownClone.querySelector('[gen-data="accordion-title"]').textContent = data.accordionTitle
           //genDropdownClone.querySelector(`[icon-gen-data-name='icon-title']`).setAttribute('icon-gen-data-name', data.iconDetails.name)
           genDropdownClone.querySelector(`[icon-gen-data-name='icon-title']`).setAttribute('icon-gen-data-name', data.iconDetails?.name || 'welcome');
-          genDropdownClone
-            .querySelector(`[gen-data='media-icon']`)
-            .setAttribute('src', data.iconDetails.url)
+          //genDropdownClone
+           // .querySelector(`[gen-data='media-icon']`)
+            //.setAttribute('src', data.iconDetails.url)
 
           const genMediaTextTemplate = genDropdownClone.querySelector('[gen-data="media-text"]')
           const genMediaLinkTemplate = genDropdownClone.querySelector('[gen-data="media-link"]').parentElement
