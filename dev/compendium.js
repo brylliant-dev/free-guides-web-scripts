@@ -56,11 +56,11 @@ const runFn = async () => {
   const ctaDetailsText = ctaDetails.textContent
 
   const mainWrapper = document.querySelector('.main-wrapper')
-  const allTabs = [1, 2, 3].map((dwt) =>
+  const allTabs = [1, 2, 3, 4].map((dwt) =>
     mainWrapper.querySelector(`[data-w-tab='Tab ${dwt}']`)
   )
 
-  const [toursTab, recommendationsTab, generalsTab] = allTabs
+  const [toursTab, recommendationsTab, generalsTab, activityTab] = allTabs
 
   // Add hover effect and set tab to active
   allTabs.map((at) =>
@@ -383,8 +383,18 @@ const runFn = async () => {
         })
     }
 
+       // Add the new Activity tab functionality
+       const runActivity = () => {
+        //const activityIframe = document.querySelector('#activity-iframe')
+        //if (activityIframe) {
+            //activityIframe.src = 'https://your-activity-iframe-url.com'
+        //}
+        console.log("activity tab test")
+    }
+
     runRecommendations() // Now we run recommendations script
     runGeneral()
+    runActivity()
   }
 
   // Update Profile Section using details from CTA field in Guide Collections
@@ -434,6 +444,7 @@ const runFn = async () => {
 startObservingElements({
   selectors: [
     'div#w-tabs-0-data-w-pane-1',
+    'div#w-tabs-0-data-w-pane-3',
     'code#json-compendium',
     'code#json-cta',
   ],
