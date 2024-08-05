@@ -384,17 +384,17 @@ const runFn = async () => {
     }
 
        // Add the new Activity tab functionality
-       const runActivity = () => {
+       //const runActivity = () => {
         //const activityIframe = document.querySelector('#activity-iframe')
         //if (activityIframe) {
             //activityIframe.src = 'https://your-activity-iframe-url.com'
         //}
-        console.log("activity tab test")
-    }
+        //console.log("activity tab test")
+    //}
 
     runRecommendations() // Now we run recommendations script
     runGeneral()
-    runActivity()
+    //runActivity()
   }
 
   // Update Profile Section using details from CTA field in Guide Collections
