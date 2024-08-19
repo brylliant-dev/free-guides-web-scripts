@@ -434,8 +434,14 @@ const runFn = async () => {
       }
       : () => runTabFunctions()
 
-  const ctaFn =
-    ctaDetailsText === '' ? removeCtaWrapper : () => runProfileFunctions()
+  // Function to handle CTA logic
+const ctaFn = () => {
+  if (ctaDetailsText !== '' && JSON.parse(ctaDetailsText).enabled) {
+    runProfileFunctions();
+  } else {
+    removeCtaWrapper();
+  }
+};
 
   compendiumFn()
   ctaFn()
