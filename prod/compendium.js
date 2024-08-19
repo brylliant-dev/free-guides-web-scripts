@@ -397,75 +397,48 @@ const runFn = async () => {
     //runActivity()
   }
 
-  const runProfileFunctions = () => {
-    const ctaLink = mainWrapper.querySelector('[profile-data="cta-link"]');
-    const ctaMobile = mainWrapper.querySelector('[profile-data="cta-mobile"]');
-    const ctaMain = mainWrapper.querySelector('[profile-data="cta-main"]');
+    // Update Profile Section using details from CTA field in Guide Collections
+    const runProfileFunctions = () => {
+      const ctaLink = mainWrapper.querySelector('[profile-data="cta-link"]')
+      const ctaMobile = mainWrapper.querySelector('[profile-data="cta-mobile"]')
+      const ctaMain = mainWrapper.querySelector('[profile-data="cta-main"]')
   
-    // Parse the ctaDetailsText JSON
-    const { enabled, link, phoneNum, main, primary } = JSON.parse(ctaDetailsText);
+      const { enabled, link, phoneNum, main, primary } = JSON.parse(ctaDetailsText)
   
-    // Function to check and update elements based on provided details
-    const checkNullData = ({ details, elem, prefix = '', parent = false }) => {
-      if (details && details.value !== '' && details.value != null) {
-        elem.textContent = details?.title || '';
-        elem.href = `${prefix}${details?.value || ''}`;
-      } else {
-        (parent ? elem.parentElement : elem).remove();
+      const checkNullData = ({ details, elem, prefix = '', parent = false }) => {
+        if (details && details !== '') {
+          elem.textContent = details?.title || ''
+          elem.href = `${prefix}${details?.value || ''}`
+        } else {
+          (parent ? elem.parentElement : elem).remove()
+        }
       }
-    };
   
-    if (enabled) {
-      // Check and update elements
-      checkNullData({ details: link, elem: ctaLink });
-      checkNullData({ details: phoneNum, elem: ctaMobile, prefix: 'tel:' });
-      checkNullData({ details: main || primary, elem: ctaMain, parent: true });
-  
-      // Debugging to see the values of each field
-      console.log('link:', link);
-      console.log('phoneNum:', phoneNum);
-      console.log('main:', main);
-      console.log('primary:', primary);
-  
-      // If all fields are empty, null, or undefined, execute removeCtaWrapper()
-      if (
-        (!link || !link.value) &&
-        (!phoneNum || !phoneNum.value) &&
-        (!main || !main.value) &&
-        (!primary || !primary.value)
-      ) {
-        console.log('All fields are empty, null, or undefined. Executing removeCtaWrapper.');
-        removeCtaWrapper();
+      if (enabled) {
+        if (!main && !primary) {
+          ctaLink.classList.add('profile-cta-order', 'margin-top-9', 'text-white')
+        }
+        checkNullData({ details: link, elem: ctaLink })
+        checkNullData({ details: phoneNum, elem: ctaMobile, prefix: 'tel:' })
+        checkNullData({ details: main || primary, elem: ctaMain, parent: true })
       } else {
-        console.log('Not all fields are empty, keeping CTA elements.');
+        removeCtaWrapper()
       }
-    } else {
-      removeCtaWrapper();
     }
-  };
   
-  // Function to handle the compendium tab logic
-  const compendiumFn = compendiumText === ''
-    ? () => {
-      generalsTab.remove();
-      recommendationsTab.remove();
-    }
-    : () => runTabFunctions();
+    const compendiumFn =
+      compendiumText === ''
+        ? () => {
+          generalsTab.remove()
+          recommendationsTab.remove()
+        }
+        : () => runTabFunctions()
   
-  // Function to handle CTA logic
-  const ctaFn = () => {
-    if (ctaDetailsText !== '' && JSON.parse(ctaDetailsText).enabled) {
-      runProfileFunctions();
-    } else {
-      removeCtaWrapper();
-    }
-  };
+    const ctaFn =
+      ctaDetailsText === '' ? removeCtaWrapper : () => runProfileFunctions()
   
-  // Execute the functions
-  document.addEventListener("DOMContentLoaded", () => {
-    compendiumFn();
-    ctaFn();
-  });
+    compendiumFn()
+    ctaFn()
   
 }
 
