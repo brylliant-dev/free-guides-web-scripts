@@ -399,21 +399,23 @@ const runFn = async () => {
 
     // Update Profile Section using details from CTA field in Guide Collections
     const runProfileFunctions = () => {
-      const ctaLink = mainWrapper.querySelector('[profile-data="cta-link"]')
-      const ctaMobile = mainWrapper.querySelector('[profile-data="cta-mobile"]')
-      const ctaMain = mainWrapper.querySelector('[profile-data="cta-main"]')
-  
-      const { enabled, link, phoneNum, main, primary } = JSON.parse(ctaDetailsText)
-  
+      const ctaLink = mainWrapper.querySelector('[profile-data="cta-link"]');
+      const ctaMobile = mainWrapper.querySelector('[profile-data="cta-mobile"]');
+      const ctaMain = mainWrapper.querySelector('[profile-data="cta-main"]');
+    
+      const { enabled, link, phoneNum, main, primary } = JSON.parse(ctaDetailsText);
+    
       const checkNullData = ({ details, elem, prefix = '', parent = false }) => {
-        if (details && details !== '') {
-          elem.textContent = details?.title || ''
-          elem.href = `${prefix}${details?.value || ''}`
-        } else {
-          (parent ? elem.parentElement : elem).remove()
+        if (elem) {
+          if (details && details !== '') {
+            elem.textContent = details?.title || '';
+            elem.href = `${prefix}${details?.value || ''}`;
+          } else {
+            (parent ? elem.parentElement : elem).remove();
+          }
         }
-      }
-  
+      };
+    
       if (enabled) {
         if (!main && !primary && ctaLink) {
           ctaLink.classList.add('profile-cta-order', 'margin-top-9', 'text-white');
@@ -428,20 +430,28 @@ const runFn = async () => {
         removeCtaWrapper();
       }
     };
-  
-    const compendiumFn =
-      compendiumText === ''
-        ? () => {
-          generalsTab.remove()
-          recommendationsTab.remove()
+    
+    const ctaFn = () => {
+      if (!ctaDetailsText) {
+        removeCtaWrapper();
+      } else {
+        const { link, phoneNum, main, primary } = JSON.parse(ctaDetailsText);
+        
+        // Check if all values are empty or not present
+        if (
+          (!link || !link.value) &&
+          (!phoneNum || !phoneNum.value) &&
+          (!main || !main.value) &&
+          (!primary || !primary.value)
+        ) {
+          removeCtaWrapper();
+        } else {
+          runProfileFunctions();
         }
-        : () => runTabFunctions()
-  
-    const ctaFn =
-      ctaDetailsText === '' ? removeCtaWrapper : () => runProfileFunctions()
-  
-    compendiumFn()
-    ctaFn()
+      }
+    };
+    
+    ctaFn();
   
 }
 
