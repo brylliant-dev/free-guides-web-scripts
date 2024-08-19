@@ -323,8 +323,8 @@ const runFn = async () => {
           //genDropdownClone.querySelector(`[icon-gen-data-name='icon-title']`).setAttribute('icon-gen-data-name', data.iconDetails.name)
           genDropdownClone.querySelector(`[icon-gen-data-name='icon-title']`).setAttribute('icon-gen-data-name', data.iconDetails?.name || 'welcome');
           //genDropdownClone
-           // .querySelector(`[gen-data='media-icon']`)
-            //.setAttribute('src', data.iconDetails.url)
+          // .querySelector(`[gen-data='media-icon']`)
+          //.setAttribute('src', data.iconDetails.url)
 
           const genMediaTextTemplate = genDropdownClone.querySelector('[gen-data="media-text"]')
           const genMediaLinkTemplate = genDropdownClone.querySelector('[gen-data="media-link"]').parentElement
@@ -383,13 +383,13 @@ const runFn = async () => {
         })
     }
 
-       // Add the new Activity tab functionality
-       //const runActivity = () => {
-        //const activityIframe = document.querySelector('#activity-iframe')
-        //if (activityIframe) {
-            //activityIframe.src = 'https://your-activity-iframe-url.com'
-        //}
-        //console.log("activity tab test")
+    // Add the new Activity tab functionality
+    //const runActivity = () => {
+    //const activityIframe = document.querySelector('#activity-iframe')
+    //if (activityIframe) {
+    //activityIframe.src = 'https://your-activity-iframe-url.com'
+    //}
+    //console.log("activity tab test")
     //}
 
     runRecommendations() // Now we run recommendations script
@@ -397,49 +397,49 @@ const runFn = async () => {
     //runActivity()
   }
 
-    // Update Profile Section using details from CTA field in Guide Collections
-    const runProfileFunctions = () => {
-      const ctaLink = mainWrapper.querySelector('[profile-data="cta-link"]')
-      const ctaMobile = mainWrapper.querySelector('[profile-data="cta-mobile"]')
-      const ctaMain = mainWrapper.querySelector('[profile-data="cta-main"]')
-  
-      const { enabled, link, phoneNum, main, primary } = JSON.parse(ctaDetailsText)
-  
-      const checkNullData = ({ details, elem, prefix = '', parent = false }) => {
-        if (details && details !== '') {
-          elem.textContent = details?.title || ''
-          elem.href = `${prefix}${details?.value || ''}`
-        } else {
-          (parent ? elem.parentElement : elem).remove()
-        }
-      }
-  
-      if (enabled) {
-        if (!main && !primary) {
-          ctaLink.classList.add('profile-cta-order', 'margin-top-9', 'text-white')
-        }
-        checkNullData({ details: link, elem: ctaLink })
-        checkNullData({ details: phoneNum, elem: ctaMobile, prefix: 'tel:' })
-        checkNullData({ details: main || primary, elem: ctaMain, parent: true })
+  // Update Profile Section using details from CTA field in Guide Collections
+  const runProfileFunctions = () => {
+    const ctaLink = mainWrapper.querySelector('[profile-data="cta-link"]')
+    const ctaMobile = mainWrapper.querySelector('[profile-data="cta-mobile"]')
+    const ctaMain = mainWrapper.querySelector('[profile-data="cta-main"]')
+
+    const { enabled, link, phoneNum, main, primary } = JSON.parse(ctaDetailsText)
+
+    const checkNullData = ({ details, elem, prefix = '', parent = false }) => {
+      if (details && details !== '') {
+        elem.textContent = details?.title || ''
+        elem.href = `${prefix}${details?.value || ''}`
       } else {
-        removeCtaWrapper()
+        (parent ? elem.parentElement : elem).remove()
       }
     }
-  
-    const compendiumFn =
-      compendiumText === ''
-        ? () => {
-          generalsTab.remove()
-          recommendationsTab.remove()
-        }
-        : () => runTabFunctions()
-  
-    const ctaFn =
-      ctaDetailsText === '' ? removeCtaWrapper : () => runProfileFunctions()
-  
-    compendiumFn()
-    ctaFn()
-  
+
+    if (enabled) {
+      if (!main && !primary) {
+        ctaLink.classList.add('profile-cta-order', 'margin-top-9', 'text-white')
+      }
+      checkNullData({ details: link, elem: ctaLink })
+      checkNullData({ details: phoneNum, elem: ctaMobile, prefix: 'tel:' })
+      checkNullData({ details: main || primary, elem: ctaMain })
+    } else {
+      removeCtaWrapper()
+    }
+  }
+
+  const compendiumFn =
+    compendiumText === ''
+      ? () => {
+        generalsTab.remove()
+        recommendationsTab.remove()
+      }
+      : () => runTabFunctions()
+
+  const ctaFn =
+    ctaDetailsText === '' ? removeCtaWrapper : () => runProfileFunctions()
+
+  compendiumFn()
+  ctaFn()
+
 }
 
 startObservingElements({
