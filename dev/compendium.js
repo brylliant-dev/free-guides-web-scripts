@@ -415,15 +415,18 @@ const runFn = async () => {
     }
 
     if (enabled) {
-      if (!main && !primary && !phoneNum && !link ) {
-        ctaLink.classList.add('profile-cta-order', 'margin-top-9', 'text-white')
-      }
-      checkNullData({ details: link, elem: ctaLink })
-      checkNullData({ details: phoneNum, elem: ctaMobile, prefix: 'tel:' })
-      checkNullData({ details: main || primary, elem: ctaMain, parent: true })
-    } else {
-      removeCtaWrapper()
+      // Check and update elements
+    checkNullData({ details: link, elem: ctaLink });
+    checkNullData({ details: phoneNum, elem: ctaMobile, prefix: 'tel:' });
+    checkNullData({ details: main || primary, elem: ctaMain, parent: true });
+
+    // If all are empty, execute removeCtaWrapper()
+    if (!link && !phoneNum && !main && !primary) {
+      removeCtaWrapper();
     }
+  } else {
+    removeCtaWrapper();
+  }
   }
 
   const compendiumFn =
