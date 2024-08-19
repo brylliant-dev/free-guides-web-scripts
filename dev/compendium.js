@@ -399,59 +399,46 @@ const runFn = async () => {
 
     // Update Profile Section using details from CTA field in Guide Collections
     const runProfileFunctions = () => {
-      const ctaLink = mainWrapper.querySelector('[profile-data="cta-link"]');
-      const ctaMobile = mainWrapper.querySelector('[profile-data="cta-mobile"]');
-      const ctaMain = mainWrapper.querySelector('[profile-data="cta-main"]');
-    
-      const { enabled, link, phoneNum, main, primary } = JSON.parse(ctaDetailsText);
-    
+      const ctaLink = mainWrapper.querySelector('[profile-data="cta-link"]')
+      const ctaMobile = mainWrapper.querySelector('[profile-data="cta-mobile"]')
+      const ctaMain = mainWrapper.querySelector('[profile-data="cta-main"]')
+  
+      const { enabled, link, phoneNum, main, primary } = JSON.parse(ctaDetailsText)
+  
       const checkNullData = ({ details, elem, prefix = '', parent = false }) => {
-        if (elem) {
-          if (details && details !== '') {
-            elem.textContent = details?.title || '';
-            elem.href = `${prefix}${details?.value || ''}`;
-          } else {
-            (parent ? elem.parentElement : elem).remove();
-          }
-        }
-      };
-    
-      if (enabled) {
-        if (!main && !primary && ctaLink) {
-          ctaLink.classList.add('profile-cta-order', 'margin-top-9', 'text-white');
-        }
-        checkNullData({ details: link, elem: ctaLink });
-        checkNullData({ details: phoneNum, elem: ctaMobile, prefix: 'tel:' });
-    
-        if (ctaMain) {
-          checkNullData({ details: main || primary, elem: ctaMain, parent: true });
-        }
-      } else {
-        removeCtaWrapper();
-      }
-    };
-    
-    const ctaFn = () => {
-      if (!ctaDetailsText) {
-        removeCtaWrapper();
-      } else {
-        const { link, phoneNum, main, primary } = JSON.parse(ctaDetailsText);
-        
-        // Check if all values are empty or not present
-        if (
-          (!link || !link.value) &&
-          (!phoneNum || !phoneNum.value) &&
-          (!main || !main.value) &&
-          (!primary || !primary.value)
-        ) {
-          removeCtaWrapper();
+        if (details && details !== '') {
+          elem.textContent = details?.title || ''
+          elem.href = `${prefix}${details?.value || ''}`
         } else {
-          runProfileFunctions();
+          (parent ? elem.parentElement : elem).remove()
         }
       }
-    };
-    
-    ctaFn();
+  
+      if (enabled) {
+        if (!main && !primary) {
+          ctaLink.classList.add('profile-cta-order', 'margin-top-9', 'text-white')
+        }
+        checkNullData({ details: link, elem: ctaLink })
+        checkNullData({ details: phoneNum, elem: ctaMobile, prefix: 'tel:' })
+        checkNullData({ details: main || primary, elem: ctaMain, parent: true })
+      } else {
+        removeCtaWrapper()
+      }
+    }
+  
+    const compendiumFn =
+      compendiumText === ''
+        ? () => {
+          generalsTab.remove()
+          recommendationsTab.remove()
+        }
+        : () => runTabFunctions()
+  
+    const ctaFn =
+      ctaDetailsText === '' ? removeCtaWrapper : () => runProfileFunctions()
+  
+    compendiumFn()
+    ctaFn()
   
 }
 
