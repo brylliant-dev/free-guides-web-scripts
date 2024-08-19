@@ -415,16 +415,19 @@ const runFn = async () => {
       }
   
       if (enabled) {
-        if (!main && !primary) {
-          ctaLink.classList.add('profile-cta-order', 'margin-top-9', 'text-white')
+        if (!main && !primary && ctaLink) {
+          ctaLink.classList.add('profile-cta-order', 'margin-top-9', 'text-white');
         }
-        checkNullData({ details: link, elem: ctaLink })
-        checkNullData({ details: phoneNum, elem: ctaMobile, prefix: 'tel:' })
-        checkNullData({ details: main || primary, elem: ctaMain, parent: true })
+        checkNullData({ details: link, elem: ctaLink });
+        checkNullData({ details: phoneNum, elem: ctaMobile, prefix: 'tel:' });
+    
+        if (ctaMain) {
+          checkNullData({ details: main || primary, elem: ctaMain, parent: true });
+        }
       } else {
-        removeCtaWrapper()
+        removeCtaWrapper();
       }
-    }
+    };
   
     const compendiumFn =
       compendiumText === ''
