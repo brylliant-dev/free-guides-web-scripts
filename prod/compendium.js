@@ -256,6 +256,7 @@ const runFn = async () => {
           // Update content with data from the array
           recomDropdownTemplate.setAttribute('data-w-id', generateUUID())
           recomDropdownClone.querySelector('[recom-data="accordion-title"]').textContent = data.accordionTitle
+          recomDropdownClone.querySelector('[recom-data="accordion-title"]').setAttribute('data-title',data.accordionTitle) 
           recomDropdownClone.setAttribute('data-title',data.accordionTitle)
           recomDropdownClone.querySelector(`[icon-recom-data-name='icon-title']`).setAttribute('icon-recom-data-name', data.iconDetails?.name || 'welcome')
 
