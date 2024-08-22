@@ -320,8 +320,8 @@ const runFn = async () => {
 
           // Update content with data from the array
           genDropdownTemplate.setAttribute('data-w-id', generateUUID())
+          genDropdownClone.querySelector('[gen-data="accordion-title"]').setAttribute('data-title',data.accordionTitle)
           genDropdownClone.querySelector('[gen-data="accordion-title"]').textContent = data.accordionTitle
-          genDropdownClone.setAttribute('data-title',data.accordionTitle)
           //genDropdownClone.querySelector(`[icon-gen-data-name='icon-title']`).setAttribute('icon-gen-data-name', data.iconDetails.name)
           genDropdownClone.querySelector(`[icon-gen-data-name='icon-title']`).setAttribute('icon-gen-data-name', data.iconDetails?.name || 'welcome');
           //genDropdownClone
