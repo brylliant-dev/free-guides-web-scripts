@@ -235,7 +235,7 @@ const runFn = async () => {
                   'src',
                   `${prodUrl + ifc.placeId}`
                 )
-
+                ifc.item.setAttribute('scrolling','no')
                 ifc.item.addEventListener('load', () => {
                   ifc.item.contentWindow.postMessage(ifc.details,prodUrl + ifc.placeId)
                 })
