@@ -236,7 +236,9 @@ const runFn = async () => {
                   `${prodUrl + ifc.placeId}`
                 )
                 
-                ifc.item.contentWindow.postMessage(ifc.details,prodUrl + ifc.placeId)
+                ifc.item.addEventListener('load', () => {
+                  ifc.item.contentWindow.postMessage(ifc.details,prodUrl + ifc.placeId)
+                })
               }
             })
           }
