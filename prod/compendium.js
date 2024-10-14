@@ -235,10 +235,8 @@ const runFn = async () => {
                   'src',
                   `${prodUrl + ifc.placeId}`
                 )
-                ifc.item.setAttribute(
-                  'data-attr',
-                  ifc.details && ifc.details !== '' ? JSON.stringify(ifc.details) : ''
-                )
+
+                ifc.item.contentWindow.postMessage(ifc.details,prodUrl + ifc.placeId)
               }
             })
           }
