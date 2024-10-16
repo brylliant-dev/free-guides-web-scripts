@@ -236,6 +236,12 @@ const runFn = async () => {
                   `${prodUrl + ifc.placeId}`
                 )
                 ifc.item.setAttribute('scrolling','no')
+                
+                var insight = ifc.details?.insight ?? ""
+                if(insight.length > 100) {
+                  ifc.item.setAttribute("height",400)
+                }
+                
                 ifc.item.addEventListener('load', () => {
                   ifc.item.contentWindow.postMessage(ifc.details,prodUrl + ifc.placeId)
                 })
