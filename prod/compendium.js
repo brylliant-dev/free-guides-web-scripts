@@ -236,6 +236,12 @@ const runFn = async () => {
                   `${prodUrl + ifc.placeId}`
                 )
                 ifc.item.setAttribute('scrolling','no')
+
+                var insight = ifc.details?.insight ?? ""
+                if(insight.length > 100) {
+                  ifc.item.setAttribute("height",400)
+                }
+                
                 ifc.item.addEventListener('load', () => {
                   ifc.item.contentWindow.postMessage(ifc.details,prodUrl + ifc.placeId)
                 })
@@ -268,7 +274,7 @@ const runFn = async () => {
               const placeId = medData.placeId
               const details = medData.details ?? ''
 
-              mediaClone.innerHTML = `<iframe src='' height='370px' width='100%' loading='lazy' class='iFrame1'></iframe>`
+              mediaClone.innerHTML = `<iframe src='' height='380px' width='100%' loading='lazy' class='iFrame1'></iframe>`
 
               iframeClones.push({
                 item: mediaClone.querySelector('iframe'),
