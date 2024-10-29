@@ -23,7 +23,7 @@ $(document).ready(() => {
 
         const urlKeywords = ["experienceoz", "getyourguide"];
 
-        if (!actDetailsJson.enabled) {
+        if (!actDetailsJson.enabled || actDetailsJson.url === '') {
             return
         }
 
