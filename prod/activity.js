@@ -15,10 +15,10 @@ $(document).ready(() => {
         const activityUrl = document.querySelector('code#activityurl')
 
         const actDetailsJson = {
-            region: activityRegion.textContent,
-            enabled: activityEnabled.textContent === 'true',
-            campaign: activityCampaign.textContent,
-            url: activityUrl.textContent
+            region: activityRegion.textContent.trim(),
+            enabled: activityEnabled.textContent.trim() === 'true',
+            campaign: activityCampaign.textContent.trim(),
+            url: activityUrl.textContent.trim()
         }
 
         console.log('actDetailsJson', actDetailsJson)
@@ -64,7 +64,7 @@ $(document).ready(() => {
 
                 activitiesBtn.addEventListener('click', (event) => {
                     event.preventDefault(); // Prevent the default behavior
-                    window.open("https://www.getyourguide.com/-t544302", '_blank'); // Replace with actual dynamic URL from Webflow
+                    window.open(actDetailsJson.url, '_blank'); // Replace with actual dynamic URL from Webflow
                 });
 
             } else {
@@ -74,7 +74,7 @@ $(document).ready(() => {
                     activitiesBtn.href = '';
                     activitiesBtn.setAttribute('data-w-tab', '');
                     setTimeout(() => {
-                        window.open("https://www.getyourguide.com/-t544302", '_blank');
+                        window.open(actDetailsJson.url, '_blank');
                     }, 100);
                 });
             }
@@ -86,7 +86,7 @@ $(document).ready(() => {
                 getyourguide: runGyg
             }
 
-            if (activitiesBtn && urlKeywords.includes(activityKeyword)) {
+            if (activitiesBtn && urlKeywords.includes(activityKeyword) && actDetailsJson.url !== '') {
                 functionItems[activityKeyword]()
             }
         }
