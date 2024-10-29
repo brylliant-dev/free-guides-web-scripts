@@ -28,7 +28,9 @@ $(document).ready(() => {
         }
 
         const containsKeyword = (url) => {
-            return urlKeywords.find(keyword => url.includes(keyword));
+            const foundUrl = urlKeywords.find(keyword => url.includes(keyword));
+
+            return foundUrl ?? "experienceoz"
         }
 
         const activitiesBtn = document.querySelector('.tour-guide-heading-wrapper #activity-tab').parentElement;
