@@ -21,8 +21,6 @@ $(document).ready(() => {
             url: activityUrl.textContent.trim()
         }
 
-        console.log('actDetailsJson', actDetailsJson)
-
         const urlKeywords = ["experienceoz", "getyourguide"];
 
         if (!actDetailsJson.enabled) {
