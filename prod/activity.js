@@ -42,7 +42,7 @@ $(document).ready(() => {
             const tabBodyWrapper = activityTab.querySelector('.guide-experiences-wrapper')
             const widgetFrame = 'https://widget.getyourguide.com/default/activities.frame'
 
-            const widgetSnippet = `<div data-gyg-href="${widgetFrame}" data-gyg-locale-code="en-US" data-gyg-widget="activities" style="width: 100%;" data-gyg-number-of-items="3" data-gyg-cmp="${actDetailsJson.campaign}" data-gyg-partner-id="KSIQTMD" data-gyg-q="${actDetailsJson.region}"">
+            const widgetSnippet = `<div data-gyg-href="${widgetFrame}" data-gyg-locale-code="en-US" data-gyg-widget="activities" style="width: 100%;" data-gyg-number-of-items="12" data-gyg-cmp="${actDetailsJson.campaign}" data-gyg-partner-id="KSIQTMD" data-gyg-q="${actDetailsJson.region}"">
                 <span>
                     Powered by <a target="_blank" rel="sponsored" href="${actDetailsJson.url}" ">GetYourGuide</a>
                 </span>
