@@ -89,6 +89,10 @@ $(document).ready(() => {
             if (activitiesBtn && urlKeywords.includes(activityKeyword) && actDetailsJson.url !== '') {
                 functionItems[activityKeyword]()
             }
+        } else {
+            if(activitiesBtn && actDetailsJson.url !== "") {
+                runExpOz()
+            }
         }
     }
 
