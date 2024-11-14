@@ -149,7 +149,6 @@ Webflow.push(function () {
                 if (!font) return 'Quicksand';
                 return font
                     .trim()
-                    .toLowerCase()
                     .replace(/\b\w/g, char => char.toUpperCase())
             }
 
