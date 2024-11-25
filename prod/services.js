@@ -1,6 +1,6 @@
 $(document).ready(() => {
 
-    const partners = document.querySelector('code#partners').textContent.trim()
+    var partners = document.querySelector('code#partners').textContent.trim()
     partners = partners.split(';').map(val => JSON.parse(val))
 
     for(var p of partners) {
