@@ -7,12 +7,19 @@ $(document).ready(() => {
       var tabHeader = document.querySelector('.tour-guide-heading-wrapper')
       var l = tabHeader.children.length
       const { category, value, url, enabled } = p 
-      var newTab = tabHeader.children[0].cloneNode()
+      var oldTab = tabHeader.children[0]
+      var newTab = document.createElement('a')  
+
       newTab.setAttribute('id',category + '-tab-button')
       newTab.setAttribute('data-w-tab','Tab ' + l)
       newTab.setAttribute('data-tab-name',category)
       newTab.setAttribute('aria-controls','w-tabs-0-data-w-pane-' + l)
-      newTab.innerHTML = ""
+      newTab.setAttribute('class','guide-tab-link-toggle w-inline-block w-tab-link')
+      newTab.setAttribute('data-id',oldTab.id)
+      newTab.setAttribute('role','tab')
+      newTab.setAttribute('aria-selected',false)
+      newTab.setAttribute('tabindex',-1)
+
       console.log(newTab)
 
       tabHeader.appendChild(newTab)
