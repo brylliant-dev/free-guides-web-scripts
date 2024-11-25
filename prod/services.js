@@ -7,15 +7,10 @@ $(document).ready(() => {
       var tabHeader = document.querySelector('.tour-guide-heading-wrapper')
       var l = tabHeader.children.length
       const { category, value, url, enabled } = p 
-      var newTab = <a data-w-tab={"Tab " + length} 
-          id={category + "-tab-button"} data-tab-name={category} data-id="TwKKMUMRxmfUALna92SMXkn77cH2" 
-          class="guide-tab-link-toggle w-inline-block w-tab-link" role="tab" 
-          aria-controls={"w-tabs-0-data-w-pane-" + length} aria-selected="false" tabindex="-1">
-        <div id="services-tab" data-id="TwKKMUMRxmfUALna92SMXkn77cH2" 
-              class="heading-20sb" style="font-family: Roboto, Quicksand, sans-serif;">
-          {category}
-        </div >
-      </a>
+      var newTab = tabHeader.children[0]
+      newTab.setAttribute('data-w-tab','Tab ' + length)
+      newTab.setAttribute('data-tab-name',category)
+      newTab.setAttribute('aria-controls','w-tabs-0-data-w-pane-' + length)
 
       tabHeader.appendChild(newTab)
     }
