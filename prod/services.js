@@ -8,13 +8,14 @@ $(document).ready(() => {
       var l = tabHeader.children.length
       const { category, value, url, enabled } = p 
       var newTab = tabHeader.children[0]
+      newTab.setAttribute('id',category + '-tab-button')
       newTab.setAttribute('data-w-tab','Tab ' + l)
       newTab.setAttribute('data-tab-name',category)
       newTab.setAttribute('aria-controls','w-tabs-0-data-w-pane-' + l)
       console.log(newTab)
 
-      //tabHeader.appendChild(newTab)
-      //console.log(tabHeader.children)
+      tabHeader.appendChild(newTab)
+      console.log(tabHeader.children)
     }
 
     const runServicesFn = () => {
