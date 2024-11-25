@@ -13,6 +13,7 @@ $(document).ready(() => {
       newTab.setAttribute('aria-controls','w-tabs-0-data-w-pane-' + length)
 
       tabHeader.appendChild(newTab)
+      console.log(tabHeader.children)
     }
 
     const runServicesFn = () => {
