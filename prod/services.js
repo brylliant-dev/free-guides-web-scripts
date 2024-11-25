@@ -9,7 +9,6 @@ $(document).ready(() => {
       const { category, value, url, enabled } = p 
       var oldTab = tabHeader.children[0]
       var newTab = document.createElement('a')  
-      var tabTitle = document.createElement('div')
 
       newTab.setAttribute('id',category + '-tab-button')
       newTab.setAttribute('data-w-tab','Tab ' + l)
@@ -22,16 +21,10 @@ $(document).ready(() => {
       newTab.setAttribute('tabindex',-1)
       newTab.setAttribute('href','#w-tabs-0-data-w-pane-' + l)
 
+      //newTab.appendChild(oldTab.children[0])
+      //newTab.children[0].innerHTML = category
 
-      tabTitle.setAttribute('id',category + '-tab')
-      tabTitle.setAttribute('data-id',oldTab.id)
-      tabTitle.setAttribute('class','heading-20sb')
-      tabTitle.setAttribute('style','font-family: Roboto, Quicksand, sans-serif;')
-      tabTitle.innerHTML = category
-
-      newTab.appendChild(tabTitle)
-      tabHeader.appendChild(newTab)
-      
+      //tabHeader.appendChild(newTab)
       console.log(tabHeader.children)
     }
 
