@@ -12,6 +12,7 @@ $(document).ready(() => {
       newTab.setAttribute('data-w-tab','Tab ' + l)
       newTab.setAttribute('data-tab-name',category)
       newTab.setAttribute('aria-controls','w-tabs-0-data-w-pane-' + l)
+      newTab.innerHTML = ``
       console.log(newTab)
 
       tabHeader.appendChild(newTab)
