@@ -1,3 +1,9 @@
+var tabTitle = <div 
+  id="tab" data-id="" 
+  class="heading-20sb" style="font-family: Roboto, Quicksand, sans-serif;">
+  Free tours
+</div>
+
 $(document).ready(() => {
 
     var partners = document.querySelector('code#partners').textContent.trim()
@@ -21,10 +27,12 @@ $(document).ready(() => {
       newTab.setAttribute('tabindex',-1)
       newTab.setAttribute('href','#w-tabs-0-data-w-pane-' + l)
 
-      //newTab.appendChild(oldTab.children[0])
-      //newTab.children[0].innerHTML = category
-
-      //tabHeader.appendChild(newTab)
+      tabTitle.setAttribute('id',category + '-tab')
+      tabTitle.setAttribute('data-id',oldTab.id)
+      tabTitle.innerHTML = category
+      
+      newTab.appendChild(tabTitle)
+      tabHeader.appendChild(newTab)
       console.log(tabHeader.children)
     }
 
