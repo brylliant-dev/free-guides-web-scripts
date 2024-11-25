@@ -20,7 +20,7 @@ $(document).ready(() => {
       newTab.setAttribute('aria-selected',false)
       newTab.setAttribute('tabindex',-1)
 
-      console.log(newTab)
+      newTab.innerHTML = `<div id="${category}-tab" data-id="${oldTab.id}" class="heading-20sb" style="font-family: Roboto, Quicksand, sans-serif;">${category}</div>`
 
       tabHeader.appendChild(newTab)
       console.log(tabHeader.children)
