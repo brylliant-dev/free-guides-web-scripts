@@ -19,6 +19,7 @@ $(document).ready(() => {
       newTab.setAttribute('role','tab')
       newTab.setAttribute('aria-selected',false)
       newTab.setAttribute('tabindex',-1)
+      newTab.setAttribute('href','#w-tabs-0-data-w-pane-' + l)
 
       newTab.appendChild(oldTab.children[0])
       newTab.children[0].innerHTML = category
