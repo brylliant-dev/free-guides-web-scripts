@@ -21,10 +21,10 @@ $(document).ready(() => {
       newTab.setAttribute('tabindex',-1)
       newTab.setAttribute('href','#w-tabs-0-data-w-pane-' + l)
 
-      newTab.appendChild(oldTab.children[0])
-      newTab.children[0].innerHTML = category
+      //newTab.appendChild(oldTab.children[0])
+      //newTab.children[0].innerHTML = category
 
-      tabHeader.appendChild(newTab)
+      //tabHeader.appendChild(newTab)
       console.log(tabHeader.children)
     }
 
