@@ -40,7 +40,7 @@ $(document).ready(() => {
       var l = tabContent.children.length
 
       var tabInner = `
-        <div data-w-tab=${"Tab 5"} data-tab-name="services" class="guide-tab-pane-wrapper w-tab-pane" 
+        <div data-w-tab="Tab 5" data-tab-name="services" class="guide-tab-pane-wrapper w-tab-pane" 
         id=${"w-tabs-0-data-w-pane-" + l} role="tabpanel" aria-labelledby="services-tab-button" 
         style="transition: all, opacity 300ms; opacity: 1;">
           <div class="guide-experiences-wrapper">
@@ -68,7 +68,7 @@ $(document).ready(() => {
                         // All elements are found, run the callback
                         callback()
 
-                        // Disconnect the observer as its job is done
+                        // Disconnect the observer  as its job is done
                         obs.disconnect()
                     }
                 }
