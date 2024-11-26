@@ -9,27 +9,47 @@ $(document).ready(() => {
       const { category, value, url, enabled } = p 
       var oldTab = tabHeader.children[0]
       var newTab = document.createElement('a')  
+      var tabTitle = document.createElement('div')
 
-      newTab.setAttribute('id',category + '-tab-button')
-      newTab.setAttribute('data-w-tab','Tab ' + l)
-      newTab.setAttribute('data-tab-name',category)
-      newTab.setAttribute('aria-controls','w-tabs-0-data-w-pane-' + l)
-      newTab.setAttribute('class','guide-tab-link-toggle w-inline-block w-tab-link')
-      newTab.setAttribute('data-id',oldTab.id)
-      newTab.setAttribute('role','tab')
-      newTab.setAttribute('aria-selected',false)
-      newTab.setAttribute('tabindex',-1)
-      newTab.setAttribute('href','#w-tabs-0-data-w-pane-' + l)
+      setAttributes(newTab, {
+        id: category + '-tab-button', 'data-w-tab': 'Tab ' + l, 'aria-controls': 'w-tabs-0-data-w-pane-' + l,
+        class: 'guide-tab-link-toggle w-inline-block w-tab-link',
+        'data-id': oldTab.id, role: 'tab', 'aria-selected': false, tabIndex: -1, href: '#w-tabs-0-data-w-pane-' + l
+      })
 
-      //newTab.appendChild(oldTab.children[0])
-      //newTab.children[0].innerHTML = category
+      setAttributes(tabTitle, {
+        id: category + '-tab', 'data-id': oldTab.id,
+        class: 'heading-20sb', style: 'font-family: Roboto, Quicksand, sans-serif;'
+      })
 
-      //tabHeader.appendChild(newTab)
+      tabTitle.innerHTML = category
+
+      newTab.appendChild(tabTitle)
+      tabHeader.appendChild(newTab)
+      
       console.log(tabHeader.children)
     }
 
     const runServicesFn = () => {
-      console.log('running services function!')
+      const tabContent = document.querySelector('.tabs-content')
+      var l = tabContent.children.length
+
+      var tabInner = `
+        <div data-w-tab=${'Tab ' + l} data-tab-name="services" class="guide-tab-pane-wrapper w-tab-pane w--tab-active" 
+        id=${"w-tabs-0-data-w-pane-" + l} role="tabpanel" aria-labelledby="services-tab-button" 
+        style="transition: all, opacity 300ms; opacity: 1;">
+          <div class="guide-experiences-wrapper>
+
+          </div>
+        </div>
+      `
+
+      tabContent.innerHTML = tabContent.innerHTML + tabInner
+
+    }
+
+    const setAttributes = (el, attrs) => {  
+      Object.entries(attrs).forEach(([key, value]) => el.setAttribute(key, value))
     }
 
     const startObservingElements = ({ selectors, callback }) => {
