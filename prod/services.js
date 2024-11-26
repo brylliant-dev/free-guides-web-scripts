@@ -83,7 +83,7 @@ $(document).ready(() => {
 
     startObservingElements({
         selectors: [
-          'div#w-tabs-0-data-w-pane-4'
+          'div#w-tabs-0-data-w-pane-4',
           'code#partners',
         ],
         callback: runServicesFn,
