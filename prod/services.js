@@ -18,7 +18,7 @@ $(document).ready(() => {
 
       setAttributes(newTab, {
         id: category + '-tab-button', 'data-w-tab': 'Tab ' + (l + 1), 'aria-controls': 'w-tabs-0-data-w-pane-' + l,
-        class: 'guide-tab-link-toggle w-inline-block w-tab-link',
+        class: 'guide-tab-link-toggle w-inline-block w-tab-link', 'data-tab-name': category,
         'data-id': id, role: 'tab', 'aria-selected': false, tabIndex: -1, href: '#w-tabs-0-data-w-pane-' + l
       })
 
