@@ -30,7 +30,7 @@ $(document).ready(() => {
       tabTitle.innerHTML = category
 
       newTab.appendChild(tabTitle)
-      //tabHeader.appendChild(newTab)
+      tabHeader.appendChild(oldTab)
       
       console.log(tabHeader.innerHTML)
     }
