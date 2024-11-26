@@ -40,11 +40,10 @@ $(document).ready(() => {
       var l = tabContent.children.length
 
       var tabInner = `
-        <div data-w-tab=${"Tab " + (l + 1)} data-tab-name="services" class="guide-tab-pane-wrapper w-tab-pane" 
+        <div data-w-tab=${"Tab 5"} data-tab-name="services" class="guide-tab-pane-wrapper w-tab-pane" 
         id=${"w-tabs-0-data-w-pane-" + l} role="tabpanel" aria-labelledby="services-tab-button" 
         style="transition: all, opacity 300ms; opacity: 1;">
-          <div class="guide-experiences-wrapper>
-
+          <div class="guide-experiences-wrapper">
           </div>
         </div>
       `
