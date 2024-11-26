@@ -18,11 +18,11 @@ $(document).ready(() => {
       setAttributes(newTab, {
         id: category + '-tab-button', 'data-w-tab': 'Tab ' + l, 'aria-controls': 'w-tabs-0-data-w-pane-' + l,
         class: 'guide-tab-link-toggle w-inline-block w-tab-link',
-        'data-id': oldTab.id, role: 'tab', 'aria-selected': false, tabIndex: -1, href: '#w-tabs-0-data-w-pane-' + l
+        'data-id': oldTab['data-id'], role: 'tab', 'aria-selected': false, tabIndex: -1, href: '#w-tabs-0-data-w-pane-' + l
       })
 
       setAttributes(tabTitle, {
-        id: category + '-tab', 'data-id': oldTab.id,
+        id: category + '-tab', 'data-id': oldTab['data-id'],
         class: 'heading-20sb', style: 'font-family: Roboto, Quicksand, sans-serif;'
       })
 
@@ -39,7 +39,7 @@ $(document).ready(() => {
       var l = tabContent.children.length
 
       var tabInner = `
-        <div data-w-tab=${'Tab ' + l} data-tab-name="services" class="guide-tab-pane-wrapper w-tab-pane w--tab-active" 
+        <div data-w-tab=${'Tab ' + l} data-tab-name="services" class="guide-tab-pane-wrapper w-tab-pane" 
         id=${"w-tabs-0-data-w-pane-" + l} role="tabpanel" aria-labelledby="services-tab-button" 
         style="transition: all, opacity 300ms; opacity: 1;">
           <div class="guide-experiences-wrapper>
