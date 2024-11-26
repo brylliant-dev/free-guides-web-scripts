@@ -14,15 +14,16 @@ $(document).ready(() => {
       var oldTab = tabHeader.children[0]
       var newTab = document.createElement('a')  
       var tabTitle = document.createElement('div')
+      var id = oldTab.getAttribute('data-id')
 
       setAttributes(newTab, {
         id: category + '-tab-button', 'data-w-tab': 'Tab ' + (l + 1), 'aria-controls': 'w-tabs-0-data-w-pane-' + l,
         class: 'guide-tab-link-toggle w-inline-block w-tab-link',
-        'data-id': oldTab['data-id'], role: 'tab', 'aria-selected': false, tabIndex: -1, href: '#w-tabs-0-data-w-pane-' + l
+        'data-id': id, role: 'tab', 'aria-selected': false, tabIndex: -1, href: '#w-tabs-0-data-w-pane-' + l
       })
 
       setAttributes(tabTitle, {
-        id: category + '-tab', 'data-id': oldTab['data-id'],
+        id: category + '-tab', 'data-id': id,
         class: 'heading-20sb', style: 'font-family: Roboto, Quicksand, sans-serif;'
       })
 
