@@ -1,5 +1,9 @@
 $(document).ready(() => {
 
+    const setAttributes = (el, attrs) => {  
+      Object.entries(attrs).forEach(([key, value]) => el.setAttribute(key, value))
+    }
+
     var partners = document.querySelector('code#partners').textContent.trim()
     partners = partners.split(';').map(val => JSON.parse(val))
 
@@ -46,10 +50,6 @@ $(document).ready(() => {
 
       tabContent.innerHTML = tabContent.innerHTML + tabInner
 
-    }
-
-    const setAttributes = (el, attrs) => {  
-      Object.entries(attrs).forEach(([key, value]) => el.setAttribute(key, value))
     }
 
     const startObservingElements = ({ selectors, callback }) => {
