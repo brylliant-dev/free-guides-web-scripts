@@ -32,7 +32,7 @@ $(document).ready(() => {
       newTab.appendChild(tabTitle)
       tabHeader.appendChild(newTab)
       
-      console.log(tabHeader.children)
+      console.log(tabHeader.innerHTML)
     }
 
     const runServicesFn = () => {
