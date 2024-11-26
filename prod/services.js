@@ -30,7 +30,7 @@ $(document).ready(() => {
       tabTitle.innerHTML = category
 
       newTab.appendChild(tabTitle)
-      tabHeader.appendChild(newTab)
+      //tabHeader.appendChild(newTab)
       
       console.log(tabHeader.innerHTML)
     }
@@ -84,7 +84,7 @@ $(document).ready(() => {
     startObservingElements({
         selectors: [
           'div#w-tabs-0-data-w-pane-4',
-          'code#partners',
+          'code#partners'
         ],
         callback: runServicesFn,
     })
