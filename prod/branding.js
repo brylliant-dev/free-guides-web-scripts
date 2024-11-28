@@ -333,36 +333,39 @@ Webflow.push(function () {
       var tabTitle = document.createElement('div')
       var id = oldTab.getAttribute('data-id')
 
-      setAttributes(newTab, {
-        id: category + '-tab-button', 'data-w-tab': 'Tab ' + (l + 1), 'aria-controls': 'w-tabs-0-data-w-pane-' + l,
-        class: 'guide-tab-link-toggle w-inline-block w-tab-link', 'data-tab-name': category,
-        'data-id': id, role: 'tab', 'aria-selected': false, tabIndex: -1, href: '#w-tabs-0-data-w-pane-' + l
-      })
+      if(enabled) {
+          setAttributes(newTab, {
+            id: category + '-tab-button', 'data-w-tab': 'Tab ' + (l + 1), 'aria-controls': 'w-tabs-0-data-w-pane-' + l,
+            class: 'guide-tab-link-toggle w-inline-block w-tab-link', 'data-tab-name': category,
+            'data-id': id, role: 'tab', 'aria-selected': false, tabIndex: -1, href: '#w-tabs-0-data-w-pane-' + l
+          })
 
-      setAttributes(tabTitle, {
-        id: category + '-tab', 'data-id': id,
-        class: 'heading-20sb', style: 'font-family: Roboto, Quicksand, sans-serif;'
-      })
+          setAttributes(tabTitle, {
+            id: category + '-tab', 'data-id': id,
+            class: 'heading-20sb', style: 'font-family: Roboto, Quicksand, sans-serif;'
+          })
 
-      tabTitle.innerHTML = category
+          tabTitle.innerHTML = category
 
-      newTab.appendChild(tabTitle)
-      tabHeader.appendChild(newTab)
-      
-      console.log(tabHeader.innerHTML)
-      const tabContent = document.querySelector('.tabs-content')
-      var l = tabContent.children.length
+          newTab.appendChild(tabTitle)
+          tabHeader.appendChild(newTab)
+          
+          console.log(tabHeader.innerHTML)
+          const tabContent = document.querySelector('.tabs-content')
+          var l = tabContent.children.length
 
-      var tabInner = `
-        <div data-w-tab="Tab 5" data-tab-name="services" class="guide-tab-pane-wrapper w-tab-pane" 
-        id=${"w-tabs-0-data-w-pane-" + l} role="tabpanel" aria-labelledby="services-tab-button" 
-        style="transition: all, opacity 300ms; opacity: 1;">
-          <div class="guide-experiences-wrapper">
-          </div>
-        </div>
-      `
+          var tabInner = `
+            <div data-w-tab="Tab 5" data-tab-name="services" class="guide-tab-pane-wrapper w-tab-pane" 
+            id=${"w-tabs-0-data-w-pane-" + l} role="tabpanel" aria-labelledby="services-tab-button" 
+            style="transition: all, opacity 300ms; opacity: 1;">
+              <div class="guide-experiences-wrapper">
+                <iframe src=${url} width="100%" height="400px" scrolling="no" style="border: none"/>
+              </div>
+            </div>
+          `
 
-      tabContent.innerHTML = tabContent.innerHTML + tabInner
+          tabContent.innerHTML = tabContent.innerHTML + tabInner
+      }
     }
 
     // Tab Titles
