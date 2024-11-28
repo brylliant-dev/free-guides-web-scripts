@@ -312,8 +312,57 @@ Webflow.push(function () {
             }, 100); // Adjust the delay time (in milliseconds) if necessary
         }
 
+
         // Reorder tabs 
         reorderTabs(finalTabOrder);
+    }
+
+    const setAttributes = (el, attrs) => {  
+      Object.entries(attrs).forEach(([key, value]) => el.setAttribute(key, value))
+    }
+
+    var partners = document.querySelector('code#partners').textContent.trim()
+    partners = partners.split(';').map(val => JSON.parse(val))
+
+    for(var p of partners) {
+      var tabHeader = document.querySelector('.tour-guide-heading-wrapper')
+      var l = tabHeader.children.length
+      const { category, value, url, enabled } = p 
+      var oldTab = tabHeader.children[0]
+      var newTab = document.createElement('a')  
+      var tabTitle = document.createElement('div')
+      var id = oldTab.getAttribute('data-id')
+
+      setAttributes(newTab, {
+        id: category + '-tab-button', 'data-w-tab': 'Tab ' + (l + 1), 'aria-controls': 'w-tabs-0-data-w-pane-' + l,
+        class: 'guide-tab-link-toggle w-inline-block w-tab-link', 'data-tab-name': category,
+        'data-id': id, role: 'tab', 'aria-selected': false, tabIndex: -1, href: '#w-tabs-0-data-w-pane-' + l
+      })
+
+      setAttributes(tabTitle, {
+        id: category + '-tab', 'data-id': id,
+        class: 'heading-20sb', style: 'font-family: Roboto, Quicksand, sans-serif;'
+      })
+
+      tabTitle.innerHTML = category
+
+      newTab.appendChild(tabTitle)
+      tabHeader.appendChild(newTab)
+      
+      console.log(tabHeader.innerHTML)
+      const tabContent = document.querySelector('.tabs-content')
+      var l = tabContent.children.length
+
+      var tabInner = `
+        <div data-w-tab="Tab 5" data-tab-name="services" class="guide-tab-pane-wrapper w-tab-pane" 
+        id=${"w-tabs-0-data-w-pane-" + l} role="tabpanel" aria-labelledby="services-tab-button" 
+        style="transition: all, opacity 300ms; opacity: 1;">
+          <div class="guide-experiences-wrapper">
+          </div>
+        </div>
+      `
+
+      tabContent.innerHTML = tabContent.innerHTML + tabInner
     }
 
     // Tab Titles
