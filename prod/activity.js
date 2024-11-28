@@ -125,6 +125,8 @@ $(document).ready(() => {
         })
     }
 
+    console.log('finished running activity script')
+
     startObservingElements({
         selectors: [
             'div#w-tabs-0-data-w-pane-3',

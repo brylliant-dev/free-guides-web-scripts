@@ -453,6 +453,8 @@ const runFn = async () => {
 
 }
 
+console.log('finished running compendium script')
+
 startObservingElements({
   selectors: [
     'div#w-tabs-0-data-w-pane-1',

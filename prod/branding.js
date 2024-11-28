@@ -362,5 +362,6 @@ Webflow.push(function () {
             return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
         }
 
+        console.log('finished running branding script')
     }
 });
