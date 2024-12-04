@@ -221,10 +221,14 @@ const runFn = async () => {
           const iframeClones = []
 
           const isBranded = document.querySelector('code#string-branded').textContent === 'true'
-          const brandedTextColor = document.getElementById('string-brand-text-color').textContent
-          const stringBrandColor = document.querySelector('code#string-brand-color').textContent
-          const brandColor = isBranded && stringBrandColor !== '' ? stringBrandColor : '#60be8c'
-          const textColour = isBranded && brandedTextColor !== '' ? brandedTextColor : "#FFFFFF"
+          var brandedTextColor = document.getElementById('string-brand-text-color').textContent
+          var stringBrandColor = document.querySelector('code#string-brand-color').textContent
+
+          brandedTextColor = brandedTextColor.substring(1)
+          stringBrandColor = stringBrandColor.substring(1)
+
+          const brandColor = isBranded && stringBrandColor !== '' ? stringBrandColor : '60be8c'
+          const textColour = isBranded && brandedTextColor !== '' ? brandedTextColor : "FFFFFF"
 
 
           const testUrl = `https://fg-tours-preview--preview-bic7ekwv.web.app/?brandColor=${brandColor}&placeId=`
