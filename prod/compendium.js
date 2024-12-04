@@ -221,30 +221,25 @@ const runFn = async () => {
           const iframeClones = []
 
           const isBranded = document.querySelector('code#string-branded').textContent === 'true'
+          const brandedTextColor = document.getElementById('string-brand-text-color').textContent
           const stringBrandColor = document.querySelector('code#string-brand-color').textContent
-          const brandColor = (isBranded && stringBrandColor !== '' && stringBrandColor || '#60be8c').replace('#', '')
+          const brandColor = isBranded && stringBrandColor !== '' ? stringBrandColor : '#60be8c'
+          const textColour = isBranded && brandedTextColor !== '' ? brandedTextColor : "#FFFFFF"
+
 
           const testUrl = `https://fg-tours-preview--preview-bic7ekwv.web.app/?brandColor=${brandColor}&placeId=`
-          const prodUrl = `https://tour.freeguides.com/?brandColor=${brandColor}&placeId=`
+          const prodUrl = `https://tour.freeguides.com/?brandColor=${brandColor}&textColor=${textColour}&placeId=`
 
 
           const feedIframeSrc = () => {
             iframeClones.forEach((ifc) => {
               if (ifc.item.getAttribute('src') === '') {
+                var insight = ifc.details?.insight ?? ""
                 ifc.item.setAttribute(
                   'src',
-                  `${prodUrl + ifc.placeId}`
+                  `${prodUrl + ifc.placeId}&insight=${insight}`
                 )
                 ifc.item.setAttribute('scrolling','no')
-
-                var insight = ifc.details?.insight ?? ""
-                if(insight.length > 100) {
-                  ifc.item.setAttribute("height",400)
-                }
-                
-                ifc.item.addEventListener('load', () => {
-                  ifc.item.contentWindow.postMessage(ifc.details,prodUrl + ifc.placeId)
-                })
               }
             })
           }
