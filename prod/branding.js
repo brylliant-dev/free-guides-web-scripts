@@ -414,6 +414,7 @@ Webflow.push(function () {
             return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
         }
 
+        Array.from(document.querySelectorAll('.w-tab-link'))[0].click() 
         console.log('finished running branding script')
     }
 });
