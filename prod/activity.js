@@ -38,7 +38,8 @@ $(document).ready(() => {
         const activityKeyword = containsKeyword(actDetailsJson.url)
 
         const runGyg = () => {
-            const activityTab = document.querySelector('div#w-tabs-0-data-w-pane-3')
+            
+            const activityTab = document.querySelector('.tabs-content div[data-tab-name="activity"]')
             const tabBodyWrapper = activityTab.querySelector('.guide-experiences-wrapper')
             const widgetFrame = 'https://widget.getyourguide.com/default/activities.frame'
 
