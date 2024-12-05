@@ -196,7 +196,7 @@ const runFn = async () => {
         return
       }
 
-      const recomTab = tabSection.querySelector('div#w-tabs-0-data-w-pane-1')
+      const recomTab = tabSection.querySelector("div[data-tab-name='recommendations']")
       const recomDropdownWrapper = recomTab.querySelector('.guide-dropdown-list-wrapper.recommendation')
       const recomDropdownTemplate = recomDropdownWrapper.querySelector('.guide-accordion-item.w-dropdown')
       const recomCardWrapperTemplate = recomDropdownTemplate.querySelector('.recommendation-card-wrapper')
@@ -297,7 +297,7 @@ const runFn = async () => {
         return
       }
 
-      const genTab = tabSection.querySelector('div#w-tabs-0-data-w-pane-2')
+      const genTab = tabSection.querySelector("div[data-tab-name='general']")
       const genDropdownWrapper = genTab.querySelector('.guide-dropdown-list-wrapper.general')
       const genDropdownTemplate = genDropdownWrapper.querySelector('.guide-accordion-item.w-dropdown')
       const { toggleFn } = tabsGenericFn()
