@@ -305,7 +305,6 @@ Webflow.push(function () {
 
             // Introduce a small delay before clicking the first tab
             setTimeout(function () {
-                console.log(finalTabOrder)
                 const firstTabButton = tabButtons.find(el => el.getAttribute('data-tab-name') === finalTabOrder[0]);
                 if (firstTabButton) {
                     firstTabButton.click();
@@ -313,7 +312,7 @@ Webflow.push(function () {
             }, 100); // Adjust the delay time (in milliseconds) if necessary
         }
 
-
+        console.log(finalTabOrder)
         // Reorder tabs 
         reorderTabs(finalTabOrder);
     }
