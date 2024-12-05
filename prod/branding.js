@@ -305,6 +305,7 @@ Webflow.push(function () {
 
             // Introduce a small delay before clicking the first tab
             setTimeout(function () {
+                console.log(finalTabOrder)
                 const firstTabButton = tabButtons.find(el => el.getAttribute('data-tab-name') === finalTabOrder[0]);
                 if (firstTabButton) {
                     firstTabButton.click();
