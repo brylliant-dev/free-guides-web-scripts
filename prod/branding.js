@@ -309,7 +309,7 @@ Webflow.push(function () {
                 if (firstTabButton) {
                     firstTabButton.click();
                 }
-            }, 100); // Adjust the delay time (in milliseconds) if necessary
+            }, 200); // Adjust the delay time (in milliseconds) if necessary
         }
 
         console.log(finalTabOrder)
