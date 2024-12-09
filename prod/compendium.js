@@ -348,7 +348,7 @@ const runFn = async () => {
           genMediaLinkTemplate.remove()
           genMediaImageTemplate.remove()
           genMediaVideoTemplate.remove()
-          //genMediaAccordionTemplate.children[0].firstChild.remove()
+          genMediaAccordionTemplate.children[0].firstChild.remove()
 
           const elementWithType = {
             text: genMediaTextTemplate,
@@ -404,7 +404,6 @@ const runFn = async () => {
 
               console.log(subToggle,subBtn,subBody,subId)
 
-              /*
               toggleFn({
                 subBody,
                 subBtn,
@@ -414,7 +413,6 @@ const runFn = async () => {
                 idx,
                 subId
               })
-              */
             }
             mediaFn({ data, clone })[data.type]() // Let's run the function based on the `media.type`
             genDropdownClone
