@@ -400,7 +400,7 @@ const runFn = async () => {
               var subId = '-' + mid
               var subBody = clone.querySelector('nav.accordion-body')
               var subBtn = clone.querySelector('.accordion-btn')
-              var subToggle = clone.querySelector('.accordion-toggle')
+              var subToggle = clone.querySelector('.accordion-toggle.w-dropdown-toggle')
               
               toggleFn({
                 subBody,
