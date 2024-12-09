@@ -384,7 +384,7 @@ const runFn = async () => {
               accordion: () => {
                 var cloneTitle = clone.querySelector('[gen-data="accordion-title"]')
                 cloneTitle.setAttribute('data-title',title)
-                cloneTitle.textContent = data.accordionTitle
+                cloneTitle.textContent = data.title
 
                 var cloneBody = clone.querySelector('.accordion-body-content')
                 cloneBody.innerHTML = content
@@ -401,6 +401,8 @@ const runFn = async () => {
               var subBody = clone.querySelector('nav.accordion-body')
               var subBtn = clone.querySelector('.accordion-btn')
               var subToggle = clone.querySelector('.accordion-toggle.w-dropdown-toggle')
+
+              console.log(subToggle,subBtn,subBody,subId)
 
               /*
               toggleFn({
