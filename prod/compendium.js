@@ -398,6 +398,7 @@ const runFn = async () => {
             const clone = elementWithType[data.type].cloneNode(true)
 
             if(data.type === 'accordion') {
+              var subId = '-' + mid
               toggleFn({
                 accordionBody,
                 accordionBtn,
@@ -405,7 +406,7 @@ const runFn = async () => {
                 clone: clone,
                 wrapper: genDropdownWrapper,
                 idx,
-                `-${mid}`
+                subId
               })
             }
 
