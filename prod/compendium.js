@@ -348,7 +348,7 @@ const runFn = async () => {
           genMediaLinkTemplate.remove()
           genMediaImageTemplate.remove()
           genMediaVideoTemplate.remove()
-          genMediaAccordionTemplate.children[0].firstChild.remove()
+          //genMediaAccordionTemplate.children[0].firstChild.remove()
 
           const elementWithType = {
             text: genMediaTextTemplate,
