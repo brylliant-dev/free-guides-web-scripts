@@ -168,7 +168,9 @@ const runFn = async () => {
             clone.style.zIndex = '901'
             clone.style.height = ''
 
-            switchAccordionBody({ toggle, wrapper })
+            if(!subId) {
+              switchAccordionBody({ toggle, wrapper })
+            }
           } else {
             closeToggle({
               toggleBody: toggle,
@@ -348,7 +350,7 @@ const runFn = async () => {
           genMediaLinkTemplate.remove()
           genMediaImageTemplate.remove()
           genMediaVideoTemplate.remove()
-          genMediaAccordionTemplate.children[0].firstChild.remove()
+          //genMediaAccordionTemplate.children[0].firstChild.remove()
 
           const elementWithType = {
             text: genMediaTextTemplate,
