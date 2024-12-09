@@ -146,8 +146,8 @@ const runFn = async () => {
         clone,
         wrapper,
         idx,
-        callback = () => { },
         subId = null,
+        callback = () => { },
       }) => {
         const toggleId = `w-dropdown-toggle-${idx + 1}${subId ??''}`
         const dropdownId = `w-dropdown-list-${idx + 1}${subId ?? ''}`
