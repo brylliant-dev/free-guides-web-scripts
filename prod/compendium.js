@@ -401,7 +401,8 @@ const runFn = async () => {
               var subBody = clone.querySelector('nav.accordion-body')
               var subBtn = clone.querySelector('.accordion-btn')
               var subToggle = clone.querySelector('.accordion-toggle.w-dropdown-toggle')
-              
+
+              /*
               toggleFn({
                 subBody,
                 subBtn,
@@ -411,6 +412,7 @@ const runFn = async () => {
                 idx,
                 subId
               })
+              */
             }
             mediaFn({ data, clone })[data.type]() // Let's run the function based on the `media.type`
             genDropdownClone
