@@ -147,9 +147,10 @@ const runFn = async () => {
         wrapper,
         idx,
         callback = () => { },
+        subId = null,
       }) => {
-        const toggleId = `w-dropdown-toggle-${idx + 1}`
-        const dropdownId = `w-dropdown-list-${idx + 1}`
+        const toggleId = `w-dropdown-toggle-${idx + 1}${subId ??''}`
+        const dropdownId = `w-dropdown-list-${idx + 1}${subId ?? ''}`
 
         toggle.setAttribute('id', toggleId)
         toggle.setAttribute('aria-controls', dropdownId)
@@ -315,6 +316,8 @@ const runFn = async () => {
           const accordionBody = genDropdownClone.querySelector('nav.accordion-body.w-dropdown-list')
           const accordionBtn = genDropdownClone.querySelector('.accordion-btn')
 
+          const genMediaAccordionTemplate = genDropdownClone.cloneNode(true)
+
           toggleFn({
             accordionBody,
             accordionBtn,
@@ -345,12 +348,14 @@ const runFn = async () => {
           genMediaLinkTemplate.remove()
           genMediaImageTemplate.remove()
           genMediaVideoTemplate.remove()
+          genMediaAccordionTemplate.children[0].firstChild.remove()
 
           const elementWithType = {
             text: genMediaTextTemplate,
             link: genMediaLinkTemplate,
             img: genMediaImageTemplate,
             video: genMediaVideoTemplate,
+            accordion: genMediaAccordionTemplate
           }
 
           const mediaFn = ({ data, clone }) => {
@@ -376,13 +381,34 @@ const runFn = async () => {
                   .querySelector('iframe.embedly-embed')
                   .setAttribute('src', content)
               },
+              accordion: () => {
+                var cloneTitle = clone.querySelector('[gen-data="accordion-title"]')
+                cloneTitle.setAttribute('data-title',title)
+                cloneTitle.textContent = data.accordionTitle
+
+                var cloneBody = clone.querySelector('.accordion-body-content')
+                cloneBody.innerHTML = content
+              }
             }
           }
 
-          data.media.forEach((data) => {
+          data.media.forEach((data,mid) => {
             if (!Object.keys(elementWithType).includes(data.type)) return // Let's skip first if there are more types than the 4
 
             const clone = elementWithType[data.type].cloneNode(true)
+
+            if(data.type === 'accordion') {
+              toggleFn({
+                accordionBody,
+                accordionBtn,
+                toggle,
+                clone: clone,
+                wrapper: genDropdownWrapper,
+                idx,
+                `-${mid}`
+              })
+            }
+
             mediaFn({ data, clone })[data.type]() // Let's run the function based on the `media.type`
             genDropdownClone
               .querySelector('.accordion-body-content')
