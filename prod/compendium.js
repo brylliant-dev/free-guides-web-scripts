@@ -396,7 +396,6 @@ const runFn = async () => {
             if (!Object.keys(elementWithType).includes(data.type)) return // Let's skip first if there are more types than the 4
 
             const clone = elementWithType[data.type].cloneNode(true)
-
             if(data.type === 'accordion') {
               var subId = '-' + mid
               toggleFn({
@@ -409,7 +408,6 @@ const runFn = async () => {
                 subId
               })
             }
-
             mediaFn({ data, clone })[data.type]() // Let's run the function based on the `media.type`
             genDropdownClone
               .querySelector('.accordion-body-content')
