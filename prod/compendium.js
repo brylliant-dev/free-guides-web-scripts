@@ -319,9 +319,9 @@ const runFn = async () => {
           const genMediaAccordionTemplate = genDropdownClone.cloneNode(true)
 
           toggleFn({
+            toggle,
             accordionBody,
             accordionBtn,
-            toggle,
             clone: genDropdownClone,
             wrapper: genDropdownWrapper,
             idx,
@@ -405,9 +405,9 @@ const runFn = async () => {
               console.log(subToggle,subBtn,subBody,subId)
 
               toggleFn({
-                subBody,
-                subBtn,
-                subToggle,
+                toggle: subToggle,
+                accordionBody: subBody,
+                accordionBtn: subBtn,
                 clone: clone,
                 wrapper: genDropdownWrapper,
                 idx,
