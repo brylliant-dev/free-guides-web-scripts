@@ -404,7 +404,6 @@ const runFn = async () => {
               var subBtn = clone.querySelector('.accordion-btn')
               var subToggle = clone.querySelector('.accordion-toggle.w-dropdown-toggle')
 
-              console.log(subToggle,subBtn,subBody,subId)
 
               toggleFn({
                 toggle: subToggle,
@@ -415,7 +414,13 @@ const runFn = async () => {
                 idx,
                 subId
               })
+              clone.style.paddingBottom = '5%'
+              clone.style.borderBottom = '1px solid lightgray'
+              clone.style.width = 'auto'
+              clone.style.marginLeft = -40
             }
+
+
             mediaFn({ data, clone })[data.type]() // Let's run the function based on the `media.type`
             genDropdownClone
               .querySelector('.accordion-body-content')
@@ -459,7 +464,7 @@ const runFn = async () => {
 
     if (enabled) {
       if (!main && !primary) {
-        ctaLink.classList.add('profile-cta-order', 'margin-top-9', 'text-white')
+        ctaMobile.classList.add('profile-cta-order', 'margin-top-9', 'text-white')
       }
       checkNullData({ details: link, elem: ctaLink })
       checkNullData({ details: phoneNum, elem: ctaMobile, prefix: 'tel:' })
