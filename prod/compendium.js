@@ -453,6 +453,7 @@ const runFn = async () => {
     const ctaMain = mainWrapper.querySelector('[profile-data="cta-main"]')
 
     var buttons = document.querySelectorAll('[profile-data]')
+    console.log(isMobile)
     if(isMobile) {
       if(buttons.length === 2) {
         var first = buttons[0]
