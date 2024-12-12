@@ -446,9 +446,28 @@ const runFn = async () => {
 
   // Update Profile Section using details from CTA field in Guide Collections
   const runProfileFunctions = () => {
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
     const ctaLink = mainWrapper.querySelector('[profile-data="cta-link"]')
     const ctaMobile = mainWrapper.querySelector('[profile-data="cta-mobile"]')
     const ctaMain = mainWrapper.querySelector('[profile-data="cta-main"]')
+
+    var buttons = document.querySelectorAll('[profile-data]')
+    if(isMobile) {
+      if(buttons.length === 2) {
+        var first = buttons[0]
+        var second = buttons[1]
+
+        first.parentElement.style['grid-template-rows'] = '1fr'
+        first.style['grid-area'] = '1 / 1 / 1 / 1'
+        second.style['grid-area'] = '1 / 2 / 1 / 2'
+
+      } else if (buttons.length === 1) {
+        var first = buttons[0]
+        first.parentElement.style['grid-template-rows'] = '1fr'
+        first.style['grid-area'] = '1 / 1 / 1 / 4'
+      }
+    }
 
     const { enabled, link, phoneNum, main, primary } = JSON.parse(ctaDetailsText)
 
