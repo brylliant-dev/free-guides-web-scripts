@@ -468,6 +468,7 @@ const runFn = async () => {
         first.parentElement.style['grid-template-rows'] = '1fr'
         first.style['grid-area'] = '1 / 1 / 1 / 4'
       }
+      console.log(buttons)
     }
 
     const { enabled, link, phoneNum, main, primary } = JSON.parse(ctaDetailsText)
