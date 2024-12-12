@@ -416,8 +416,7 @@ const runFn = async () => {
               })
               clone.style.paddingBottom = '5%'
               clone.style.borderBottom = '1px solid lightgray'
-              clone.style.width = 'auto'
-              clone.style.marginLeft = -40
+              clone.style.marginLeft = "-40px"
             }
 
 
