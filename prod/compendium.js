@@ -464,7 +464,7 @@ const runFn = async () => {
 
     if (enabled) {
       if (!main && !primary) {
-        ctaMobile.classList.add('profile-cta-order', 'margin-top-9', 'text-white')
+        ctaLink.classList.add('profile-cta-order', 'margin-top-9', 'text-white')
       }
       checkNullData({ details: link, elem: ctaLink })
       checkNullData({ details: phoneNum, elem: ctaMobile, prefix: 'tel:' })
