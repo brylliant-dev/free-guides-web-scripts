@@ -459,14 +459,14 @@ const runFn = async () => {
         var first = buttons[0]
         var second = buttons[1]
 
-        first.parentElement.style['grid-template-rows'] = '1fr'
-        first.style['grid-area'] = '1 / 1 / 1 / 1'
-        second.style['grid-area'] = '1 / 2 / 1 / 2'
+        buttons[0].parentElement.style['grid-template-rows'] = '1fr'
+        buttons[0].style['grid-area'] = '1 / 1 / 1 / 1'
+        buttons[1].style['grid-area'] = '1 / 2 / 1 / 2'
 
       } else if (buttons.length === 1) {
         var first = buttons[0]
-        first.parentElement.style['grid-template-rows'] = '1fr'
-        first.style['grid-area'] = '1 / 1 / 1 / 4'
+        buttons[0].parentElement.style['grid-template-rows'] = '1fr'
+        buttons[0].style['grid-area'] = '1 / 1 / 1 / 4'
       }
       console.log(buttons)
     }
