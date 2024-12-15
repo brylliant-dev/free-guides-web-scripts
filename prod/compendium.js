@@ -452,24 +452,7 @@ const runFn = async () => {
     const ctaMobile = mainWrapper.querySelector('[profile-data="cta-mobile"]')
     const ctaMain = mainWrapper.querySelector('[profile-data="cta-main"]')
 
-    var buttons = document.querySelectorAll('[profile-data]')
-    console.log(isMobile)
-    if(isMobile) {
-      if(buttons.length === 2) {
-        var first = buttons[0]
-        var second = buttons[1]
-
-        buttons[0].parentElement.style['grid-template-rows'] = '1fr'
-        buttons[0].style['grid-area'] = '1 / 1 / 1 / 1'
-        buttons[1].style['grid-area'] = '1 / 2 / 1 / 2'
-
-      } else if (buttons.length === 1) {
-        var first = buttons[0]
-        buttons[0].parentElement.style['grid-template-rows'] = '1fr'
-        buttons[0].style['grid-area'] = '1 / 1 / 1 / 4'
-      }
-      console.log(buttons)
-    }
+    console.log(ctaLink,ctaMobile,ctaMain)
 
     const { enabled, link, phoneNum, main, primary } = JSON.parse(ctaDetailsText)
 
@@ -492,6 +475,25 @@ const runFn = async () => {
     } else {
       removeCtaWrapper()
     }
+    
+    var buttons = document.querySelectorAll('[profile-data]')
+    if(isMobile) {
+      if(buttons.length === 2) {
+        var first = buttons[0]
+        var second = buttons[1]
+
+        buttons[0].parentElement.style['grid-template-rows'] = '1fr'
+        buttons[0].style['grid-area'] = '1 / 1 / 1 / 1'
+        buttons[1].style['grid-area'] = '1 / 2 / 1 / 2'
+
+      } else if (buttons.length === 1) {
+        var first = buttons[0]
+        buttons[0].parentElement.style['grid-template-rows'] = '1fr'
+        buttons[0].style['grid-area'] = '1 / 1 / 1 / 4'
+      }
+      //console.log(buttons)
+    }
+
   }
 
   const compendiumFn =
