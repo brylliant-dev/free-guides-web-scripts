@@ -384,6 +384,8 @@ const runFn = async () => {
                   .setAttribute('src', content)
               },
               accordion: () => {
+                clone.querySelector('general-icon-wrapper').remove()
+
                 var cloneTitle = clone.querySelector('[gen-data="accordion-title"]')
                 cloneTitle.setAttribute('data-title',title)
                 cloneTitle.textContent = data.title
@@ -416,7 +418,8 @@ const runFn = async () => {
               })
               clone.style.paddingBottom = '5%'
               clone.style.borderBottom = '1px solid lightgray'
-              clone.style.marginLeft = "-40px"
+              subBody.style.padding = 0
+
             }
 
 
@@ -475,7 +478,7 @@ const runFn = async () => {
     } else {
       removeCtaWrapper()
     }
-    
+
     var buttons = document.querySelectorAll('[profile-data]')
     if(isMobile) {
       if(buttons.length === 2) {
