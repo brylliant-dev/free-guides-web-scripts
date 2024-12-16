@@ -384,7 +384,8 @@ const runFn = async () => {
                   .setAttribute('src', content)
               },
               accordion: () => {
-                //clone.querySelector(`[icon-gen-data-name='icon-title']`).remove()
+                clone.querySelector(`[icon-gen-data-name='icon-title']`).style.display = 'none'
+                clone.parentElement.style.paddingTop = '5px'
 
                 var cloneTitle = clone.querySelector('[gen-data="accordion-title"]')
                 cloneTitle.setAttribute('data-title',title)
