@@ -384,11 +384,16 @@ const runFn = async () => {
                   .setAttribute('src', content)
               },
               accordion: () => {
+                clone.querySelector(`[icon-gen-data-name='icon-title']`).remove()
+
                 var cloneTitle = clone.querySelector('[gen-data="accordion-title"]')
                 cloneTitle.setAttribute('data-title',title)
                 cloneTitle.textContent = data.title
 
                 var cloneBody = clone.querySelector('.accordion-body-content')
+                cloneBody.style.padding = '0px'
+                cloneBody.style.paddingTop = '10px'
+
                 cloneBody.innerHTML = content
               }
             }
@@ -416,8 +421,6 @@ const runFn = async () => {
               })
               clone.style.paddingBottom = '5%'
               clone.style.borderBottom = '1px solid lightgray'
-              subBody.style.padding = 0
-
             }
 
 
