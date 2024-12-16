@@ -421,6 +421,7 @@ const runFn = async () => {
                 subId
               })
               clone.style.paddingBottom = '5%'
+              clone.style.marginTop = '3%'
               clone.style.borderBottom = '1px solid lightgray'
             }
 
