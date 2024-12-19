@@ -222,7 +222,7 @@ Webflow.push(function () {
         // Collect SVG data
         const svgIcons = {};
         document.querySelectorAll('.icon-item').forEach(function (item) {
-            if(item) {
+            if(!Object.is(item,null)) {
                 const name = item.querySelector('.svg-embed').getAttribute('data-name').toLowerCase(); // Convert to lowercase
                 const encodedSvgContent = item.querySelector('.svg-embed').getAttribute('data-path');
                 const decodedSvgContent = decodeHtmlEntities(encodedSvgContent);
