@@ -222,10 +222,12 @@ Webflow.push(function () {
         // Collect SVG data
         const svgIcons = {};
         document.querySelectorAll('.icon-item').forEach(function (item) {
-            const name = item.querySelector('.svg-embed').getAttribute('data-name').toLowerCase(); // Convert to lowercase
-            const encodedSvgContent = item.querySelector('.svg-embed').getAttribute('data-path');
-            const decodedSvgContent = decodeHtmlEntities(encodedSvgContent);
-            svgIcons[name] = decodedSvgContent;
+            if(item) {
+                const name = item.querySelector('.svg-embed').getAttribute('data-name').toLowerCase(); // Convert to lowercase
+                const encodedSvgContent = item.querySelector('.svg-embed').getAttribute('data-path');
+                const decodedSvgContent = decodeHtmlEntities(encodedSvgContent);
+                svgIcons[name] = decodedSvgContent;
+            }
         });
 
         // Function to insert SVGs
