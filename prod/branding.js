@@ -255,7 +255,7 @@ Webflow.push(function () {
         });
 
         // Insert SVGs for General tab
-        document.querySelectorAll('.guide-accordion-item.general').forEach(function (item) {
+        document.querySelectorAll('.guide-accordion-item.general,.highlights-container').forEach(function (item) {
             insertSvg(item, '.general-icon-wrapper', 'icon-gen-data-name');
         });
     });
