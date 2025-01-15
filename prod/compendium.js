@@ -528,7 +528,7 @@ const runFn = async () => {
 
 
     var highlights = JSON.parse(highlightsData.innerHTML)
-    var blocks = document.getElementByClassName('highlights-time')
+    var blocks = document.getElementsByClassName('highlights-time')
     var timeTextDivs = document.getElementsByClassName('time-text') ?? []
 
 
