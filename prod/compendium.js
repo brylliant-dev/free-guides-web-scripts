@@ -538,6 +538,7 @@ const runFn = async () => {
     for (var i = 0; i < timeTextDivs.length ; i++) {
       var t = timeTextDivs[i]
       var time = ""
+      console.log(t.id)
       if(t.id === 'check-in') {
         if(highlights.check?.active) {
           time = highlights.check?.value?.in ?? '15:00'
