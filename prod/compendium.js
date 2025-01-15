@@ -527,7 +527,7 @@ const runFn = async () => {
   const runHighlightsFunction = () => {
 
 
-    var highlights = JSON.parse(highlightsData)
+    var highlights = JSON.parse(highlightsData.innerHTML)
     var blocks = document.getElementsByClass('highlights-time')
     var timeTextDivs = document.getElementsByClass('time-text') ?? []
 
@@ -577,7 +577,7 @@ const runFn = async () => {
   const ctaFn =
     ctaDetailsText === '' ? removeCtaWrapper : () => runProfileFunctions()
 
-  if(highlightsData !== '') {
+  if(highlightsData.innerHTML !== '') {
     runHighlightsFunction()
   }
 
