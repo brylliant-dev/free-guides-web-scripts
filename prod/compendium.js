@@ -540,15 +540,15 @@ const runFn = async () => {
       var time = ""
       if(t.id === 'check-in') {
         if(highlights.check?.active) {
-          time = highlights.check?.value?.in ?? '03:00 PM'
-          t.innerHTML = parseTime(time)
+          time = highlights.check?.value?.in ?? '15:00'
+          //t.innerHTML = parseTime(time)
           blocks[0].style.backgroundColor = bkg
         } else {
           blocks[0].style = "display: none"
         }
       } else if (t.id === 'check-out') {
-        time = highlights.check?.value?.out ?? '11:00 AM'
-        t.innerHTML = parseTime(time)
+        time = highlights.check?.value?.out ?? '11:00'
+        //t.innerHTML = parseTime(time)
       } else if (t.id === 'breakfast-time') { 
         if(highlights.breakfast?.active) {
           var start = highlights.breakfast?.value?.start ?? '06:30 AM'
