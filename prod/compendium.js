@@ -577,10 +577,7 @@ const runFn = async () => {
   const ctaFn =
     ctaDetailsText === '' ? removeCtaWrapper : () => runProfileFunctions()
 
-  if(highlightsData.innerHTML !== '') {
-    runHighlightsFunction()
-  }
-
+  if(highlightsData.innerHTML !== '') runHighlightsFunction()
 
   compendiumFn()
   ctaFn()
