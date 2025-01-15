@@ -532,7 +532,8 @@ const runFn = async () => {
     var timeTextDivs = document.getElementsByClassName('time-text') ?? []
 
 
-    timeTextDivs.forEach((t) => {
+    for (var i = 0; i < timeTextDivs.length ; i++) {
+      var t = timeTextDivs[i]
       var time = ""
       if(t.id === 'check-in') {
         if(highlights.check?.active) {
@@ -563,7 +564,7 @@ const runFn = async () => {
 
       var highlightsContainer = document.querySelector('')
       document.getElementsByClassName('highlights-container')[0].style = "display: block" 
-    })
+    }
   }
 
   const compendiumFn =
