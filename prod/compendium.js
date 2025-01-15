@@ -55,6 +55,8 @@ const runFn = async () => {
   const ctaDetails = document.querySelector('code#json-cta')
   const ctaDetailsText = ctaDetails.textContent
 
+  var highlightsData = document.querySelector('code#highlights')
+
   const mainWrapper = document.querySelector('.main-wrapper')
   const allTabs = [1, 2, 3, 4].map((dwt) =>
     mainWrapper.querySelector(`[data-w-tab='Tab ${dwt}']`)
@@ -502,6 +504,68 @@ const runFn = async () => {
 
   }
 
+    const calculatePreviewColor = (hexColour) => {
+
+      const r = parseInt(hexColour.slice(1, 3), 16)
+      const g = parseInt(hexColour.slice(3, 5), 16)
+      const b = parseInt(hexColour.slice(5, 7), 16)
+      
+      const newR = Math.round((r + 255 * 14) / 15)
+      const newG = Math.round((g + 255 * 14) / 15)
+      const newB = Math.round((b + 255 * 14) / 15)
+      
+      return `#${newR.toString(16).padStart(2, '0')}${newG.toString(16).padStart(2, '0')}${newB.toString(16).padStart(2, '0')}`
+    }
+
+    const parseTime = (timeString) => {
+      return new Date('1970-01-01T' + timeString + 'Z')
+        .toLocaleTimeString('en-US',
+          {timeZone:'UTC',hour12:true,hour:'numeric',minute:'numeric'}
+      );
+    }
+
+  const runHighlightsFunction = () => {
+
+
+    var highlights = JSON.parse(highlightsData)
+    var blocks = document.getElementsByClass('highlights-time')
+    var timeTextDivs = document.getElementsByClass('time-text') ?? []
+
+
+    timeTextDivs.forEach((t) => {
+      var time = ""
+      if(t.id === 'check-in') {
+        if(highlights.check?.active) {
+          time = highlights.check?.value?.in ?? '03:00 PM'
+          t.innerHTML = parseTime(time)
+        } else {
+          blocks[0].style = "display: none"
+        }
+      } else if (t.id === 'check-out') {
+        time = highlights.check?.value?.out ?? '11:00 AM'
+        t.innerHTML = parseTime(time)
+      } else if (t.id === 'breakfast-time') { 
+        if(highlights.breakfast?.active) {
+          var start = highlights.breakfast?.value?.start ?? '06:30 AM'
+          var end = highlights.breakfast?.value?.end ?? '10:30 AM'
+          t.innerHTML = start + ' - ' + end
+        } else {
+          blocks[1].style = "display: none"
+        }
+      }
+
+      var wifiDiv = document.getElementsByClass('highlights-checkin-text')
+      if(highlights?.wifi.active) {
+        wifiDiv.innerHTML = highlights.content
+      } else {
+        blocks[2].style = "display: none"
+      }
+
+      var highlightsContainer = document.querySelector('')
+      document.getElementsByClassName('highlights-container')[0].style = "display: block" 
+    })
+  }
+
   const compendiumFn =
     compendiumText === ''
       ? () => {
@@ -512,6 +576,11 @@ const runFn = async () => {
 
   const ctaFn =
     ctaDetailsText === '' ? removeCtaWrapper : () => runProfileFunctions()
+
+  if(highlightsData !== '') {
+    runHighlightsFunction()
+  }
+
 
   compendiumFn()
   ctaFn()
