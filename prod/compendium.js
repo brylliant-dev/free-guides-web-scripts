@@ -531,6 +531,9 @@ const runFn = async () => {
     var blocks = document.getElementsByClassName('highlights-time')
     var timeTextDivs = document.getElementsByClassName('time-text') ?? []
 
+    var stringBrandColor = document.querySelector('code#string-brand-color').textContent
+    var bkg = stringBrandColor !== '' ? stringBrandColor : '#60BE8C'
+    bkg = calculatePreviewColor(bkg)
 
     for (var i = 0; i < timeTextDivs.length ; i++) {
       var t = timeTextDivs[i]
@@ -539,6 +542,7 @@ const runFn = async () => {
         if(highlights.check?.active) {
           time = highlights.check?.value?.in ?? '03:00 PM'
           t.innerHTML = parseTime(time)
+          blocks[0].style.backgroundColor = bkg
         } else {
           blocks[0].style = "display: none"
         }
@@ -550,6 +554,7 @@ const runFn = async () => {
           var start = highlights.breakfast?.value?.start ?? '06:30 AM'
           var end = highlights.breakfast?.value?.end ?? '10:30 AM'
           t.innerHTML = start + ' - ' + end
+          blocks[1].style.backgroundColor = bkg
         } else {
           blocks[1].style = "display: none"
         }
@@ -558,12 +563,13 @@ const runFn = async () => {
       var wifiDiv = document.getElementsByClassName('highlights-checkin-text')
       if(highlights?.wifi.active) {
         wifiDiv[0].innerHTML = highlights.content
+        blocks[2].style.backgroundColor = bkg
       } else {
         blocks[2].style = "display: none"
       }
 
-      var highlightsContainer = document.querySelector('')
-      document.getElementsByClassName('highlights-container')[0].style = "display: block" 
+      var highlightsContainer = document.getElementsByClassName('highlights-container')
+      highlightsContainer[0].style = "display: block" 
     }
   }
 
