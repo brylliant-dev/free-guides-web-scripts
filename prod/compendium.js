@@ -528,8 +528,8 @@ const runFn = async () => {
 
 
     var highlights = JSON.parse(highlightsData.innerHTML)
-    var blocks = document.getElementsByClass('highlights-time')
-    var timeTextDivs = document.getElementsByClass('time-text') ?? []
+    var blocks = document.getElementByClassName('highlights-time')
+    var timeTextDivs = document.getElementsByClassName('time-text') ?? []
 
 
     timeTextDivs.forEach((t) => {
@@ -554,9 +554,9 @@ const runFn = async () => {
         }
       }
 
-      var wifiDiv = document.getElementsByClass('highlights-checkin-text')
+      var wifiDiv = document.getElementsByClassName('highlights-checkin-text')
       if(highlights?.wifi.active) {
-        wifiDiv.innerHTML = highlights.content
+        wifiDiv[0].innerHTML = highlights.content
       } else {
         blocks[2].style = "display: none"
       }
