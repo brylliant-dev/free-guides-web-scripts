@@ -543,7 +543,7 @@ const runFn = async () => {
       if(t.id === 'check-in') {
         if(highlights?.check?.active) {
           time = highlights.check?.value?.in ?? '15:00'
-          //t.innerHTML = parseTime(time)
+          t.innerHTML = parseTime(time)
           displayFlag = true 
           blocks[0].style.backgroundColor = bkg
         } else {
@@ -551,7 +551,7 @@ const runFn = async () => {
         }
       } else if (t.id === 'check-out') {
         time = highlights.check?.value?.out ?? '11:00'
-        //t.innerHTML = parseTime(time)
+        t.innerHTML = parseTime(time)
       } else if (t.id === 'breakfast-time') { 
         if(highlights?.breakfast?.active) {
           var start = highlights.breakfast?.value?.start ?? '06:30 AM'
