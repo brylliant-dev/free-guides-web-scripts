@@ -545,10 +545,12 @@ const runFn = async () => {
     for (var i = 0; i < timeTextDivs.length ; i++) {
       var t = timeTextDivs[i]
       var time = ""
+      console.log(t.id)
       if(t.id === 'check-in') {
         if(highlights?.check?.active) {
           time = highlights.check?.value?.in ?? '15:00'
-          t.innerHTML = parseTime("15:00")
+          console.log(time)
+          //t.innerHTML = parseTime("15:00")
           displayFlag = true 
           blocks[0].style.backgroundColor = bkg
         } else {
@@ -556,7 +558,8 @@ const runFn = async () => {
         }
       } else if (t.id === 'check-out') {
         time = highlights.check?.value?.out ?? '11:00'
-        t.innerHTML = parseTime("11:00")
+        console.log(time)
+        //t.innerHTML = parseTime("11:00")
       } else if (t.id === 'breakfast-time') { 
         if(highlights?.breakfast?.active) {
           var start = highlights.breakfast?.value?.start ?? '06:30 AM'
