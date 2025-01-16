@@ -517,11 +517,16 @@ const runFn = async () => {
       return `#${newR.toString(16).padStart(2, '0')}${newG.toString(16).padStart(2, '0')}${newB.toString(16).padStart(2, '0')}`
     }
 
-    const parseTime = (timeString) => {
-      return new Date('1970-01-01T' + timeString + 'Z')
-        .toLocaleTimeString('en-US',
-          {timeZone:'UTC',hour12:true,hour:'numeric',minute:'numeric'}
-      );
+    const parseTime = (time) => {
+      // Check correct time format and split into components
+      time = time.toString ().match (/^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/) || [time];
+
+      if (time.length > 1) { // If time format correct
+        time = time.slice (1);  // Remove full string match value
+        time[5] = +time[0] < 12 ? 'AM' : 'PM'; // Set AM/PM
+        time[0] = +time[0] % 12 || 12; // Adjust hours
+      }
+      return time.join (''); // return adjusted time or original string
     }
 
   const runHighlightsFunction = () => {
