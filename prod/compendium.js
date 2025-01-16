@@ -540,7 +540,19 @@ const runFn = async () => {
     for (var i = 0; i < timeTextDivs.length ; i++) {
       var t = timeTextDivs[i]
       var time = ""
-      if (t.id === 'breakfast-time') { 
+      if(t.id === 'check-in') {
+        if(highlights?.check?.active) {
+          time = highlights.check?.value?.in ?? '15:00'
+          //t.innerHTML = parseTime(time)
+          displayFlag = true 
+          blocks[0].style.backgroundColor = bkg
+        } else {
+          blocks[0].style = "display: none"
+        }
+      } else if (t.id === 'check-out') {
+        time = highlights.check?.value?.out ?? '11:00'
+        //t.innerHTML = parseTime(time)
+      } else if (t.id === 'breakfast-time') { 
         if(highlights?.breakfast?.active) {
           var start = highlights.breakfast?.value?.start ?? '06:30 AM'
           var end = highlights.breakfast?.value?.end ?? '10:30 AM'
@@ -551,19 +563,19 @@ const runFn = async () => {
           blocks[1].style = "display: none"
         }
       }
-
-      var wifiDiv = document.getElementsByClassName('highlights-checkin-text')
-      if(highlights?.wifi?.active) {
-        wifiDiv[0].innerHTML = highlights.content
-        blocks[2].style.backgroundColor = bkg
-        displayFlag = true
-      } else {
-        blocks[2].style = "display: none"
-      }
-
-      var highlightsContainer = document.getElementsByClassName('highlights-container')
-      highlightsContainer[0].style.display = displayFlag ? 'block' : 'none'
     }
+
+    var wifiDiv = document.getElementsByClassName('highlights-checkin-text')
+    if(highlights?.wifi?.active) {
+      wifiDiv[0].innerHTML = highlights.content
+      blocks[2].style.backgroundColor = bkg
+      displayFlag = true
+    } else {
+      blocks[2].style = "display: none"
+    }
+
+    var highlightsContainer = document.getElementsByClassName('highlights-container')
+    highlightsContainer[0].style.display = displayFlag ? 'block' : 'none'
   }
 
   const compendiumFn =
