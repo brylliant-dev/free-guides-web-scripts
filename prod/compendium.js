@@ -561,7 +561,7 @@ const runFn = async () => {
         if(highlights?.breakfast?.active) {
           var start = highlights.breakfast?.value?.start ?? '06:30 AM'
           var end = highlights.breakfast?.value?.end ?? '10:30 AM'
-          t.innerHTML = start + ' - ' + end
+          t.innerHTML = parseTime(start) + ' - ' + parseTime(end)
           blocks[1].style.backgroundColor = bkg
           displayFlag = true
         } else {
