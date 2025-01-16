@@ -546,18 +546,41 @@ const runFn = async () => {
       var t = timeTextDivs[i]
       var time = ""
       console.log(t)
+      if(t.id === 'check-in') {
+        if(highlights?.check?.active) {
+          time = highlights.check?.value?.in ?? '15:00'
+          console.log(time)
+          //t.innerHTML = parseTime("15:00")
+          displayFlag = true 
+          blocks[0].style.backgroundColor = bkg
+        } else {
+          blocks[0].style = "display: none"
+        }
+      } else if (t.id === 'check-out') {
+        time = highlights.check?.value?.out ?? '11:00'
+        console.log(time)
+        //t.innerHTML = parseTime("11:00")
+      } else if (t.id === 'breakfast-time') { 
+        if(highlights?.breakfast?.active) {
+          var start = highlights.breakfast?.value?.start ?? '06:30 AM'
+          var end = highlights.breakfast?.value?.end ?? '10:30 AM'
+          t.innerHTML = parseTime(start) + ' - ' + parseTime(end)
+          blocks[1].style.backgroundColor = bkg
+          displayFlag = true
+        } else {
+          blocks[1].style = "display: none"
+        }
+      }
     }
 
-    /*
     var wifiDiv = document.getElementsByClassName('highlights-checkin-text')
     if(highlights?.wifi?.active) {
-      wifiDiv[0].innerHTML = highlights.content
+      wifiDiv[2].innerHTML = highlights.content
       blocks[2].style.backgroundColor = bkg
       displayFlag = true
     } else {
       blocks[2].style = "display: none"
     }
-    */
 
     var highlightsContainer = document.getElementsByClassName('highlights-container')
     highlightsContainer[0].style.display = displayFlag ? 'block' : 'none'
