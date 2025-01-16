@@ -542,6 +542,12 @@ const runFn = async () => {
 
     var displayFlag = false 
 
+    for (var i = 0; i < timeTextDivs.length ; i++) {
+      var t = timeTextDivs[i]
+      var time = ""
+      console.log(t)
+    }
+
     var wifiDiv = document.getElementsByClassName('highlights-checkin-text')
     if(highlights?.wifi?.active) {
       wifiDiv[0].innerHTML = highlights.content
@@ -566,7 +572,7 @@ const runFn = async () => {
   const ctaFn =
     ctaDetailsText === '' ? removeCtaWrapper : () => runProfileFunctions()
 
-  //if(highlightsData.innerHTML !== '') runHighlightsFunction()
+  if(highlightsData.innerHTML !== '') runHighlightsFunction()
 
   compendiumFn()
   ctaFn()
