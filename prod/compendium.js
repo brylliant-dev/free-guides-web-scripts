@@ -575,7 +575,7 @@ const runFn = async () => {
 
     var wifiDiv = document.getElementsByClassName('highlights-checkin-text')
     if(highlights?.wifi?.active) {
-      wifiDiv[2].innerHTML = highlights?.wifi?.value?.content ?? ""
+      wifiDiv[2].children[0].innerHTML = highlights?.wifi?.value?.content ?? ""
       blocks[2].style.backgroundColor = bkg
       displayFlag = true
     } else {
