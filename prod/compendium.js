@@ -575,7 +575,17 @@ const runFn = async () => {
 
     var wifiDiv = document.getElementsByClassName('highlights-checkin-text')
     if(highlights?.wifi?.active) {
-      wifiDiv[2].children[0].innerHTML = highlights?.wifi?.value?.content ?? ""
+      var { content = "", type = "password" } = highlights?.wifi?.value
+      if(type === 'password') {
+        var parts = content.split('\n')
+        var textBlocks = wifiDiv[2].children[0].children
+
+        if(parts.length > 1 ) {
+          textBlocks[0].innerHTML = "SSID: " + parts[0]
+          textBlocks[1].innerHTML = "SSID: " + parts[1]
+        }
+      }
+
       blocks[2].style.backgroundColor = bkg
       displayFlag = true
     } else {
