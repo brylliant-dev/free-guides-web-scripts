@@ -504,30 +504,30 @@ const runFn = async () => {
 
   }
 
-    const calculatePreviewColor = (hexColour) => {
+  const calculatePreviewColor = (hexColour) => {
 
-      const r = parseInt(hexColour.slice(1, 3), 16)
-      const g = parseInt(hexColour.slice(3, 5), 16)
-      const b = parseInt(hexColour.slice(5, 7), 16)
-      
-      const newR = Math.round((r + 255 * 14) / 15)
-      const newG = Math.round((g + 255 * 14) / 15)
-      const newB = Math.round((b + 255 * 14) / 15)
-      
-      return `#${newR.toString(16).padStart(2, '0')}${newG.toString(16).padStart(2, '0')}${newB.toString(16).padStart(2, '0')}`
+    const r = parseInt(hexColour.slice(1, 3), 16)
+    const g = parseInt(hexColour.slice(3, 5), 16)
+    const b = parseInt(hexColour.slice(5, 7), 16)
+    
+    const newR = Math.round((r + 255 * 14) / 15)
+    const newG = Math.round((g + 255 * 14) / 15)
+    const newB = Math.round((b + 255 * 14) / 15)
+    
+    return `#${newR.toString(16).padStart(2, '0')}${newG.toString(16).padStart(2, '0')}${newB.toString(16).padStart(2, '0')}`
+  }
+
+  const parseTime = (time) => {
+    // Check correct time format and split into components
+    time = time.match(/^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/) || [time];
+
+    if (time.length > 1) { // If time format correct
+      time = time.slice(1);  // Remove full string match value
+      time[5] = +time[0] < 12 ? 'AM' : 'PM'; // Set AM/PM
+      time[0] = +time[0] % 12 || 12; // Adjust hours
     }
-
-    const parseTime = (time) => {
-      // Check correct time format and split into components
-      time = time.toString ().match (/^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/) || [time];
-
-      if (time.length > 1) { // If time format correct
-        time = time.slice (1);  // Remove full string match value
-        time[5] = +time[0] < 12 ? 'AM' : 'PM'; // Set AM/PM
-        time[0] = +time[0] % 12 || 12; // Adjust hours
-      }
-      return time.join (''); // return adjusted time or original string
-    }
+    return time.join(''); // return adjusted time or original string
+  }
 
   const runHighlightsFunction = () => {
 
