@@ -548,6 +548,7 @@ const runFn = async () => {
       console.log(t)
     }
 
+    /*
     var wifiDiv = document.getElementsByClassName('highlights-checkin-text')
     if(highlights?.wifi?.active) {
       wifiDiv[0].innerHTML = highlights.content
@@ -556,6 +557,7 @@ const runFn = async () => {
     } else {
       blocks[2].style = "display: none"
     }
+    */
 
     var highlightsContainer = document.getElementsByClassName('highlights-container')
     highlightsContainer[0].style.display = displayFlag ? 'block' : 'none'
