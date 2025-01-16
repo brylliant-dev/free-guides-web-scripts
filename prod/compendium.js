@@ -582,7 +582,7 @@ const runFn = async () => {
 
         if(parts.length > 1 ) {
           textBlocks[0].innerHTML = "SSID: " + parts[0]
-          textBlocks[1].innerHTML = "SSID: " + parts[1]
+          textBlocks[1].innerHTML = "password: " + parts[1]
         }
       }
 
