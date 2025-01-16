@@ -535,14 +535,16 @@ const runFn = async () => {
     var bkg = stringBrandColor !== '' ? stringBrandColor : '#60BE8C'
     bkg = calculatePreviewColor(bkg)
 
+    var displayFlag = false 
+
     for (var i = 0; i < timeTextDivs.length ; i++) {
       var t = timeTextDivs[i]
       var time = ""
-      console.log(t.id)
       if(t.id === 'check-in') {
         if(highlights?.check?.active) {
           time = highlights.check?.value?.in ?? '15:00'
           //t.innerHTML = parseTime(time)
+          displayFlag = true 
           blocks[0].style.backgroundColor = bkg
         } else {
           blocks[0].style = "display: none"
@@ -556,6 +558,7 @@ const runFn = async () => {
           var end = highlights.breakfast?.value?.end ?? '10:30 AM'
           t.innerHTML = start + ' - ' + end
           blocks[1].style.backgroundColor = bkg
+          displayFlag = true
         } else {
           blocks[1].style = "display: none"
         }
@@ -565,12 +568,13 @@ const runFn = async () => {
       if(highlights?.wifi?.active) {
         wifiDiv[0].innerHTML = highlights.content
         blocks[2].style.backgroundColor = bkg
+        displayFlag = true
       } else {
         blocks[2].style = "display: none"
       }
 
       var highlightsContainer = document.getElementsByClassName('highlights-container')
-      highlightsContainer[0].style = "display: block" 
+      highlightsContainer[0].style.display = displayFlag ? 'block' : 'none'
     }
   }
 
