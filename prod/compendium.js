@@ -523,7 +523,7 @@ const runFn = async () => {
 
     if (time.length > 1) { // If time format correct
       time = time.slice(1);  // Remove full string match value
-      time[5] = +time[0] < 12 ? 'AM' : 'PM'; // Set AM/PM
+      time[5] = +time[0] < 12 ? ' AM' : ' PM'; // Set AM/PM
       time[0] = +time[0] % 12 || 12; // Adjust hours
     }
     return time.join(''); // return adjusted time or original string
@@ -548,7 +548,7 @@ const runFn = async () => {
       if(t.id === 'check-in') {
         if(highlights?.check?.active) {
           time = highlights.check?.value?.in ?? '15:00'
-          t.innerHTML = parseTime(time)
+          t.innerHTML = parseTime("15:00")
           displayFlag = true 
           blocks[0].style.backgroundColor = bkg
         } else {
@@ -556,7 +556,7 @@ const runFn = async () => {
         }
       } else if (t.id === 'check-out') {
         time = highlights.check?.value?.out ?? '11:00'
-        t.innerHTML = parseTime(time)
+        t.innerHTML = parseTime("11:00")
       } else if (t.id === 'breakfast-time') { 
         if(highlights?.breakfast?.active) {
           var start = highlights.breakfast?.value?.start ?? '06:30 AM'
