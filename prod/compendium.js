@@ -525,6 +525,7 @@ const runFn = async () => {
       time = time.slice(1);  // Remove full string match value
       time[5] = +time[0] < 12 ? ' AM' : ' PM'; // Set AM/PM
       time[0] = +time[0] % 12 || 12; // Adjust hours
+      time[0] = time[0] < 10 ? '0' + time[0] : time[0] //pad 0 if under 10 
     }
     return time.join(''); // return adjusted time or original string
   }
@@ -583,6 +584,9 @@ const runFn = async () => {
           name.innerHTML = parts[0]
           pass.innerHTML = parts[1]
         }
+      } else {
+        var wifiBlock = document.getElementsByClassName('highlights-checkin-text')[2]
+        wifiBlock.innerHTML = content
       }
       blocks[2].style.backgroundColor = bkg
       displayFlag = true
