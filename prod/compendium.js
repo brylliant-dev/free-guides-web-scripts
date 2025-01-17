@@ -549,8 +549,7 @@ const runFn = async () => {
       if(t.id === 'check-in') {
         if(highlights?.check?.active) {
           time = highlights.check?.value?.in ?? '15:00'
-          console.log(time)
-          //t.innerHTML = parseTime("15:00")
+          t.innerHTML = parseTime(time)
           displayFlag = true 
           blocks[0].style.backgroundColor = bkg
         } else {
@@ -558,36 +557,33 @@ const runFn = async () => {
         }
       } else if (t.id === 'check-out') {
         time = highlights.check?.value?.out ?? '11:00'
-        console.log(time)
-        //t.innerHTML = parseTime("11:00")
-      } else if (t.id === 'breakfast-time') { 
+        t.innerHTML = parseTime(time)
+      } else if (t.id === 'breakfast-time-start') { 
         if(highlights?.breakfast?.active) {
           var start = highlights.breakfast?.value?.start ?? '06:30 AM'
-          var end = highlights.breakfast?.value?.end ?? '10:30 AM'
-          t.innerHTML = parseTime(start) + ' - ' + parseTime(end)
           blocks[1].style.backgroundColor = bkg
           displayFlag = true
         } else {
           blocks[1].style = "display: none"
         }
+      } else if (t.id === 'breakfast-time-end') {
+        var end = highlights.breakfast?.value?.end ?? '11:30 AM'
+        t.innerHTML = parseTime(end)
       }
     }
 
-    var wifiDiv = document.getElementsByClassName('highlights-checkin-text')
     if(highlights?.wifi?.active) {
-      /*
       var { content = "", type = "password" } = highlights?.wifi?.value
       if(type === 'password') {
         var parts = content.split('\n')
-        var textBlocks = wifiDiv[2].children[0].children
+        var name = document.getElementById('wifi-id')
+        var pass = document.getElementById('wifi-pass')
 
         if(parts.length > 1 ) {
-          textBlocks[0].innerHTML = parts[0]
-          textBlocks[1].innerHTML = parts[1]
+          name.innerHTML = parts[0]
+          pass.innerHTML = parts[1]
         }
       }
-      */
-
       blocks[2].style.backgroundColor = bkg
       displayFlag = true
     } else {
