@@ -581,14 +581,17 @@ const runFn = async () => {
         var pass = document.getElementById('wifi-pass')
 
         if(parts.length > 1 ) {
+          name.style.textAlign = 'center'
+          pass.style.textAlign = 'center'
+
           name.innerHTML = parts[0]
           pass.innerHTML = parts[1]
+
         }
       } else {
         var wifiBlock = document.getElementsByClassName('highlights-checkin-text')[2]
         wifiBlock.innerHTML = content
         wifiBlock.style.fontWeight = 500
-        wifiBlock.style.textAlign = 'center'
       }
       blocks[2].style.backgroundColor = bkg
       displayFlag = true
