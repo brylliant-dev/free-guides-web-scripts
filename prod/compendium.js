@@ -588,6 +588,7 @@ const runFn = async () => {
         var wifiBlock = document.getElementsByClassName('highlights-checkin-text')[2]
         wifiBlock.innerHTML = content
         wifiBlock.style.fontWeight = 500
+        wifiBlock.style.textAlign = 'center'
       }
       blocks[2].style.backgroundColor = bkg
       displayFlag = true
