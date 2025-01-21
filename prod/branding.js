@@ -303,7 +303,7 @@ Webflow.push(function () {
                         tabMenu.appendChild(button);
                         tabContent.appendChild(content);
                     } else {
-                        tabMenu.style.display = 'none'
+                        button.style.display = 'none'
                     }
                 }
             });
