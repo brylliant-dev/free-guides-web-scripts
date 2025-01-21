@@ -285,38 +285,41 @@ Webflow.push(function () {
         const filteredTabOrder = tabOrder.filter(tabName => tabContainer.includes(tabName));
 
         // Create an array for tabs in tabContainer but not in tabOrder
-        //const additionalTabs = tabContainer.filter(tabName => !tabOrder.includes(tabName));
+        const additionalTabs = tabContainer.filter(tabName => !tabOrder.includes(tabName));
 
         // Combine the filteredTabOrder with the additionalTabs
-       // const finalTabOrder = filteredTabOrder.concat(additionalTabs);
+        const finalTabOrder = filteredTabOrder.concat(additionalTabs);
 
         // Function to reorder elements
         function reorderTabs(order) {
             const tabMenu = document.querySelector('.tour-guide-heading-wrapper');
             const tabContent = document.querySelector('.tabs-content');
 
-            order.forEach(function (tabName) {
+            order.forEach((tabName,index) => {
                 const button = tabButtons.find(el => el.getAttribute('data-tab-name') === tabName);
                 const content = tabContents.find(el => el.getAttribute('data-tab-name') === tabName);
-
                 if (button && content) { // Ensure both button and content exist
-                    tabMenu.appendChild(button);
-                    tabContent.appendChild(content);
+                    if(index < filteredTabOrder.length) {
+                        tabMenu.appendChild(button);
+                        tabContent.appendChild(content);
+                    } else {
+                        tabMenu.style.display = 'none'
+                    }
                 }
             });
 
             // Introduce a small delay before clicking the first tab
             setTimeout(function () {
-                const firstTabButton = tabButtons.find(el => el.getAttribute('data-tab-name') === filteredTabOrder[0]);
+                const firstTabButton = tabButtons.find(el => el.getAttribute('data-tab-name') === finalTabOrder[0]);
                 if (firstTabButton) {
                     firstTabButton.click();
                 }
             }, 200); // Adjust the delay time (in milliseconds) if necessary
         }
 
-        console.log(filteredTabOrder)
+        console.log(finalTabOrder)
         // Reorder tabs 
-        reorderTabs(filteredTabOrder);
+        reorderTabs(finalTabOrder);
     }
 
     const setAttributes = (el, attrs) => {  
