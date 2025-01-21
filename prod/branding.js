@@ -285,10 +285,10 @@ Webflow.push(function () {
         const filteredTabOrder = tabOrder.filter(tabName => tabContainer.includes(tabName));
 
         // Create an array for tabs in tabContainer but not in tabOrder
-        const additionalTabs = tabContainer.filter(tabName => !tabOrder.includes(tabName));
+        //const additionalTabs = tabContainer.filter(tabName => !tabOrder.includes(tabName));
 
         // Combine the filteredTabOrder with the additionalTabs
-        const finalTabOrder = filteredTabOrder.concat(additionalTabs);
+       // const finalTabOrder = filteredTabOrder.concat(additionalTabs);
 
         // Function to reorder elements
         function reorderTabs(order) {
@@ -314,9 +314,9 @@ Webflow.push(function () {
             }, 200); // Adjust the delay time (in milliseconds) if necessary
         }
 
-        console.log(finalTabOrder)
+        console.log(filteredTabOrder)
         // Reorder tabs 
-        reorderTabs(finalTabOrder);
+        reorderTabs(filteredTabOrder);
     }
 
     const setAttributes = (el, attrs) => {  
