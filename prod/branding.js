@@ -364,7 +364,7 @@ Webflow.push(function () {
             id=${"w-tabs-0-data-w-pane-" + l} role="tabpanel" aria-labelledby="${category}-tab-button" 
             style="transition: all, opacity 300ms; opacity: 1;">
               <div class="guide-experiences-wrapper">
-                <iframe src=${url} width="100%" height="1000px" style="border: none"/>
+                <iframe src=${url} width="100%" height="1400px" style="border: none"/>
               </div>
             </div>
           `
