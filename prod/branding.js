@@ -330,7 +330,7 @@ Webflow.push(function () {
     partners = partners.split(';').map(val => JSON.parse(val))
 
     var tabHeader = document.querySelector('.tour-guide-heading-wrapper')
-    var l = tabHeader.children.length - 1
+    var l = tabHeader.children.length
     
     for(var p of partners) {
       const { category, value, url, enabled } = p 
