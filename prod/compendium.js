@@ -602,7 +602,7 @@ const runFn = async () => {
     var borderBlocks = document.getElementsByClassName('highlights-checkin-block')
     for(var i = 0; i < borderBlocks.length; i = i + 2) {
       var b = borderBlocks[i]
-      i.style.borderRight = '2px solid lightgray'
+      b.style.borderRight = '2px solid lightgray'
     }
 
     var highlightsContainer = document.getElementsByClassName('highlights-container')
