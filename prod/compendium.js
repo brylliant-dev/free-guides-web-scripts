@@ -538,6 +538,7 @@ const runFn = async () => {
     var timeTextDivs = document.getElementsByClassName('time-text') ?? []
 
     var stringBrandColor = document.querySelector('code#string-brand-color').textContent
+    var stringBrandFont = document.querySelector('code#string-brand-font').textContent
     var bkg = stringBrandColor !== '' ? stringBrandColor : '#60BE8C'
     bkg = calculatePreviewColor(bkg)
 
@@ -592,6 +593,7 @@ const runFn = async () => {
         var wifiBlock = document.getElementsByClassName('highlights-checkin-text')[2]
         wifiBlock.innerHTML = content
         wifiBlock.style.fontWeight = 500
+        wifiBlock.style.fontFamily = stringBrandFont
       }
       blocks[2].style.backgroundColor = bkg
       displayFlag = true
