@@ -360,8 +360,8 @@ Webflow.push(function () {
           var l = tabContent.children.length
 
           var tabInner = `
-            <div data-w-tab="Tab 5" data-tab-name="services" class="guide-tab-pane-wrapper w-tab-pane" 
-            id=${"w-tabs-0-data-w-pane-" + l} role="tabpanel" aria-labelledby="services-tab-button" 
+            <div data-w-tab="Tab 5" data-tab-name=${category} class="guide-tab-pane-wrapper w-tab-pane" 
+            id=${"w-tabs-0-data-w-pane-" + l} role="tabpanel" aria-labelledby="${category}-tab-button" 
             style="transition: all, opacity 300ms; opacity: 1;">
               <div class="guide-experiences-wrapper">
                 <iframe src=${url} width="100%" height="750px" style="border: none"/>
