@@ -329,9 +329,10 @@ Webflow.push(function () {
     var partners = document.querySelector('code#partners').textContent.trim()
     partners = partners.split(';').map(val => JSON.parse(val))
 
+    var tabHeader = document.querySelector('.tour-guide-heading-wrapper')
+    var l = tabHeader.children.length - 1
+    
     for(var p of partners) {
-      var tabHeader = document.querySelector('.tour-guide-heading-wrapper')
-      var l = tabHeader.children.length
       const { category, value, url, enabled } = p 
       var oldTab = tabHeader.children[0]
       var newTab = document.createElement('a')  
@@ -340,7 +341,7 @@ Webflow.push(function () {
 
       if(enabled) {
           setAttributes(newTab, {
-            id: category + '-tab-button', 'data-w-tab': 'Tab ' + (l + 1), 'aria-controls': 'w-tabs-0-data-w-pane-' + l,
+            id: category + '-tab-button', 'data-w-tab': 'Tab ' + l, 'aria-controls': 'w-tabs-0-data-w-pane-' + l,
             class: 'guide-tab-link-toggle w-inline-block w-tab-link', 'data-tab-name': category,
             'data-id': id, role: 'tab', 'aria-selected': false, tabIndex: -1, href: '#w-tabs-0-data-w-pane-' + l
           })
@@ -357,10 +358,9 @@ Webflow.push(function () {
           
           console.log(tabHeader.innerHTML)
           const tabContent = document.querySelector('.tabs-content')
-          var l = tabContent.children.length
 
           var tabInner = `
-            <div data-w-tab="Tab 5" data-tab-name=${category} class="guide-tab-pane-wrapper w-tab-pane" 
+            <div data-w-tab="Tab ${l}" data-tab-name=${category} class="guide-tab-pane-wrapper w-tab-pane" 
             id=${"w-tabs-0-data-w-pane-" + l} role="tabpanel" aria-labelledby="${category}-tab-button" 
             style="transition: all, opacity 300ms; opacity: 1;">
               <div class="guide-experiences-wrapper">
@@ -370,6 +370,7 @@ Webflow.push(function () {
           `
 
           tabContent.innerHTML = tabContent.innerHTML + tabInner
+          l = l + 1
       }
     }
 
