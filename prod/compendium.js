@@ -87,8 +87,8 @@ const runFn = async () => {
     const compendium = JSON.parse(compendiumText)
 
     const generalDataArray = compendium.general.map(
-      ({ iconDetails, active, title, media }) => ({
-        iconDetails,
+      ({ icon, active, title, media }) => ({
+        icon,
         active,
         accordionTitle: title,
         media,
@@ -96,8 +96,8 @@ const runFn = async () => {
     )
 
     const recomDataArray = compendium.recommendations.map(
-      ({ iconDetails, active, title, media }) => ({
-        iconDetails,
+      ({ icon, active, title, media }) => ({
+        icon,
         active,
         accordionTitle: title,
         media: media.map((m) => ({ ...m, placeId: m.content })),
@@ -268,7 +268,7 @@ const runFn = async () => {
           recomDropdownClone.querySelector('[recom-data="accordion-title"]').textContent = data.accordionTitle
           recomDropdownClone.querySelector('[recom-data="accordion-title"]').setAttribute('data-title',data.accordionTitle) 
           recomDropdownClone.setAttribute('data-title',data.accordionTitle)
-          recomDropdownClone.querySelector(`[icon-recom-data-name='icon-title']`).setAttribute('icon-recom-data-name', data.iconDetails?.name || 'welcome')
+          recomDropdownClone.querySelector(`[icon-recom-data-name='icon-title']`).setAttribute('icon-recom-data-name', data.icon ?? 'welcome')
           
 
           data.media
@@ -336,7 +336,7 @@ const runFn = async () => {
           genDropdownClone.querySelector('[gen-data="accordion-title"]').setAttribute('data-title',data.accordionTitle)
           genDropdownClone.querySelector('[gen-data="accordion-title"]').textContent = data.accordionTitle
           //genDropdownClone.querySelector(`[icon-gen-data-name='icon-title']`).setAttribute('icon-gen-data-name', data.iconDetails.name)
-          genDropdownClone.querySelector(`[icon-gen-data-name='icon-title']`).setAttribute('icon-gen-data-name', data.iconDetails?.name || 'welcome');
+          genDropdownClone.querySelector(`[icon-gen-data-name='icon-title']`).setAttribute('icon-gen-data-name', data.icon ?? 'welcome');
         
 
           //genDropdownClone
