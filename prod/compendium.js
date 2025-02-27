@@ -532,6 +532,7 @@ const runFn = async () => {
 
   const runHighlightsFunction = () => {
 
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
     var highlights = JSON.parse(highlightsData.innerHTML)
     var blocks = document.getElementsByClassName('highlights-time')
@@ -609,6 +610,12 @@ const runFn = async () => {
 
     var highlightsContainer = document.getElementsByClassName('highlights-container')
     highlightsContainer[0].style.display = displayFlag ? 'block' : 'none'
+
+    if(Array.from(blocks).filter(x => x.style.display !== "none").length < 2) {
+      highlightsContainer[0].style.height = isMobile ? '110px' : '80px'
+    }
+
+
   }
 
   const compendiumFn =
