@@ -386,7 +386,7 @@ Webflow.push(function () {
 
         // Combine the filteredTabOrder with the additionalTabs
         const finalTabOrder = filteredTabOrder.concat(additionalTabs);  
-        console.log(finalTabOrder,filteredTabOrder,additionalTabs)
+        console.log(tabOrder)
 
         // Function to reorder elements
         function reorderTabs(order) {
