@@ -416,7 +416,7 @@ Webflow.push(function () {
         }
 
         // Reorder tabs 
-        reorderTabs(tabOrder);
+        reorderTabs(finalTabOrder);
     }
 
 
