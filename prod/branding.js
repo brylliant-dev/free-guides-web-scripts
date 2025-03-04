@@ -278,6 +278,7 @@ Webflow.push(function () {
         const tabButtons = Array.from(document.querySelectorAll('.w-tab-link'));
         const tabContents = Array.from(document.querySelectorAll('.w-tab-pane'));
 
+        console.log(tabButtons)
         // Collect all the data-tab-name values from the tab buttons
         const tabContainer = tabButtons.map(button => button.getAttribute('data-tab-name'));
 
