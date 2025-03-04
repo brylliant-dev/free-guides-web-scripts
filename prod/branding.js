@@ -261,67 +261,6 @@ Webflow.push(function () {
     });
 
 
-    //Tab Ordering Function
-    // Get the tab order from the <code> element
-
-    const tabOrderElement = document.getElementById('tabOrder');
-    const tabOrderText = tabOrderElement.textContent.trim();
-
-    // Parse the tab order text into an array
-    const tabOrder = tabOrderText
-        .replace(/[';\s]/g, '') // Remove quotes, semicolon, and spaces
-        .split(','); // Split by comma
-
-    // Only proceed if tabOrder is not empty
-    if (tabOrder.length > 0) {
-        // Get all tab buttons and contents
-        const tabButtons = Array.from(document.querySelectorAll('.w-tab-link'));
-        const tabContents = Array.from(document.querySelectorAll('.w-tab-pane'));
-
-        // Collect all the data-tab-name values from the tab buttons
-        const tabContainer = tabButtons.map(button => button.getAttribute('data-tab-name'));
-
-        // Filter the tabOrder to only include tabs that exist in the tabContainer
-        const filteredTabOrder = tabOrder.filter(tabName => tabContainer.includes(tabName));
-
-        // Create an array for tabs in tabContainer but not in tabOrder
-        const additionalTabs = tabContainer.filter(tabName => !tabOrder.includes(tabName));
-
-        // Combine the filteredTabOrder with the additionalTabs
-        const finalTabOrder = filteredTabOrder.concat(additionalTabs);  
-        console.log(finalTabOrder,filteredTabOrder,additionalTabs)
-
-        // Function to reorder elements
-        function reorderTabs(order) {
-            const tabMenu = document.querySelector('.tour-guide-heading-wrapper');
-            const tabContent = document.querySelector('.tabs-content');
-
-            order.forEach((tabName,index) => {
-                const button = tabButtons.find(el => el.getAttribute('data-tab-name') === tabName);
-                const content = tabContents.find(el => el.getAttribute('data-tab-name') === tabName);
-                if (button && content) { // Ensure both button and content exist
-                    if(index < filteredTabOrder.length) {
-                        tabMenu.appendChild(button);
-                        tabContent.appendChild(content);
-                    } else {
-                        button.style.display = 'none'
-                    }
-                }
-            });
-
-            // Introduce a small delay before clicking the first tab
-            setTimeout(function () {
-                const firstTabButton = tabButtons.find(el => el.getAttribute('data-tab-name') === finalTabOrder[0]);
-                if (firstTabButton) {
-                    firstTabButton.click();
-                }
-            }, 200); // Adjust the delay time (in milliseconds) if necessary
-        }
-
-        // Reorder tabs 
-        reorderTabs(tabOrder);
-    }
-
     const setAttributes = (el, attrs) => {  
       Object.entries(attrs).forEach(([key, value]) => el.setAttribute(key, value))
     }
@@ -418,6 +357,68 @@ Webflow.push(function () {
         function capitalizeFirstLetter(string) {
             return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
         }
+
+    //Tab Ordering Function
+    // Get the tab order from the <code> element
+
+    const tabOrderElement = document.getElementById('tabOrder');
+    const tabOrderText = tabOrderElement.textContent.trim();
+
+    // Parse the tab order text into an array
+    const tabOrder = tabOrderText
+        .replace(/[';\s]/g, '') // Remove quotes, semicolon, and spaces
+        .split(','); // Split by comma
+
+    // Only proceed if tabOrder is not empty
+    if (tabOrder.length > 0) {
+        // Get all tab buttons and contents
+        const tabButtons = Array.from(document.querySelectorAll('.w-tab-link'));
+        const tabContents = Array.from(document.querySelectorAll('.w-tab-pane'));
+
+        // Collect all the data-tab-name values from the tab buttons
+        const tabContainer = tabButtons.map(button => button.getAttribute('data-tab-name'));
+
+        // Filter the tabOrder to only include tabs that exist in the tabContainer
+        const filteredTabOrder = tabOrder.filter(tabName => tabContainer.includes(tabName));
+
+        // Create an array for tabs in tabContainer but not in tabOrder
+        const additionalTabs = tabContainer.filter(tabName => !tabOrder.includes(tabName));
+
+        // Combine the filteredTabOrder with the additionalTabs
+        const finalTabOrder = filteredTabOrder.concat(additionalTabs);  
+        console.log(finalTabOrder,filteredTabOrder,additionalTabs)
+
+        // Function to reorder elements
+        function reorderTabs(order) {
+            const tabMenu = document.querySelector('.tour-guide-heading-wrapper');
+            const tabContent = document.querySelector('.tabs-content');
+
+            order.forEach((tabName,index) => {
+                const button = tabButtons.find(el => el.getAttribute('data-tab-name') === tabName);
+                const content = tabContents.find(el => el.getAttribute('data-tab-name') === tabName);
+                if (button && content) { // Ensure both button and content exist
+                    if(index < filteredTabOrder.length) {
+                        tabMenu.appendChild(button);
+                        tabContent.appendChild(content);
+                    } else {
+                        button.style.display = 'none'
+                    }
+                }
+            });
+
+            // Introduce a small delay before clicking the first tab
+            setTimeout(function () {
+                const firstTabButton = tabButtons.find(el => el.getAttribute('data-tab-name') === finalTabOrder[0]);
+                if (firstTabButton) {
+                    firstTabButton.click();
+                }
+            }, 200); // Adjust the delay time (in milliseconds) if necessary
+        }
+
+        // Reorder tabs 
+        reorderTabs(tabOrder);
+    }
+
 
         Array.from(document.querySelectorAll('.w-tab-link'))[0].click() 
         console.log('finished running branding script')
