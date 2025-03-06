@@ -266,7 +266,7 @@ Webflow.push(function () {
     }
 
     var partners = document.querySelector('code#partners').textContent.trim()
-    partners = partners.split(';').map(val => JSON.parse(val))
+    partners = partners !== "" ? partners.split(';').map(val => JSON.parse(val)) : []
 
     var tabHeader = document.querySelector('.tour-guide-heading-wrapper')
     var l = tabHeader.children.length + 1
