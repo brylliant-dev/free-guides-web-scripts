@@ -387,7 +387,7 @@ const runFn = async () => {
               },
               accordion: () => {
                 clone.querySelector(`[icon-gen-data-name='icon-title']`).style.display = 'none'
-                console.log(clone.parent)
+                //console.log(clone.parent)
 
                 var cloneTitle = clone.querySelector('[gen-data="accordion-title"]')
                 cloneTitle.setAttribute('data-title',title)
@@ -564,6 +564,7 @@ const runFn = async () => {
       } else if (t.id === 'breakfast-time-start') { 
         if(highlights?.breakfast?.active) {
           var start = highlights.breakfast?.value?.start ?? '06:30 AM'
+          t.innerHTML = parseTime(start)
           blocks[1].style.backgroundColor = bkg
           displayFlag = true
         } else {
