@@ -397,7 +397,7 @@ const runFn = async () => {
                 cloneBody.style.padding = '0px'
                 cloneBody.style.paddingTop = '10px'
 
-                cloneBody.innerHTML = content
+                cloneBody.innerHTML = content.replace(/\n/g,'</br>')
               }
             }
           }
@@ -426,6 +426,7 @@ const runFn = async () => {
               clone.style.marginTop = '3%'
               clone.style.borderBottom = '1px solid lightgray'
               clone.style.minHeight = '30px'
+              clone.style.height = 'auto'
             }
 
 
@@ -549,7 +550,6 @@ const runFn = async () => {
     for (var i = 0; i < timeTextDivs.length ; i++) {
       var t = timeTextDivs[i]
       var time = ""
-      console.log(t)
       if(t.id === 'check-in') {
         if(highlights?.check?.active) {
           time = highlights.check?.value?.in ?? '15:00'
