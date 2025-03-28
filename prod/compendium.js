@@ -426,6 +426,7 @@ const runFn = async () => {
               clone.style.marginTop = '3%'
               clone.style.borderBottom = '1px solid lightgray'
               clone.style.minHeight = '30px'
+              clone.style.height = 'auto'
             }
 
 
