@@ -117,7 +117,7 @@ const runFn = async () => {
         toggleBody.setAttribute('aria-expanded', 'false')
         accordionBtn.style.transform = 'translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg)'
         clone.style.zIndex = ''
-        clone.style.height = '30px'
+        clone.style.minHeight = '30px'
       }
 
       const switchAccordionBody = ({ toggle, wrapper }) => {
@@ -426,7 +426,6 @@ const runFn = async () => {
               clone.style.marginTop = '3%'
               clone.style.borderBottom = '1px solid lightgray'
               clone.style.minHeight = '30px'
-              clone.style.height = 'auto'
             }
 
 
