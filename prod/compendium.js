@@ -383,7 +383,7 @@ const runFn = async () => {
                 const video = clone.querySelector('[gen-data="media-vid"]')
                 video.style.paddingTop = 0
                 video.innerHTML = `
-                  <video controls autoplay="false" height="528px" width="100%" >
+                  <video controls height="528px" width="100%" >
                     <source src=${content}/>
                   </video>
                 `
