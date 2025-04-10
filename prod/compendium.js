@@ -381,9 +381,12 @@ const runFn = async () => {
               },
               video: () => {
                 const video = clone.querySelector('[gen-data="media-vid"]')
-                video
-                  .querySelector('iframe.embedly-embed')
-                  .setAttribute('src', content)
+                video.style.paddingTop = 0
+                video.innerHTML = `
+                  <video controls autoplay="false" height="528px" width="100%" >
+                    <source src=${content}/>
+                  </video>
+                `
               },
               accordion: () => {
                 clone.querySelector(`[icon-gen-data-name='icon-title']`).style.display = 'none'
