@@ -22,7 +22,6 @@ freeguides-web/
 │   ├── services.js      # Partner services integration
 │   ├── activity.js      # Activity-related features
 │   └── branding.js      # Branding and styling utilities
-└── sample.html          # Sample implementation
 ```
 
 ## Key Features
