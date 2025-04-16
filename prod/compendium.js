@@ -238,7 +238,7 @@ const runFn = async () => {
 
           const testUrl = `https://fg-tours-preview--preview-bic7ekwv.web.app/?brandColor=${brandColor}&placeId=`
           const prodUrl = `https://tour.freeguides.com/?brandColor=${brandColor}&textColor=${textColour}&placeId=`
-
+          var userId = document.querySelector('code#activitycampaign').textContent
 
           const feedIframeSrc = () => {
             iframeClones.forEach((ifc) => {
@@ -246,7 +246,7 @@ const runFn = async () => {
                 var insight = ifc.details?.insight ?? ""
                 ifc.item.setAttribute(
                   'src',
-                  `${prodUrl + ifc.placeId}&insight=${insight}`
+                  `${prodUrl + ifc.placeId}&insight=${insight}&userId=${userId}`
                 )
                 ifc.item.setAttribute('scrolling','no')
               }
