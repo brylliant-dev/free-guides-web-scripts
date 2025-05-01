@@ -370,6 +370,7 @@ const runFn = async () => {
               text: () => {
                 clone.style.fontFamily = stringBrandFont
                 clone.innerHTML = content
+                clone.children[0].style.fontFamily = stringBrandFont
               },
               link: () => {
                 const link = clone.querySelector('[gen-data="media-link"]')
