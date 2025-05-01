@@ -364,8 +364,11 @@ const runFn = async () => {
 
           const mediaFn = ({ data, clone }) => {
             const { content, title } = data
+            var stringBrandFont = document.querySelector('code#string-brand-font').textContent
+
             return {
               text: () => {
+                clone.style.fontFamily = stringBrandFont
                 clone.innerHTML = content
               },
               link: () => {
